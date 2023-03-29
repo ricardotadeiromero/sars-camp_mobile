@@ -47,9 +47,34 @@ class homePage extends StatelessWidget {
         ],
       ),
       body: Container(
-        color: Color(0xFF0A6066),
-        child: Center(child: Image.asset('image/Unicamp.jpg')),
-      ),
+          color: Color(0xFF0A6066),
+          width: double.infinity,
+          child: Stack(
+            children: [
+              Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [],
+                ),
+              ),
+              Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 300,
+                      child: Opacity(
+                        opacity: 0.12,
+                        child: Image.asset('image/Unicamp.png'),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          )),
     );
   }
 }

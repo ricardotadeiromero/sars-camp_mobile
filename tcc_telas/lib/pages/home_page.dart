@@ -75,36 +75,44 @@ class homePage extends StatelessWidget {
                   children: [
                     Container(
                       margin: const EdgeInsets.all(10),
-                      width: 200,
+                      width: 140,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('image/cardapio.png'),
+                          Container(
+                            width: 140,
+                            child:Image.asset('image/cardapio.png') ,
+                          ),
                           Text('Cardápio RU',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),)
                         ],
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.all(10),
-                      width: 180,
+                      width: 120,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('image/carteira.png'),
+                          Container(
+                            width: 120,
+                            child:Image.asset('image/carteira.png'),
+                          ),
                           Text('Saldo do RU', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),)
                         ],
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.all(10),
-                      width: 180,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('image/achados-e-perdidos.png'),
+                          Container(
+                            width: 130,
+                            child: Image.asset('image/achados-e-perdidos.png'),
+                          ),
                           Text('Achados & Perdidos', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),)
                         ],
                       ),

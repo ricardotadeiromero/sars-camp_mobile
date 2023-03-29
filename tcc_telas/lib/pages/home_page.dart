@@ -51,13 +51,7 @@ class homePage extends StatelessWidget {
           width: double.infinity,
           child: Stack(
             children: [
-              Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [],
-                ),
-              ),
+              
               Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +66,52 @@ class homePage extends StatelessWidget {
                     )
                   ],
                 ),
-              )
+              ),
+              Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      width: 200,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('image/cardapio.png'),
+                          Text('Cardápio RU',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),)
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      width: 180,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('image/carteira.png'),
+                          Text('Saldo do RU', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),)
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      width: 180,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('image/achados-e-perdidos.png'),
+                          Text('Achados & Perdidos', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),)
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ],
           )),
     );

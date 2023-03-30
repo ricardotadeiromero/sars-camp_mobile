@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tcc_telas/pages/cardapio_page.dart';
 
 class homePage extends StatelessWidget {
   @override
@@ -51,7 +52,6 @@ class homePage extends StatelessWidget {
           width: double.infinity,
           child: Stack(
             children: [
-              
               Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,21 +71,34 @@ class homePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  
                   children: [
-                    Container(
-                      margin: const EdgeInsets.all(10),
-                      width: 140,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 140,
-                            child:Image.asset('image/cardapio.png') ,
-                          ),
-                          Text('Cardápio RU',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),)
-                        ],
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => cardapioPage()));
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        width: 140,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 140,
+                              child: Image.asset('image/cardapio.png'),
+                            ),
+                            Text(
+                              'Cardápio RU',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Container(
@@ -97,9 +110,15 @@ class homePage extends StatelessWidget {
                         children: [
                           Container(
                             width: 120,
-                            child:Image.asset('image/carteira.png'),
+                            child: Image.asset('image/carteira.png'),
                           ),
-                          Text('Saldo do RU', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),)
+                          Text(
+                            'Saldo do RU',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          )
                         ],
                       ),
                     ),
@@ -113,7 +132,13 @@ class homePage extends StatelessWidget {
                             width: 130,
                             child: Image.asset('image/achados-e-perdidos.png'),
                           ),
-                          Text('Achados & Perdidos', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),)
+                          Text(
+                            'Achados & Perdidos',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          )
                         ],
                       ),
                     )

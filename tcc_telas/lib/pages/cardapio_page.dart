@@ -1,10 +1,34 @@
 import 'dart:ui';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 
-class cardapioPage extends StatelessWidget {
+class cardapioPage extends StatefulWidget {
+  
+  _CardapioPage createState() => _CardapioPage();
+
+}
+
+class _CardapioPage extends State<cardapioPage>{
+
+  List<DateTime> _daysOfWeek = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Obter a data atual e determinar o dia da semana em que a semana começa (segunda-feira).
+    DateTime now = DateTime.now();
+    int weekDay = now.weekday;
+    int diff = (weekDay - DateTime.monday) % 7;
+
+    // Criar uma lista de datas para os próximos sete dias da semana.
+    DateTime startOfWeek = now.subtract(Duration(days: diff));
+    for (int i = 0; i < 7; i++) {
+      _daysOfWeek.add(startOfWeek.add(Duration(days: i)));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +102,14 @@ class cardapioPage extends StatelessWidget {
                     color: Color(0xFFA12E2F),
                     borderRadius: BorderRadius.circular(20),
                   ),
+                  child: ListView.builder(
+                    itemCount: _daysOfWeek.length,
+                    itemBuilder: (BuildContext context, int index){
+                    String formattedDate = DateFormat('dd/MM').format(_daysOfWeek[index]);
+                    return ListTile(
+                    title: Text('$formattedDate'), );
+
+                  }),
                 ),
               ),
             ],

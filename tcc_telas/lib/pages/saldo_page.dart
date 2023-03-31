@@ -101,8 +101,13 @@ class saldoPage extends StatelessWidget {
                     color: Color(0xFFA12E2F),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Container(
-                    
+                  child: Form(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'RA:',
+                        
+                      ),
+                    ),
                   ),
                 ),
               ),

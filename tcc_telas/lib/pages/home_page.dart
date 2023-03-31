@@ -12,7 +12,9 @@ class homePage extends StatelessWidget {
         backgroundColor: Color(0xFFA12E2F),
         leading: IconButton(
           icon: Image.asset('image/logo.png'),
-          onPressed: (() => homePage()),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         leadingWidth: 80,
         title: Text(

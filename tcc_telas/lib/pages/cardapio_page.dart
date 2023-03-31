@@ -13,7 +13,9 @@ class cardapioPage extends StatelessWidget {
         backgroundColor: Color(0xFFA12E2F),
         leading: IconButton(
           icon: Image.asset('image/logo.png'),
-          onPressed: (() => homePage()),
+          onPressed: (){
+            Navigator.pop(context);
+          },
         ),
         leadingWidth: 80,
         title: Text(
@@ -51,6 +53,35 @@ class cardapioPage extends StatelessWidget {
       body: Container(
           color: Color(0xFF0A6066),
           width: double.infinity,
+          child: Stack(
+            children: [
+              Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 300,
+                      child: Opacity(
+                        opacity: 0.12,
+                        child: Image.asset("image/Unicamp.png"),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Center(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFA12E2F),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
+            ],
+          )
         )
     );
   }

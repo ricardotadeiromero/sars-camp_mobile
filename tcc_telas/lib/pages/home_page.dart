@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc_telas/pages/cardapio_page.dart';
+import 'package:tcc_telas/pages/saldo_page.dart';
 
 class homePage extends StatelessWidget {
   @override
@@ -103,7 +104,14 @@ class homePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
+                    InkWell(
+                      onTap:() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => saldoPage()));
+                      },
+                      child:Container(
                       margin: const EdgeInsets.all(10),
                       width: 120,
                       child: Column(
@@ -116,13 +124,14 @@ class homePage extends StatelessWidget {
                           ),
                           Text(
                             'Saldo do RU',
-                            style: TextStyle(
+                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                                 color: Colors.white),
                           )
                         ],
                       ),
+                    ) ,
                     ),
                     Container(
                       margin: const EdgeInsets.all(10),

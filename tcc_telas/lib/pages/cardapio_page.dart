@@ -65,12 +65,14 @@ void initState() {
               ),
             ),
           ],
-          bottom: TabBar(tabs: [
-            Tab(text: 'Segunda'),
-            Tab(text: 'Terça'),
-            Tab(text: 'Quarta'),
-            Tab(text: 'Quinta'),
-            Tab(text: 'Sexta'),
+          bottom: TabBar(
+            indicatorColor: Color.fromARGB(255, 15, 142, 147),
+            tabs: [
+            Tab(text: DateFormat("dd/MM"). format(DiaDaSemana.obterData(DateTime.monday))),
+            Tab(text: DateFormat("dd/MM"). format(DiaDaSemana.obterData(DateTime.tuesday))),
+            Tab(text: DateFormat("dd/MM"). format(DiaDaSemana.obterData(DateTime.wednesday))),
+            Tab(text: DateFormat("dd/MM"). format(DiaDaSemana.obterData(DateTime.thursday))),
+            Tab(text: DateFormat("dd/MM"). format(DiaDaSemana.obterData(DateTime.friday))),
             ],
             onTap: (index) {
             setState(() {
@@ -96,11 +98,10 @@ void initState() {
           ),
         ),
         body: Container(
-            color: Color(0xFF0A6066),
+            color: Color.fromARGB(192, 10, 96, 102),
             width: double.infinity,
             child: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                 ListView.separated(
@@ -110,7 +111,11 @@ void initState() {
                   final cardapio = controller.Cardap;
                   late String title;
                   late String trailing;
-                  if(cardapio[i].aj == 1) {
+                  
+                  if(cardapio[i].aj == 0) {
+                    title = "Café da manhã";
+                    trailing = "";
+                  } else if(cardapio[i].aj == 1) {
                     title = "Almoço";
                     if(cardapio[i].vn == 1){
                       trailing = "Normal";
@@ -124,16 +129,24 @@ void initState() {
                     } else if(cardapio[i].vn == 0){
                       trailing = "Vegano";
                     }
-                  } else if(cardapio[i].aj == 0) {
-                    title = "Café da manhã";
-                    trailing = "";
-                  }
+                  }  
                   return ListTile(
-                    title: Text(title, style: TextStyle(),),
-                    trailing: Text(trailing),
+                    title: Text(title, 
+                     style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: Colors.white),),
+                    trailing: Text(trailing,
+                     style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                color: Color.fromARGB(180, 255, 255, 255))
+                    ),
+                    tileColor: Color(0xFF0A6066),
                   );
                 },
                 separatorBuilder: (_,__) => Divider(),//Especificar o divisor
+                padding: EdgeInsets.all(16),
                 ),
                 ],
               ),

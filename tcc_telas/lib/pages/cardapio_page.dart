@@ -1,4 +1,6 @@
 import 'dart:ui';
+import '../controller/date_controller.dart';
+import '../controller/cardapio_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,27 +11,20 @@ class cardapioPage extends StatefulWidget {
 }
 
 class _CardapioPage extends State<cardapioPage> {
-  List<DateTime> _daysOfWeek = [];
+  late DateTime selectedDay;
+  var controller = CardapioController();
 
   @override
-  void initState() {
-    super.initState();
+void initState() {
+  super.initState();
 
-    // Obter a data atual e determinar o dia da semana em que a semana começa (segunda-feira).
-    DateTime now = DateTime.now();
-    int weekDay = now.weekday;
-    int diff = (weekDay - DateTime.monday) % 5;
+}
 
-    // Criar uma lista de datas para os próximos sete dias da semana.
-    DateTime startOfWeek = now.subtract(Duration(days: diff));
-    for (int i = 0; i < 5; i++) {
-      _daysOfWeek.add(startOfWeek.add(Duration(days: i)));
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(length: 5, child: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFFA12E2F),
           leading: IconButton(
@@ -70,58 +65,81 @@ class _CardapioPage extends State<cardapioPage> {
               ),
             ),
           ],
+          bottom: TabBar(tabs: [
+            Tab(text: 'Segunda'),
+            Tab(text: 'Terça'),
+            Tab(text: 'Quarta'),
+            Tab(text: 'Quinta'),
+            Tab(text: 'Sexta'),
+            ],
+            onTap: (index) {
+            setState(() {
+              switch (index) {
+                case 0:
+                  selectedDay = DiaDaSemana.obterData(DateTime.monday);
+                  break;
+                case 1:
+                  selectedDay = DiaDaSemana.obterData(DateTime.tuesday);
+                  break;
+                case 2:
+                  selectedDay = DiaDaSemana.obterData(DateTime.wednesday);
+                  break;
+                case 3:
+                  selectedDay = DiaDaSemana.obterData(DateTime.thursday);
+                  break;
+                case 4:
+                  selectedDay = DiaDaSemana.obterData(DateTime.friday);
+                  break;
+              }
+            });
+            }
+          ),
         ),
         body: Container(
             color: Color(0xFF0A6066),
             width: double.infinity,
-            child: Stack(
-              children: [
-                Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 300,
-                        child: Opacity(
-                          opacity: 0.12,
-                          child: Image.asset("image/Unicamp.png"),
-                        ),
-                      )
-                    ],
-                  ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                ListView.separated(
+                shrinkWrap: true,
+                itemCount: controller.Cardap.length,
+                itemBuilder: (BuildContext context, int i) {
+                  final cardapio = controller.Cardap;
+                  late String title;
+                  late String trailing;
+                  if(cardapio[i].aj == 1) {
+                    title = "Almoço";
+                    if(cardapio[i].vn == 1){
+                      trailing = "Normal";
+                    } else if(cardapio[i].vn == 0){
+                      trailing = "Vegano";
+                    }
+                  } else if (cardapio[i].aj == 2){
+                    title = "Jantar";
+                    if(cardapio[i].vn == 1){
+                      trailing = "Normal";
+                    } else if(cardapio[i].vn == 0){
+                      trailing = "Vegano";
+                    }
+                  } else if(cardapio[i].aj == 0) {
+                    title = "Café da manhã";
+                    trailing = "";
+                  }
+                  return ListTile(
+                    title: Text(title, style: TextStyle(),),
+                    trailing: Text(trailing),
+                  );
+                },
+                separatorBuilder: (_,__) => Divider(),//Especificar o divisor
                 ),
-                Center(
-                  child: Container(
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFA12E2F),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: _daysOfWeek.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                String formattedDate = DateFormat('dd/MM')
-                                    .format(_daysOfWeek[index]);
-                                return ListTile(
-                                  title: Text('$formattedDate',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          color: Colors.white)),
-                                );
-                              }),
-                        ],
-                      )),
-                ),
-              ],
-            )));
+                ],
+              ),
+               ),
+            )
+          )
+      );
   }
 }

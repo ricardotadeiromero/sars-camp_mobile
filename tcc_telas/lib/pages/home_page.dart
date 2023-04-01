@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:tcc_telas/teste.dart';
-
+import 'package:tcc_telas/pages/testeCardapio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc_telas/pages/cardapio_page.dart';
@@ -106,33 +106,33 @@ class homePage extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap:() {
+                      onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => saldoPage()));
                       },
-                      child:Container(
-                      margin: const EdgeInsets.all(10),
-                      width: 120,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 120,
-                            child: Image.asset('image/carteira.png'),
-                          ),
-                          Text(
-                            'Saldo do RU',
-                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.white),
-                          )
-                        ],
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        width: 120,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 120,
+                              child: Image.asset('image/carteira.png'),
+                            ),
+                            Text(
+                              'Saldo do RU',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        ),
                       ),
-                    ) ,
                     ),
                     Container(
                       margin: const EdgeInsets.all(10),

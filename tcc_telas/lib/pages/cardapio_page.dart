@@ -2,6 +2,7 @@ import 'dart:ui';
 import '../controller/date_controller.dart';
 import '../controller/cardapio_controller.dart';
 import 'package:intl/intl.dart';
+import 'package:mysql1/mysql1.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../model/Cardapio.dart';
@@ -14,13 +15,28 @@ class cardapioPage extends StatefulWidget {
 
 class _CardapioPage extends State<cardapioPage> {
   late DateTime selectedDay;
-  Future<Iterable<Cardapio>>? _future;
+  late Cardapio cardapioAN, cardapioAV, cardapioJN, cardapioJV;
+  Future<List<Cardapio>>? _future;
   var controller = CardapioController();
 
   @override
   void initState() {
-    _future = Connection().getCardapio();
+    _future = getCardapio(DiaDaSemana.obterData(DateTime.monday)).then((iterable) => iterable.toList());
+
     super.initState();
+  }
+
+  static Future<Iterable<Cardapio>> getCardapio(DateTime data) async {
+    MySqlConnection conn = await MySqlConnection.connect(ConnectionSettings(
+      host: '143.106.241.3',
+      port: 3306,
+      user: 'cl201605',
+      password: 'cl*20122005',
+      db: 'cl201605',
+    ));
+    final results = await conn.query(
+        "SELECT principal,guarnicao,salada,sobremesa,suco,periodo,vegetariano FROM Cardapio WHERE data = '${DateFormat("yyyy-MM-dd").format(data)}';");
+    return results.map((row) => Cardapio.fromMap(row.fields));
   }
 
   @override
@@ -29,7 +45,7 @@ class _CardapioPage extends State<cardapioPage> {
         length: 5,
         child: Scaffold(
             appBar: AppBar(
-              backgroundColor: Color(0xFFA12E2F),
+              backgroundColor: const Color(0xFFA12E2F),
               leading: IconButton(
                 icon: Image.asset('image/logo.png'),
                 onPressed: () {
@@ -37,7 +53,7 @@ class _CardapioPage extends State<cardapioPage> {
                 },
               ),
               leadingWidth: 80,
-              title: Text(
+              title: const Text(
                 'SARsCamp',
                 style: TextStyle(fontWeight: FontWeight.w800, fontSize: 30),
               ),
@@ -46,7 +62,7 @@ class _CardapioPage extends State<cardapioPage> {
                 SizedBox(
                   width: 50, // largura do espaço em pixels
                   child: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.star,
                       size: 40,
                     ),
@@ -58,7 +74,7 @@ class _CardapioPage extends State<cardapioPage> {
                 SizedBox(
                   width: 50, // largura do espaço em pixels
                   child: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.info,
                       size: 40,
                     ),
@@ -69,7 +85,7 @@ class _CardapioPage extends State<cardapioPage> {
                 ),
               ],
               bottom: TabBar(
-                  indicatorColor: Color.fromARGB(255, 15, 142, 147),
+                  indicatorColor: const Color.fromARGB(255, 15, 142, 147),
                   tabs: [
                     Tab(
                         text: DateFormat("dd/MM")
@@ -92,20 +108,25 @@ class _CardapioPage extends State<cardapioPage> {
                       switch (index) {
                         case 0:
                           selectedDay = DiaDaSemana.obterData(DateTime.monday);
+                          _future = getCardapio(selectedDay).then((iterable) => iterable.toList());
                           break;
                         case 1:
                           selectedDay = DiaDaSemana.obterData(DateTime.tuesday);
+                          _future = getCardapio(selectedDay).then((iterable) => iterable.toList());
                           break;
                         case 2:
                           selectedDay =
                               DiaDaSemana.obterData(DateTime.wednesday);
+                              _future = getCardapio(selectedDay).then((iterable) => iterable.toList());
                           break;
                         case 3:
                           selectedDay =
                               DiaDaSemana.obterData(DateTime.thursday);
+                              _future = getCardapio(selectedDay).then((iterable) => iterable.toList());
                           break;
                         case 4:
                           selectedDay = DiaDaSemana.obterData(DateTime.friday);
+                          _future = getCardapio(selectedDay).then((iterable) => iterable.toList());
                           break;
                       }
                     });
@@ -114,7 +135,7 @@ class _CardapioPage extends State<cardapioPage> {
             body: Stack(
               children: [
                 Container(
-                  color: Color(0xFF0A6066),
+                  color: const Color(0xFF0A6066),
                   width: double.infinity,
                 ),
                 Center(
@@ -138,7 +159,7 @@ class _CardapioPage extends State<cardapioPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ExpansionTile(
+                        const ExpansionTile(
                           iconColor: Color.fromARGB(159, 255, 255, 255),
                           textColor: Color.fromARGB(159, 255, 255, 255),
                           backgroundColor: Color.fromARGB(255, 193, 54, 57),
@@ -146,9 +167,10 @@ class _CardapioPage extends State<cardapioPage> {
                           title: Text(
                             'Café da manhã',
                             style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Colors.white),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: Colors.white
+                            ),
                           ),
                         ),
                         ExpansionTile(
@@ -156,36 +178,64 @@ class _CardapioPage extends State<cardapioPage> {
                           textColor: Color.fromARGB(159, 255, 255, 255),
                           backgroundColor: Color.fromARGB(255, 193, 54, 57),
                           leading: Icon(Icons.sunny),
-                          title: Text(
+                          title: const Text(
                             'Almoço',
                             style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Colors.white),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: Colors.white
+                            ),
                           ),
                           subtitle: Text('Comum'),
-                          children: [
-                            FutureBuilder(
-                                future: _future,
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return const CircularProgressIndicator();
-                                  } else {
-                                    final cardapio = snapshot.data ?? false;
-                                    return ListView.builder(
-                                        itemCount: 1,
-                                        itemBuilder:
-                                            (BuildContext context, int i) {
-                                          return ListTile(
-                                            title: Text('FON'),
-                                          );
-                                        });
-                                  }
-                                })
+                          children: <Widget>[
+                            FutureBuilder<List<Cardapio>>(
+                              future: _future,
+                              builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if(snapshot.hasData){
+                                final list = snapshot.data!;
+                                if(list.isEmpty){
+                                  return Text('Erro ao carregar os itens');
+                                } else {
+                                   var cardapio = null;
+                                   for(var item in list){
+                                     if(item.periodo == 0 && item.vegetariano == 0){
+                                        cardapio = item;
+                                      }
+                                    }
+                                   if(cardapio != null){
+                                     return ListView(
+                                        shrinkWrap: true,
+                                       children: [
+                                       ListTile(
+                                          leading: const Text('Principal: ',style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          color: Color.fromARGB(255, 255, 255, 255)),),
+                                          title: Text(cardapio.principal,style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                          color: Color.fromARGB(157, 255, 255, 255))),
+                                        )
+                                      ],
+                                    );
+                                    } else {
+                                        return Text('Erro ao carregar os itens');
+                                      }             
+                                    }
+                                  } else if (snapshot.hasError) {
+                                      return Text('Erro ao carregar os itens');
+                                    } else {
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }
+                              }
+                              )
                           ],
                         ),
-                        ExpansionTile(
+                        const ExpansionTile(
                           iconColor: Color.fromARGB(159, 255, 255, 255),
                           textColor: Color.fromARGB(159, 255, 255, 255),
                           backgroundColor: Color.fromARGB(255, 193, 54, 57),
@@ -197,9 +247,9 @@ class _CardapioPage extends State<cardapioPage> {
                                 fontSize: 16,
                                 color: Colors.white),
                           ),
-                          subtitle: Text('vegano'),
+                          subtitle: Text('Vegetariano'),
                         ),
-                        ExpansionTile(
+                        const ExpansionTile(
                           iconColor: Color.fromARGB(159, 255, 255, 255),
                           textColor: Color.fromARGB(159, 255, 255, 255),
                           backgroundColor: Color.fromARGB(255, 193, 54, 57),
@@ -213,7 +263,7 @@ class _CardapioPage extends State<cardapioPage> {
                           ),
                           subtitle: Text('Comum'),
                         ),
-                        ExpansionTile(
+                        const ExpansionTile(
                           iconColor: Color.fromARGB(159, 255, 255, 255),
                           textColor: Color.fromARGB(159, 255, 255, 255),
                           backgroundColor: Color.fromARGB(255, 193, 54, 57),
@@ -225,7 +275,7 @@ class _CardapioPage extends State<cardapioPage> {
                                 fontSize: 16,
                                 color: Colors.white),
                           ),
-                          subtitle: Text('vegano'),
+                          subtitle: Text('Vegetariano'),
                         )
                       ],
                     ),

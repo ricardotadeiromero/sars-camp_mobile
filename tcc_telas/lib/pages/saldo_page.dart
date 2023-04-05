@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 
 class saldoPage extends StatelessWidget {
+  final _raController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -101,14 +102,18 @@ class saldoPage extends StatelessWidget {
                     color: Color(0xFFA12E2F),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Form(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'RA:',
-                        
-                      ),
+                  child: SizedBox(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(16),
+                        ),
+                        TextField(
+                          
+                        )
+                      ],
                     ),
-                  ),
+                  )
                 ),
               ),
                 ],

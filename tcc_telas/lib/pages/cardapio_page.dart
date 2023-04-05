@@ -21,7 +21,7 @@ class _CardapioPage extends State<cardapioPage> {
 
   @override
   void initState() {
-    _future = getCardapio(DiaDaSemana.obterData(DateTime.monday)).then((iterable) => iterable.toList());
+    _future = Connection.getCardapio(DiaDaSemana.obterData(DateTime.monday)).then((iterable) => iterable.toList());
 
     super.initState();
   }
@@ -155,10 +155,10 @@ class _CardapioPage extends State<cardapioPage> {
                 ),
                 Container(
                   width: double.infinity,
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                  child: Container(
+                    child: SingleChildScrollView(
+                      child: Column(
+                         children: [
                         const ExpansionTile(
                           iconColor: Color.fromARGB(159, 255, 255, 255),
                           textColor: Color.fromARGB(159, 255, 255, 255),
@@ -200,13 +200,13 @@ class _CardapioPage extends State<cardapioPage> {
                                 } else {
                                    var cardapio = null;
                                    for(var item in list){
-                                     if(item.periodo == 0 && item.vegetariano == 0){
+                                     if(item.periodo == 1 && item.vegetariano == 0){
                                         cardapio = item;
                                       }
                                     }
                                    if(cardapio != null){
                                      return ListView(
-                                        shrinkWrap: true,
+                                      shrinkWrap: true,
                                        children: [
                                        ListTile(
                                           leading: const Text('Principal: ',style: TextStyle(
@@ -214,6 +214,46 @@ class _CardapioPage extends State<cardapioPage> {
                                           fontSize: 16,
                                           color: Color.fromARGB(255, 255, 255, 255)),),
                                           title: Text(cardapio.principal,style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                          color: Color.fromARGB(157, 255, 255, 255))),
+                                        ),
+                                        ListTile(
+                                          leading: const Text('Guarnição: ',style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          color: Color.fromARGB(255, 255, 255, 255)),),
+                                          title: Text(cardapio.guarnicao,style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                          color: Color.fromARGB(157, 255, 255, 255))),
+                                        ),
+                                        ListTile(
+                                          leading: const Text('Salada: ',style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          color: Color.fromARGB(255, 255, 255, 255)),),
+                                          title: Text(cardapio.salada,style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                          color: Color.fromARGB(157, 255, 255, 255))),
+                                        ),
+                                        ListTile(
+                                          leading: const Text('Sobremesa: ',style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          color: Color.fromARGB(255, 255, 255, 255)),),
+                                          title: Text(cardapio.sobremesa,style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                          color: Color.fromARGB(157, 255, 255, 255))),
+                                        ),
+                                        ListTile(
+                                          leading: const Text('Suco: ',style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          color: Color.fromARGB(255, 255, 255, 255)),),
+                                          title: Text(cardapio.suco,style: const TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 14,
                                           color: Color.fromARGB(157, 255, 255, 255))),
@@ -278,6 +318,8 @@ class _CardapioPage extends State<cardapioPage> {
                           subtitle: Text('Vegetariano'),
                         )
                       ],
+                      ),
+                     
                     ),
                   ),
                 )

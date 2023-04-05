@@ -4,6 +4,8 @@ import '../controller/cardapio_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../model/Cardapio.dart';
+import '../connection/connection.dart';
 import 'home_page.dart';
 
 class cardapioPage extends StatefulWidget {
@@ -12,10 +14,12 @@ class cardapioPage extends StatefulWidget {
 
 class _CardapioPage extends State<cardapioPage> {
   late DateTime selectedDay;
+  Future<Iterable<Cardapio>>? _future;
   var controller = CardapioController();
 
   @override
   void initState() {
+    _future = Connection().getCardapio();
     super.initState();
   }
 
@@ -160,6 +164,26 @@ class _CardapioPage extends State<cardapioPage> {
                                 color: Colors.white),
                           ),
                           subtitle: Text('Comum'),
+                          children: [
+                            FutureBuilder(
+                                future: _future,
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const CircularProgressIndicator();
+                                  } else {
+                                    final cardapio = snapshot.data ?? false;
+                                    return ListView.builder(
+                                        itemCount: 1,
+                                        itemBuilder:
+                                            (BuildContext context, int i) {
+                                          return ListTile(
+                                            title: Text('FON'),
+                                          );
+                                        });
+                                  }
+                                })
+                          ],
                         ),
                         ExpansionTile(
                           iconColor: Color.fromARGB(159, 255, 255, 255),

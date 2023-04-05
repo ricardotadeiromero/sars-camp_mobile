@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
-import 'connection/connection.dart';
-// import 'package:mysql1/mysql1.dart';
+//import 'connection/connection.dart';
+import 'package:mysql1/mysql1.dart';
+import 'model/Cardapio.dart';
 import 'package:http/http.dart' as http;
 
-void main() async{
-  print(await http.get(Uri.parse("http://localhost:5000/")));
-
+void main() {
   runApp(const MyApp());
 }
 

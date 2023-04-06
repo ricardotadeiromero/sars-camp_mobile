@@ -21,22 +21,9 @@ class _CardapioPage extends State<cardapioPage> {
 
   @override
   void initState() {
-    _future = Connection.getCardapio(DiaDaSemana.obterData(DateTime.monday)).then((iterable) => iterable.toList());
+    _future = Connection.getCardapio(DiaDaSemana.obterData(DateTime.monday));
 
     super.initState();
-  }
-
-  static Future<Iterable<Cardapio>> getCardapio(DateTime data) async {
-    MySqlConnection conn = await MySqlConnection.connect(ConnectionSettings(
-      host: '143.106.241.3',
-      port: 3306,
-      user: 'cl201605',
-      password: 'cl*20122005',
-      db: 'cl201605',
-    ));
-    final results = await conn.query(
-        "SELECT principal,guarnicao,salada,sobremesa,suco,periodo,vegetariano FROM Cardapio WHERE data = '${DateFormat("yyyy-MM-dd").format(data)}';");
-    return results.map((row) => Cardapio.fromMap(row.fields));
   }
 
   @override
@@ -108,25 +95,25 @@ class _CardapioPage extends State<cardapioPage> {
                       switch (index) {
                         case 0:
                           selectedDay = DiaDaSemana.obterData(DateTime.monday);
-                          _future = getCardapio(selectedDay).then((iterable) => iterable.toList());
+                          _future = Connection.getCardapio(selectedDay);
                           break;
                         case 1:
                           selectedDay = DiaDaSemana.obterData(DateTime.tuesday);
-                          _future = getCardapio(selectedDay).then((iterable) => iterable.toList());
+                          _future = Connection.getCardapio(selectedDay);
                           break;
                         case 2:
                           selectedDay =
                               DiaDaSemana.obterData(DateTime.wednesday);
-                              _future = getCardapio(selectedDay).then((iterable) => iterable.toList());
+                              _future = Connection.getCardapio(selectedDay);
                           break;
                         case 3:
                           selectedDay =
                               DiaDaSemana.obterData(DateTime.thursday);
-                              _future = getCardapio(selectedDay).then((iterable) => iterable.toList());
+                              _future = Connection.getCardapio(selectedDay);
                           break;
                         case 4:
                           selectedDay = DiaDaSemana.obterData(DateTime.friday);
-                          _future = getCardapio(selectedDay).then((iterable) => iterable.toList());
+                          _future = Connection.getCardapio(selectedDay);
                           break;
                       }
                     });

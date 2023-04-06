@@ -20,10 +20,14 @@ class Connection {
     return conn;
   }
 
-  static Future<Iterable<Cardapio>> getCardapio(DateTime data) async {
+  static Future<List<Cardapio>> getCardapio(DateTime data) async {
     var url = Uri.parse('http://localhost:3000/api/cardapio/${data}');
     final response = await http.get(url);
-    final Iterable<Map<String, dynamic>> responseMap = jsonDecode(response.body);
-    return responseMap.map<Cardapio>((resp) => Cardapio.fromMap(resp));
+    if (response.statusCode == 200) {
+      final cardapios = jsonDecode(response.body) as List;
+      return cardapios.map((cardapio) => Cardapio.fromMap(cardapio)).toList();
+    } else {
+      throw Exception('Falha ao carregar cardápio');
+    }
   }
 }

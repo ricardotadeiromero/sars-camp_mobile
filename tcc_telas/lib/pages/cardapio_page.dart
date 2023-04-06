@@ -1,13 +1,12 @@
-import 'dart:ui';
 import '../controller/date_controller.dart';
 import '../controller/cardapio_controller.dart';
 import 'package:intl/intl.dart';
-import 'package:mysql1/mysql1.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../model/Cardapio.dart';
 import '../connection/connection.dart';
-import 'home_page.dart';
+import 'package:http/http.dart' as  http;
+import 'dart:convert';
+
 
 class cardapioPage extends StatefulWidget {
   _CardapioPage createState() => _CardapioPage();
@@ -21,10 +20,10 @@ class _CardapioPage extends State<cardapioPage> {
 
   @override
   void initState() {
-    _future = Connection.getCardapio(DiaDaSemana.obterData(DateTime.monday));
-
+    _future = Connection.getCardapio(DateFormat("yyyy-MM-dd").format(DiaDaSemana.obterData(DateTime.monday)));
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -95,25 +94,25 @@ class _CardapioPage extends State<cardapioPage> {
                       switch (index) {
                         case 0:
                           selectedDay = DiaDaSemana.obterData(DateTime.monday);
-                          _future = Connection.getCardapio(selectedDay);
+                          _future = Connection.getCardapio(DateFormat("yyyy-MM-dd").format(selectedDay));
                           break;
                         case 1:
                           selectedDay = DiaDaSemana.obterData(DateTime.tuesday);
-                          _future = Connection.getCardapio(selectedDay);
+                          _future = Connection.getCardapio(DateFormat("yyyy-MM-dd").format(selectedDay));
                           break;
                         case 2:
                           selectedDay =
                               DiaDaSemana.obterData(DateTime.wednesday);
-                              _future = Connection.getCardapio(selectedDay);
+                              _future = Connection.getCardapio(DateFormat("yyyy-MM-dd").format(selectedDay));
                           break;
                         case 3:
                           selectedDay =
                               DiaDaSemana.obterData(DateTime.thursday);
-                              _future = Connection.getCardapio(selectedDay);
+                              _future = Connection.getCardapio(DateFormat("yyyy-MM-dd").format(selectedDay));
                           break;
                         case 4:
                           selectedDay = DiaDaSemana.obterData(DateTime.friday);
-                          _future = Connection.getCardapio(selectedDay);
+                          _future = Connection.getCardapio(DateFormat("yyyy-MM-dd").format(selectedDay));
                           break;
                       }
                     });
@@ -175,7 +174,7 @@ class _CardapioPage extends State<cardapioPage> {
                           ),
                           subtitle: Text('Comum'),
                           children: <Widget>[
-                            FutureBuilder<List<Cardapio>>(
+                            FutureBuilder(
                               future: _future,
                               builder: (context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -183,7 +182,7 @@ class _CardapioPage extends State<cardapioPage> {
                               } else if(snapshot.hasData){
                                 final list = snapshot.data!;
                                 if(list.isEmpty){
-                                  return Text('Erro ao carregar os itens');
+                                  return Text('Vazio');
                                 } else {
                                    var cardapio = null;
                                    for(var item in list){
@@ -248,11 +247,11 @@ class _CardapioPage extends State<cardapioPage> {
                                       ],
                                     );
                                     } else {
-                                        return Text('Erro ao carregar os itens');
+                                        return Text('Fon');
                                       }             
                                     }
                                   } else if (snapshot.hasError) {
-                                      return Text('Erro ao carregar os itens');
+                                      return Text('Snap');
                                     } else {
                                         return Center(
                                           child: CircularProgressIndicator(),

@@ -3,10 +3,8 @@ import '../model/Cardapio.dart';
 import 'package:http/http.dart' as http;
 
 class Connection {
-
-
   static Future<List<Cardapio>> getCardapio(String data) async {
-    var url = Uri.parse("http://localhost:3000/api/cardapio/'${data}'");
+    var url = Uri.parse("http://192.168.15.7:3000/api/cardapio/'${data}'");
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final cardapios = jsonDecode(response.body) as List;

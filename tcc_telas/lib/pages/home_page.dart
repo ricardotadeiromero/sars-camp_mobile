@@ -1,164 +1,110 @@
 import 'dart:ui';
 import 'package:tcc_telas/teste.dart';
-import 'package:tcc_telas/pages/testeCardapio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc_telas/pages/cardapio_page.dart';
 import 'package:tcc_telas/pages/saldo_page.dart';
+import 'Componentes/CustomCard.dart';
+import 'Componentes/Background.dart';
 
 class homePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFFA12E2F),
-        leading: IconButton(
-          icon: Image.asset('image/logo.png'),
-          onPressed: () {
-            Navigator.pop(context);
+        appBar: MyAppBar(
+          onStarPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Título do Alerta'),
+                  content: Text('Conteúdo do Alerta'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('Cancelar'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: Text('OK'),
+                      onPressed: () {
+                        // Lógica para quando o botão "OK" é pressionado
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          onInfoPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Título do Alerta'),
+                  content: Text('Conteúdo do Alerta'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('Cancelar'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: Text('OK'),
+                      onPressed: () {
+                        // Lógica para quando o botão "OK" é pressionado
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
           },
         ),
-        leadingWidth: 80,
-        title: Text(
-          'SARsCamp',
-          style: TextStyle(fontWeight: FontWeight.w800, fontSize: 30),
-        ),
-        titleSpacing: 0,
-        actions: [
-          SizedBox(
-            width: 50, // largura do espaço em pixels
-            child: IconButton(
-              icon: Icon(
-                Icons.star,
-                size: 40,
-              ),
-              onPressed: () {
-                // função chamada quando o ícone de estrela é pressionado
-              },
-            ),
-          ),
-          SizedBox(
-            width: 50, // largura do espaço em pixels
-            child: IconButton(
-              icon: Icon(
-                Icons.info,
-                size: 40,
-              ),
-              onPressed: () {
-                // função chamada quando o ícone de informações é pressionado
-              },
-            ),
-          ),
-        ],
-      ),
-      body: Container(
-          color: Color(0xFF0A6066),
-          width: double.infinity,
-          child: Stack(
+        body: Background(
+          components: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 300,
-                      child: Opacity(
-                        opacity: 0.12,
-                        child: Image.asset('image/Unicamp.png'),
-                      ),
-                    )
-                  ],
-                ),
+              CustomCard(
+                size: 140,
+                imageAsset: 'image/cardapio.png',
+                title: 'Cardápio RU',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => cardapioPage()),
+                  );
+                },
               ),
-              Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => cardapioPage()));
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(10),
-                        width: 140,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 140,
-                              child: Image.asset('image/cardapio.png'),
-                            ),
-                            Text(
-                              'Cardápio RU',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => saldoPage()));
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(10),
-                        width: 120,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 120,
-                              child: Image.asset('image/carteira.png'),
-                            ),
-                            Text(
-                              'Saldo do RU',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 130,
-                            child: Image.asset('image/achados-e-perdidos.png'),
-                          ),
-                          Text(
-                            'Achados & Perdidos',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.white),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+              CustomCard(
+                size: 120,
+                imageAsset: 'image/carteira.png',
+                title: 'Saldo do RU',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => saldoPage()),
+                  );
+                },
+              ),
+              CustomCard(
+                size: 130,
+                imageAsset: 'image/achados-e-perdidos.png',
+                title: 'Saldo do RU',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => saldoPage()),
+                  );
+                },
               ),
             ],
-          )),
-    );
+          ),
+        ));
   }
 }

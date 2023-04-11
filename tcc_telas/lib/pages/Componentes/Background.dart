@@ -9,7 +9,7 @@ class Background extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Color(0xFF0A6066),
+        color: const Color(0xFF0A6066),
         width: double.infinity,
         child: Stack(
           children: [
@@ -41,7 +41,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   final bool shouldPopOnLogoPressed;
 
-  MyAppBar(
+  const MyAppBar(
       {this.onStarPressed,
       this.onInfoPressed,
       this.onLogoPressed,

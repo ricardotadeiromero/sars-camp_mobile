@@ -14,7 +14,7 @@ class cardapioPage extends StatefulWidget {
   _CardapioPage createState() => _CardapioPage();
 }
 
-class _CardapioPage extends State<cardapioPage> {
+class _CardapioPage extends State<cardapioPage> with SingleTickerProviderStateMixin{
   late DateTime selectedDay;
   late Future<List<Cardapio>> _future;
   var controller = CardapioController();
@@ -36,7 +36,7 @@ class _CardapioPage extends State<cardapioPage> {
               onInfoPressed: () {},
               onStarPressed: () {},
               bottom: PreferredSize(
-                preferredSize: Size.fromHeight(48),
+                preferredSize: const Size.fromHeight(48),
                 child: TabBar(
                     indicatorColor: const Color.fromARGB(255, 15, 142, 147),
                     tabs: [
@@ -100,22 +100,13 @@ class _CardapioPage extends State<cardapioPage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const ExpansionTile(
-                        iconColor: Color.fromARGB(159, 255, 255, 255),
-                        textColor: Color.fromARGB(159, 255, 255, 255),
-                        backgroundColor: Color.fromARGB(255, 193, 54, 57),
-                        leading: Icon(Icons.sunny_snowing),
-                        title: Text(
-                          'Café da manhã',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color: Colors.white),
-                        ),
-                      ),
+                      ExpansionWidgetCafe(
+                        leadingIcon: const Icon(Icons.sunny_snowing),
+                        titleText: 'Café da manhã', 
+                        future: MyListViewCafe()),
                       ExpansionWidget(
                           leadingIcon: const Icon(Icons.sunny),
-                          titleText: 'Almoço',
+                          titleText: 'Almoço',  
                           subtitleText: 'Comum',
                           future: CustomFutureBuilder<List<Cardapio>>(
                             future: _future,

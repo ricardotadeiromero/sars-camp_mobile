@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import '../../model/Cardapio.dart';
 
 TextStyle style =
-    TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);
-TextStyle style2 = TextStyle(
+    const TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);
+TextStyle style2 = const TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 14,
     color: Color.fromARGB(157, 255, 255, 255));
-Color textColor = Color.fromARGB(159, 255, 255, 255);
+Color textColor = const Color.fromARGB(159, 255, 255, 255);
 
 class ExpansionWidget extends StatelessWidget {
   Color iconColor = Color.fromARGB(159, 255, 255, 255);
@@ -24,6 +24,7 @@ class ExpansionWidget extends StatelessWidget {
     required this.future,
   });
 
+
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
@@ -36,6 +37,35 @@ class ExpansionWidget extends StatelessWidget {
         style: style,
       ),
       subtitle: Text(subtitleText),
+      children: [future],
+    );
+  }
+}
+class ExpansionWidgetCafe extends StatelessWidget {
+  Color iconColor = Color.fromARGB(159, 255, 255, 255);
+  Color backgroundColor = Color.fromARGB(255, 193, 54, 57);
+  Icon leadingIcon;
+  String titleText;
+  Widget future;
+
+  ExpansionWidgetCafe({
+    required this.leadingIcon,
+    required this.titleText,
+    required this.future,
+  });
+
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      iconColor: iconColor,
+      textColor: textColor,
+      backgroundColor: backgroundColor,
+      leading: leadingIcon,
+      title: Text(
+        titleText,
+        style: style,
+      ),
       children: [future],
     );
   }
@@ -122,6 +152,40 @@ class MyListView extends StatelessWidget {
         leading: Text('Suco: ', style: style),
         title: Text(cardapio.suco, style: style2),
       )
+    ]);
+  }
+}
+
+class MyListViewCafe extends StatelessWidget {
+
+  MyListViewCafe();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      shrinkWrap: true, 
+      children: [
+      ListTile(
+        leading: Text('Leite', style: style),
+      ),
+      ListTile(
+        leading: Text('Café', style: style),
+      ),
+      ListTile(
+        leading: Text('Achocolatado', style: style),
+      ),
+      ListTile(
+        leading: Text('Pão Francês', style: style),
+      ),
+      ListTile(
+        leading: Text('Margarina', style: style),
+      ),
+      ListTile(
+        leading: Text('Geléia', style: style),
+      ),
+      ListTile(
+        leading: Text('Fruta', style: style),
+      ),
     ]);
   }
 }

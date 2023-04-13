@@ -1,121 +1,149 @@
-import 'dart:ui';
+import 'package:tcc_telas/pages/Componentes/Background.dart';
+import 'package:tcc_telas/pages/Componentes/CardapioPage.dart';
+
+import '../controller/date_controller.dart';
+import '../controller/cardapio_controller.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+import '../model/Cardapio.dart';
+import '../connection/connection.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class cardapioPage extends StatefulWidget {
-  
   _CardapioPage createState() => _CardapioPage();
-
 }
 
-class _CardapioPage extends State<cardapioPage>{
-
-  List<DateTime> _daysOfWeek = [];
+class _CardapioPage extends State<cardapioPage> with SingleTickerProviderStateMixin{
+  late DateTime selectedDay;
+  late Future<List<Cardapio>> _future;
+  var controller = CardapioController();
 
   @override
   void initState() {
+    _future = Connection.getCardapio(DateFormat("yyyy-MM-dd")
+        .format(DiaDaSemana.obterData(DateTime.monday)));
     super.initState();
-
-    // Obter a data atual e determinar o dia da semana em que a semana começa (segunda-feira).
-    DateTime now = DateTime.now();
-    int weekDay = now.weekday;
-    int diff = (weekDay - DateTime.monday) % 7;
-
-    // Criar uma lista de datas para os próximos sete dias da semana.
-    DateTime startOfWeek = now.subtract(Duration(days: diff));
-    for (int i = 0; i < 7; i++) {
-      _daysOfWeek.add(startOfWeek.add(Duration(days: i)));
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFFA12E2F),
-        leading: IconButton(
-          icon: Image.asset('image/logo.png'),
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-        leadingWidth: 80,
-        title: Text(
-          'SARsCamp',
-          style: TextStyle(fontWeight: FontWeight.w800, fontSize: 30),
-        ),
-        titleSpacing: 0,
-        actions: [
-          SizedBox(
-            width: 50, // largura do espaço em pixels
-            child: IconButton(
-              icon: Icon(
-                Icons.star,
-                size: 40,
+    return DefaultTabController(
+        length: 5,
+        child: Scaffold(
+            appBar: MyAppBar(
+              shouldPopOnLogoPressed: true,
+              onInfoPressed: () {},
+              onStarPressed: () {},
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(48),
+                child: TabBar(
+                    indicatorColor: const Color.fromARGB(255, 15, 142, 147),
+                    tabs: [
+                      Tab(
+                          text: DateFormat("dd/MM")
+                              .format(DiaDaSemana.obterData(DateTime.monday))),
+                      Tab(
+                          text: DateFormat("dd/MM")
+                              .format(DiaDaSemana.obterData(DateTime.tuesday))),
+                      Tab(
+                          text: DateFormat("dd/MM").format(
+                              DiaDaSemana.obterData(DateTime.wednesday))),
+                      Tab(
+                          text: DateFormat("dd/MM").format(
+                              DiaDaSemana.obterData(DateTime.thursday))),
+                      Tab(
+                          text: DateFormat("dd/MM")
+                              .format(DiaDaSemana.obterData(DateTime.friday))),
+                    ],
+                    onTap: (index) {
+                      setState(() {
+                        switch (index) {
+                          case 0:
+                            selectedDay =
+                                DiaDaSemana.obterData(DateTime.monday);
+                            _future = Connection.getCardapio(
+                                DateFormat("yyyy-MM-dd").format(selectedDay));
+                            break;
+                          case 1:
+                            selectedDay =
+                                DiaDaSemana.obterData(DateTime.tuesday);
+                            _future = Connection.getCardapio(
+                                DateFormat("yyyy-MM-dd").format(selectedDay));
+                            break;
+                          case 2:
+                            selectedDay =
+                                DiaDaSemana.obterData(DateTime.wednesday);
+                            _future = Connection.getCardapio(
+                                DateFormat("yyyy-MM-dd").format(selectedDay));
+                            break;
+                          case 3:
+                            selectedDay =
+                                DiaDaSemana.obterData(DateTime.thursday);
+                            _future = Connection.getCardapio(
+                                DateFormat("yyyy-MM-dd").format(selectedDay));
+                            break;
+                          case 4:
+                            selectedDay =
+                                DiaDaSemana.obterData(DateTime.friday);
+                            _future = Connection.getCardapio(
+                                DateFormat("yyyy-MM-dd").format(selectedDay));
+                            break;
+                        }
+                      });
+                    }),
               ),
-              onPressed: () {
-                // função chamada quando o ícone de estrela é pressionado
-              },
             ),
-          ),
-          SizedBox(
-            width: 50, // largura do espaço em pixels
-            child: IconButton(
-              icon: Icon(
-                Icons.info,
-                size: 40,
-              ),
-              onPressed: () {
-                // função chamada quando o ícone de informações é pressionado
-              },
-            ),
-          ),
-        ],
-      ),
-      body: Container(
-          color: Color(0xFF0A6066),
-          width: double.infinity,
-          child: Stack(
-            children: [
-              Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 300,
-                      child: Opacity(
-                        opacity: 0.12,
-                        child: Image.asset("image/Unicamp.png"),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Center(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.7,
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFA12E2F),
-                    borderRadius: BorderRadius.circular(20),
+            body: Background(
+              components: Container(
+                alignment: AlignmentDirectional.topStart,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ExpansionWidgetCafe(
+                        leadingIcon: const Icon(Icons.sunny_snowing),
+                        titleText: 'Café da manhã', 
+                        future: MyListViewCafe()),
+                      ExpansionWidget(
+                          leadingIcon: const Icon(Icons.sunny),
+                          titleText: 'Almoço',  
+                          subtitleText: 'Comum',
+                          future: CustomFutureBuilder<List<Cardapio>>(
+                            future: _future,
+                            periodo: 0,
+                            vegetariano: 0,
+                          )),
+                      ExpansionWidget(
+                          leadingIcon: const Icon(Icons.sunny),
+                          titleText: 'Almoço',
+                          subtitleText: 'Vegetariano',
+                          future: CustomFutureBuilder<List<Cardapio>>(
+                            future: _future,
+                            periodo: 0,
+                            vegetariano: 1,
+                          )),
+                      ExpansionWidget(
+                          leadingIcon: const Icon(Icons.nightlight),
+                          titleText: 'Jantar',
+                          subtitleText: 'Comum',
+                          future: CustomFutureBuilder<List<Cardapio>>(
+                            future: _future,
+                            periodo: 1,
+                            vegetariano: 0,
+                          )),
+                      ExpansionWidget(
+                          leadingIcon: const Icon(Icons.nightlight),
+                          titleText: 'Jantar',
+                          subtitleText: 'Vegetariano',
+                          future: CustomFutureBuilder<List<Cardapio>>(
+                            future: _future,
+                            periodo: 1,
+                            vegetariano: 1,
+                          )),
+                    ],
                   ),
-                  child: ListView.builder(
-                    itemCount: _daysOfWeek.length,
-                    itemBuilder: (BuildContext context, int index){
-                    String formattedDate = DateFormat('dd/MM').format(_daysOfWeek[index]);
-                    return ListTile(
-                    title: Text('$formattedDate'), );
-
-                  }),
                 ),
               ),
-            ],
-          )
-        )
-    );
+            )));
   }
-
 }

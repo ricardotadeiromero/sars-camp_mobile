@@ -11,60 +11,7 @@ class homePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MyAppBar(
-          onStarPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Título do Alerta'),
-                  content: Text('Conteúdo do Alerta'),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text('Cancelar'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    TextButton(
-                      child: Text('OK'),
-                      onPressed: () {
-                        // Lógica para quando o botão "OK" é pressionado
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-          onInfoPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Título do Alerta'),
-                  content: Text('Conteúdo do Alerta'),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text('Cancelar'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    TextButton(
-                      child: Text('OK'),
-                      onPressed: () {
-                        // Lógica para quando o botão "OK" é pressionado
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-        ),
+        appBar: MyAppBar(shouldPopOnLogoPressed: false),
         body: Background(
           components: Column(
             mainAxisAlignment: MainAxisAlignment.center,

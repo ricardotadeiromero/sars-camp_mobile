@@ -2,7 +2,6 @@ import 'package:tcc_telas/pages/Componentes/Background.dart';
 import 'package:tcc_telas/pages/Componentes/CardapioPage.dart';
 
 import '../controller/date_controller.dart';
-import '../controller/cardapio_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import '../model/Cardapio.dart';
@@ -17,7 +16,6 @@ class cardapioPage extends StatefulWidget {
 class _CardapioPage extends State<cardapioPage> with SingleTickerProviderStateMixin{
   late DateTime selectedDay;
   late Future<List<Cardapio>> _future;
-  var controller = CardapioController();
 
   @override
   void initState() {
@@ -33,8 +31,6 @@ class _CardapioPage extends State<cardapioPage> with SingleTickerProviderStateMi
         child: Scaffold(
             appBar: MyAppBar(
               shouldPopOnLogoPressed: true,
-              onInfoPressed: () {},
-              onStarPressed: () {},
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(48),
                 child: TabBar(

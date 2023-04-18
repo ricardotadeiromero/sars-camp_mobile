@@ -35,17 +35,11 @@ class Background extends StatelessWidget {
 }
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final VoidCallback? onStarPressed;
-  final VoidCallback? onInfoPressed;
-  final Function()? onLogoPressed;
   final PreferredSizeWidget? bottom;
   final bool shouldPopOnLogoPressed;
 
   const MyAppBar(
-      {this.onStarPressed,
-      this.onInfoPressed,
-      this.onLogoPressed,
-      this.bottom,
+      {this.bottom,
       this.shouldPopOnLogoPressed = false});
 
   @override
@@ -59,7 +53,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: Image.asset('image/logo.png'),
         onPressed: () {
-          onLogoPressed;
           if (shouldPopOnLogoPressed) {
             Navigator.pop(context);
           }
@@ -79,7 +72,32 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               Icons.star,
               size: 40,
             ),
-            onPressed: onStarPressed,
+            onPressed: () {
+              showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Título do Alerta'),
+                  content: const Text('Conteúdo do Alerta'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Cancelar'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: const Text('OK'),
+                      onPressed: () {
+                        // Lógica para quando o botão "OK" é pressionado
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+            },
           ),
         ),
         SizedBox(
@@ -89,7 +107,32 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               Icons.info,
               size: 40,
             ),
-            onPressed: onInfoPressed,
+            onPressed: () {
+              showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Título do Alerta'),
+                  content: Text('Conteúdo do Alerta'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('Cancelar'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: Text('OK'),
+                      onPressed: () {
+                        // Lógica para quando o botão "OK" é pressionado
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+            },
           ),
         ),
       ],

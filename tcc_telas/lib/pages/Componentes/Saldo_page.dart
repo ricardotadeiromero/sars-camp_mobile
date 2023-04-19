@@ -10,7 +10,7 @@ class MainContainerSaldo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 100),
-      height: MediaQuery.of(context).size.height * 0.37,
+      height: MediaQuery.of(context).size.height * 0.3,
       width: MediaQuery.of(context).size.width * 0.7,
       decoration: BoxDecoration(
       color: Color(0xFFA12E2F),

@@ -42,11 +42,11 @@ class homePage extends StatelessWidget {
               CustomCard(
                 size: 130,
                 imageAsset: 'image/achados-e-perdidos.png',
-                title: 'Saldo do RU',
+                title: 'Achados & Perdidos',
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => saldoPage()),
+                    MaterialPageRoute(builder: (context) => homePage()),
                   );
                 },
               ),

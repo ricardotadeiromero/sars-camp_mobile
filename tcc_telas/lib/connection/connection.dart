@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class Connection {
   static Future<List<Cardapio>> getCardapio(String data) async {
-    var url = Uri.parse("http://143.106.241.45:3000/api/cardapio/'${data}'");
+    var url = Uri.parse("http://localhost:3000/api/cardapio/'${data}'");
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final cardapios = jsonDecode(response.body) as List;
@@ -14,7 +14,7 @@ class Connection {
     }
   }
 
-  static Future<double> getSaldo2(String ra, String senha) async {
+  /*static Future<double> getSaldo2(String ra, String senha) async {
     var url = Uri.parse("http://localhost:3000/api/saldo");
 
     final response = await http.post(url,
@@ -25,14 +25,15 @@ class Connection {
 
     var res = jsonDecode(response.body);
     return double.parse(res["saldo"] ?? "");
-  }
+  }*/
 
   static Future<double> getSaldo(String ra, String senha) async {
-    var url = Uri.parse("http://localhost:3000/api/saldo/'$ra'/'$senha'");
+    var url = Uri.parse("http://localhost:3000/api/saldo/${ra}/${senha}");
 
     final response = await http.get(url);
 
     var res = jsonDecode(response.body);
-    return double.parse(res["saldo"] ?? "");
+
+    return double.parse(res["Saldo"] ?? "");
   }
 }

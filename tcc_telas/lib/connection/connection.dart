@@ -14,14 +14,23 @@ class Connection {
     }
   }
 
-  static Future<double> getSaldo(String ra, String senha) async{
+  static Future<double> getSaldo2(String ra, String senha) async {
     var url = Uri.parse("http://localhost:3000/api/saldo");
 
-    final response = await http.post(
-      url,
-      headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8' },
-      body: jsonEncode(<String, String>{ "ra": ra, "senha": senha })
-    );
+    final response = await http.post(url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, String>{"ra": ra, "senha": senha}));
+
+    var res = jsonDecode(response.body);
+    return double.parse(res["saldo"] ?? "");
+  }
+
+  static Future<double> getSaldo(String ra, String senha) async {
+    var url = Uri.parse("http://localhost:3000/api/saldo/'$ra'/'$senha'");
+
+    final response = await http.get(url);
 
     var res = jsonDecode(response.body);
     return double.parse(res["saldo"] ?? "");

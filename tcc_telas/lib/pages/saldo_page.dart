@@ -30,9 +30,44 @@ class saldoPage extends StatelessWidget {
                     padding: EdgeInsets.only(top: 20, left: 15, right: 15),
                     child: Column(
                       children: [
-                        MyTextField(text: 'RA'),
+                        TextField(
+      cursorColor: _inputColor,
+      decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            width: 3,
+            color: _inputColor,
+          )
+        ),
+        filled: true,
+        fillColor: Colors.grey,
+        hintText: 'RA',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5)
+        )
+      ),
+    ),
                         SizedBox(height: 20),
-                        MyTextField(text: 'Senha'),
+                        TextField(
+      cursorColor: _inputColor,
+      obscureText: true,
+      decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            width: 3,
+            color: _inputColor,
+          )
+        ),
+        filled: true,
+        fillColor: Colors.grey,
+        hintText: 'Senha',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5)
+        )
+      ),
+    ),
                         SizedBox(height: 25),
                         Align(
                           alignment: Alignment.center,

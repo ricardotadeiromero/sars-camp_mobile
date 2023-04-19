@@ -100,7 +100,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
         ),
-        SizedBox(
+       SizedBox(
           width: 50,
           child: IconButton(
             icon: const Icon(
@@ -112,19 +112,22 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text('Título do Alerta'),
-                  content: Text('Conteúdo do Alerta'),
+                  backgroundColor: Colors.grey,
+                  title: Text('SARsCamp',textAlign: TextAlign.center,),
+                  content: 
+                  Text('Este é um aplicativo que tem por objetivo oferecer aos usuários de dispositivos móveis alguns serviços corporativos envolvendo o campus I de Limeira, que possam de fato facilitar o dia a dia dos mesmos. A ideia é que o aplicativo vá agregando novos serviços a medida que seu uso se intensifique.\n\nToda nossa base de dados é obtida de serviços servidos pela Prefeitura, SAR, PU (Prefeitura Universitária Unicamp), DEA, entre outros. Para mais informações entre em contato com o SAR: \nhttps://www.sar.unicamp.br/contato\n\nPara mais informações sobre o Campus Limeira I acesse: \nhttps://www.sar.unicamp.br\n\n\n\n© Unicamp / Campus Limeira I - SAR',
+                  textAlign: TextAlign.center,),
                   actions: <Widget>[
-                    TextButton(
+                    /*TextButton(
                       child: Text('Cancelar'),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                    ),
+                    ),*/
                     TextButton(
+                      //ButtonStyle
                       child: Text('OK'),
                       onPressed: () {
-                        // Lógica para quando o botão "OK" é pressionado
                         Navigator.of(context).pop();
                       },
                     ),

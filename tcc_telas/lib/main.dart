@@ -8,8 +8,7 @@ import 'model/Cardapio.dart';
 import 'package:http/http.dart' as http;
 import 'connection/connection.dart';
 
-void main() async{
-  print(await Connection.getSaldo("201605","clfon"));
+void main() {
 
   runApp(const MyApp());
 }

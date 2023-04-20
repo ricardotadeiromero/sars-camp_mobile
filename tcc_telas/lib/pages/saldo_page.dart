@@ -38,6 +38,7 @@ class _saldoPageState extends State<saldoPage> {
                 padding: EdgeInsets.only(top: 20, left: 15, right: 15),
                 child: Column(children: [
                   TextField(
+                    controller: _raController,
                     cursorColor: _inputColor,
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
@@ -54,6 +55,7 @@ class _saldoPageState extends State<saldoPage> {
                   ),
                   SizedBox(height: 20),
                   TextField(
+                    controller: _senhaController,
                     cursorColor: _inputColor,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -118,7 +120,9 @@ class _saldoPageState extends State<saldoPage> {
                                                 if (result == null) {
                                                   return Text('Deu ruim!');
                                                 } else
-                                                  return Text('Deu bom!');
+                                                  return Text('O seu saldo é: '+result.toString(),style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20));
                                               } else if (snapshot.hasError) {
                                                 return Text('Deu ruim!');
                                               } else {

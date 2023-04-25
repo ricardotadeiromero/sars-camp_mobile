@@ -1,6 +1,16 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+abrirUrl() async {
+  var url = Uri.parse('https://flutterando.com.br/');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Não é possível redirecionar ao link.';
+  }
+}
 
 class Background extends StatelessWidget {
   Widget? components;
@@ -71,31 +81,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               size: 40,
             ),
             onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    backgroundColor: Colors.grey,
-                    title: const Text('Deseja avaliar o aplicativo?'),
-                    //content: const Text('Conteúdo do Alerta'),
-                    actions: <Widget>[
-                      TextButton(
-                        child: const Text('Não'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      TextButton(
-                        child: const Text('Sim'),
-                        onPressed: () {
-                          // Lógica para quando o botão "OK" é pressionado
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
+              abrirUrl();
             },
           ),
         ),

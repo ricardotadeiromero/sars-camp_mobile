@@ -37,8 +37,13 @@ class _saldoPageState extends State<saldoPage> {
                   input: Padding(
                 padding: EdgeInsets.only(top: 20, left: 15, right: 15),
                 child: Column(children: [
-                  TextField(
+                  TextFormField(
                     controller: _raController,
+                    validator: (value) {
+                      if(value == null || value.isEmpty) {
+                        return 'Digite ai seu merdinha';
+                      }
+                    },
                     cursorColor: _inputColor,
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
@@ -54,8 +59,13 @@ class _saldoPageState extends State<saldoPage> {
                             borderRadius: BorderRadius.circular(5))),
                   ),
                   SizedBox(height: 20),
-                  TextField(
+                  TextFormField(
                     controller: _senhaController,
+                    validator: (value) {
+                      if(value == null || value.isEmpty) {
+                        return 'Digite ai seu merdinha';
+                      }
+                    },
                     cursorColor: _inputColor,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -69,7 +79,10 @@ class _saldoPageState extends State<saldoPage> {
                         fillColor: Colors.grey,
                         hintText: 'Senha',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5))),
+                            borderRadius: BorderRadius.circular(5)
+                            )
+                        ),
+                            
                   ),
                   SizedBox(height: 25),
                   Align(

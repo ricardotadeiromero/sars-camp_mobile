@@ -77,7 +77,7 @@ class _saldoPageState extends State<saldoPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          _future = Connection.getSaldo(
+                          _future = Connection.getSaldo2(
                               _raController.text, _senhaController.text);
                         });
                         showDialog(
@@ -120,9 +120,12 @@ class _saldoPageState extends State<saldoPage> {
                                                 if (result == null) {
                                                   return Text('Deu ruim!');
                                                 } else
-                                                  return Text('O seu saldo é: '+result.toString(),style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20));
+                                                  return Text(
+                                                      'O seu saldo é: ' +
+                                                          result.toString(),
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 20));
                                               } else if (snapshot.hasError) {
                                                 return Text('Deu ruim!');
                                               } else {

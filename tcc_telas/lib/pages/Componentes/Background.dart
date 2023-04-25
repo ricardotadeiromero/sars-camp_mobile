@@ -75,17 +75,18 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('Título do Alerta'),
-                    content: const Text('Conteúdo do Alerta'),
+                    backgroundColor: Colors.grey,
+                    title: const Text('Deseja avaliar o aplicativo?'),
+                    //content: const Text('Conteúdo do Alerta'),
                     actions: <Widget>[
                       TextButton(
-                        child: const Text('Cancelar'),
+                        child: const Text('Não'),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                       ),
                       TextButton(
-                        child: const Text('OK'),
+                        child: const Text('Sim'),
                         onPressed: () {
                           // Lógica para quando o botão "OK" é pressionado
                           Navigator.of(context).pop();

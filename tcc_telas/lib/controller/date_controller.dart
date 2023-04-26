@@ -5,4 +5,6 @@ class DiaDaSemana {
     DateTime data = now.add(Duration(days: diff));
     return DateTime(data.year, data.month, data.day);
   }
+
+
 }

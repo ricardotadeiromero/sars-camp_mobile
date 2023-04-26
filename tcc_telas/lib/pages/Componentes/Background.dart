@@ -12,6 +12,8 @@ abrirUrl() async {
   }
 }
 
+Color myGreen = Color(0xFF0A6066);
+
 class Background extends StatelessWidget {
   Widget? components;
   Background({super.key, this.components});
@@ -81,7 +83,57 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               size: 40,
             ),
             onPressed: () {
-              abrirUrl();
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor: Color.fromARGB(255, 210, 210, 210),
+                      title: Text(
+                        'Deseja avaliar o aplicativo?',
+                        textAlign: TextAlign.center,
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              if (states.contains(MaterialState.pressed)) {
+                                return Colors.white;// cor do texto do botão quando pressionado
+                              }
+                              return myGreen; // cor do texto do botão quando não pressionado
+                            },
+                          ), // cor do texto do botão// cor de fundo do botão
+                          overlayColor: MaterialStateProperty.all<Color>(
+                              Color(0xFF0A6066)),
+                        ),
+                          child: Text('Não'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        TextButton(
+                          style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              if (states.contains(MaterialState.pressed)) {
+                                return Colors.white;// cor do texto do botão quando pressionado
+                              }
+                              return myGreen; // cor do texto do botão quando não pressionado
+                            },
+                          ), // cor do texto do botão// cor de fundo do botão
+                          overlayColor: MaterialStateProperty.all<Color>(
+                              Color(0xFF0A6066)),
+                        ),
+                          child: Text('Sim'),
+                          onPressed: () {
+                            abrirUrl();
+                          },
+                        ),
+                      ],
+                    );
+                  });
             },
           ),
         ),
@@ -115,6 +167,19 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),*/
                       TextButton(
                         //ButtonStyle
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              if (states.contains(MaterialState.pressed)) {
+                                return Colors.white;// cor do texto do botão quando pressionado
+                              }
+                              return myGreen; // cor do texto do botão quando não pressionado
+                            },
+                          ), // cor do texto do botão// cor de fundo do botão
+                          overlayColor: MaterialStateProperty.all<Color>(
+                              Color(0xFF0A6066)),
+                        ),
                         child: Text('OK'),
                         onPressed: () {
                           Navigator.of(context).pop();

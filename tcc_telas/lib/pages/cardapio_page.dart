@@ -16,17 +16,20 @@ class cardapioPage extends StatefulWidget {
 class _CardapioPage extends State<cardapioPage> with SingleTickerProviderStateMixin{
   late DateTime selectedDay;
   late Future<List<Cardapio>> _future;
+  var index = DateTime.now().weekday - 1;
 
   @override
   void initState() {
+    selectedDay = DateTime.now();
     _future = Connection.getCardapio(DateFormat("yyyy-MM-dd")
-        .format(DiaDaSemana.obterData(DateTime.monday)));
+        .format(selectedDay));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+        initialIndex: index,
         length: 5,
         child: Scaffold(
             appBar: MyAppBar(

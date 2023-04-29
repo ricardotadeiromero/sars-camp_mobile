@@ -13,6 +13,7 @@ abrirUrl() async {
 }
 
 Color myGreen = Color(0xFF0A6066);
+Color myRed = Color(0xFFA12E2F);
 
 class Background extends StatelessWidget {
   Widget? components;
@@ -21,7 +22,7 @@ class Background extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: const Color(0xFF0A6066),
+        color: myGreen,
         width: double.infinity,
         child: Stack(
           children: [
@@ -59,7 +60,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color(0xFFA12E2F),
+      backgroundColor: myRed,
       leading: IconButton(
         icon: Image.asset('image/logo.png'),
         onPressed: () {
@@ -87,46 +88,48 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      backgroundColor: Color.fromARGB(255, 210, 210, 210),
-                      title: Text(
+                      backgroundColor: const Color.fromARGB(255, 210, 210, 210),
+                      title: const Text(
                         'Deseja avaliar o aplicativo?',
                         textAlign: TextAlign.center,
                       ),
                       actions: <Widget>[
                         TextButton(
                           style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.resolveWith<Color>(
-                            (Set<MaterialState> states) {
-                              if (states.contains(MaterialState.pressed)) {
-                                return Colors.white;// cor do texto do botão quando pressionado
-                              }
-                              return myGreen; // cor do texto do botão quando não pressionado
-                            },
-                          ), // cor do texto do botão// cor de fundo do botão
-                          overlayColor: MaterialStateProperty.all<Color>(
-                              Color(0xFF0A6066)),
-                        ),
-                          child: Text('Não'),
+                            foregroundColor:
+                                MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.pressed)) {
+                                  return Colors
+                                      .white; // cor do texto do botão quando pressionado
+                                }
+                                return myGreen; // cor do texto do botão quando não pressionado
+                              },
+                            ), // cor do texto do botão// cor de fundo do botão
+                            overlayColor:
+                                MaterialStateProperty.all<Color>(myGreen),
+                          ),
+                          child: const Text('Não'),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
                         ),
                         TextButton(
                           style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.resolveWith<Color>(
-                            (Set<MaterialState> states) {
-                              if (states.contains(MaterialState.pressed)) {
-                                return Colors.white;// cor do texto do botão quando pressionado
-                              }
-                              return myGreen; // cor do texto do botão quando não pressionado
-                            },
-                          ), // cor do texto do botão// cor de fundo do botão
-                          overlayColor: MaterialStateProperty.all<Color>(
-                              Color(0xFF0A6066)),
-                        ),
-                          child: Text('Sim'),
+                            foregroundColor:
+                                MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.pressed)) {
+                                  return Colors
+                                      .white; // cor do texto do botão quando pressionado
+                                }
+                                return myGreen; // cor do texto do botão quando não pressionado
+                              },
+                            ), // cor do texto do botão// cor de fundo do botão
+                            overlayColor:
+                                MaterialStateProperty.all<Color>(myGreen),
+                          ),
+                          child: const Text('Sim'),
                           onPressed: () {
                             abrirUrl();
                           },
@@ -149,12 +152,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    backgroundColor: Color.fromARGB(255, 210, 210, 210),
-                    title: Text(
+                    backgroundColor: const Color.fromARGB(255, 210, 210, 210),
+                    title: const Text(
                       'SARsCamp',
                       textAlign: TextAlign.center,
                     ),
-                    content: Text(
+                    content: const Text(
                       'Este é um aplicativo que tem por objetivo oferecer aos usuários de dispositivos móveis alguns serviços corporativos envolvendo o campus I de Limeira, que possam de fato facilitar o dia a dia dos mesmos. A ideia é que o aplicativo vá agregando novos serviços a medida que seu uso se intensifique.\n\nToda nossa base de dados é obtida de serviços servidos pela Prefeitura, SAR, PU (Prefeitura Universitária Unicamp), DEA, entre outros. Para mais informações entre em contato com o SAR: \nhttps://www.sar.unicamp.br/contato\n\nPara mais informações sobre o Campus Limeira I acesse: \nhttps://www.sar.unicamp.br\n\n\n\n© Unicamp / Campus Limeira I - SAR',
                       textAlign: TextAlign.center,
                     ),
@@ -172,13 +175,14 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                               MaterialStateProperty.resolveWith<Color>(
                             (Set<MaterialState> states) {
                               if (states.contains(MaterialState.pressed)) {
-                                return Colors.white;// cor do texto do botão quando pressionado
+                                return Colors
+                                    .white; // cor do texto do botão quando pressionado
                               }
                               return myGreen; // cor do texto do botão quando não pressionado
                             },
                           ), // cor do texto do botão// cor de fundo do botão
-                          overlayColor: MaterialStateProperty.all<Color>(
-                              Color(0xFF0A6066)),
+                          overlayColor:
+                              MaterialStateProperty.all<Color>(myGreen),
                         ),
                         child: Text('OK'),
                         onPressed: () {

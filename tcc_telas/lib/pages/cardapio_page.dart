@@ -13,7 +13,8 @@ class cardapioPage extends StatefulWidget {
   _CardapioPage createState() => _CardapioPage();
 }
 
-class _CardapioPage extends State<cardapioPage> with SingleTickerProviderStateMixin{
+class _CardapioPage extends State<cardapioPage>
+    with SingleTickerProviderStateMixin {
   late DateTime selectedDay;
   late Future<List<Cardapio>> _future;
   var index = DateTime.now().weekday - 1;
@@ -21,15 +22,15 @@ class _CardapioPage extends State<cardapioPage> with SingleTickerProviderStateMi
   @override
   void initState() {
     selectedDay = DateTime.now();
-    _future = Connection.getCardapio(DateFormat("yyyy-MM-dd")
-        .format(selectedDay));
+    _future =
+        Connection.getCardapio(DateFormat("yyyy-MM-dd").format(selectedDay));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        initialIndex: index,
+        initialIndex: DiaDaSemana.numberWeek(),
         length: 5,
         child: Scaffold(
             appBar: MyAppBar(
@@ -100,12 +101,12 @@ class _CardapioPage extends State<cardapioPage> with SingleTickerProviderStateMi
                   child: Column(
                     children: [
                       ExpansionWidgetCafe(
-                        leadingIcon: const Icon(Icons.sunny_snowing),
-                        titleText: 'Café da manhã', 
-                        future: MyListViewCafe()),
+                          leadingIcon: const Icon(Icons.sunny_snowing),
+                          titleText: 'Café da manhã',
+                          future: MyListViewCafe()),
                       ExpansionWidget(
                           leadingIcon: const Icon(Icons.sunny),
-                          titleText: 'Almoço',  
+                          titleText: 'Almoço',
                           subtitleText: 'Comum',
                           future: CustomFutureBuilder<List<Cardapio>>(
                             future: _future,

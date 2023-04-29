@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../model/Cardapio.dart';
 
-TextStyle style =
-    const TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);
-TextStyle style2 = const TextStyle(
+const TextStyle style =
+    TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);
+const TextStyle style2 = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 14,
     color: Color.fromARGB(157, 255, 255, 255));
@@ -24,7 +24,6 @@ class ExpansionWidget extends StatelessWidget {
     required this.future,
   });
 
-
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
@@ -41,6 +40,7 @@ class ExpansionWidget extends StatelessWidget {
     );
   }
 }
+
 class ExpansionWidgetCafe extends StatelessWidget {
   Color iconColor = Color.fromARGB(159, 255, 255, 255);
   Color backgroundColor = Color.fromARGB(255, 193, 54, 57);
@@ -53,7 +53,6 @@ class ExpansionWidgetCafe extends StatelessWidget {
     required this.titleText,
     required this.future,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -131,40 +130,74 @@ class MyListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(shrinkWrap: true, children: [
-      ListTile(
-        leading: Text('Principal: ', style: style),
-        title: Text(cardapio.principal, style: style2),
-      ),
-      ListTile(
-        leading: Text('Guarnição: ', style: style),
-        title: Text(cardapio.guarnicao, style: style2),
-      ),
-      ListTile(
-        leading: Text('Salada: ', style: style),
-        title: Text(cardapio.salada, style: style2),
-      ),
-      ListTile(
-        leading: Text('Sobremesa: ', style: style),
-        title: Text(cardapio.sobremesa, style: style2),
-      ),
-      ListTile(
-        leading: Text('Suco: ', style: style),
-        title: Text(cardapio.suco, style: style2),
-      )
-    ]);
+    if (cardapio.periodo == 1) {
+      return ListView(shrinkWrap: true, children: [
+        const ListTile(
+          leading: Text(
+            '11:00 - 14:00',
+            style: style2,
+          ),
+        ),
+        ListTile(
+          leading: Text('Principal: ', style: style),
+          title: Text(cardapio.principal, style: style2),
+        ),
+        ListTile(
+          leading: Text('Guarnição: ', style: style),
+          title: Text(cardapio.guarnicao, style: style2),
+        ),
+        ListTile(
+          leading: Text('Salada: ', style: style),
+          title: Text(cardapio.salada, style: style2),
+        ),
+        ListTile(
+          leading: Text('Sobremesa: ', style: style),
+          title: Text(cardapio.sobremesa, style: style2),
+        ),
+        ListTile(
+          leading: Text('Suco: ', style: style),
+          title: Text(cardapio.suco, style: style2),
+        )
+      ]);
+    } else {
+      return ListView(shrinkWrap: true, children: [
+        const ListTile(
+          leading: Text('18:00 - 20:00', style: style2),
+        ),
+        ListTile(
+          leading: Text('Principal: ', style: style),
+          title: Text(cardapio.principal, style: style2),
+        ),
+        ListTile(
+          leading: Text('Guarnição: ', style: style),
+          title: Text(cardapio.guarnicao, style: style2),
+        ),
+        ListTile(
+          leading: Text('Salada: ', style: style),
+          title: Text(cardapio.salada, style: style2),
+        ),
+        ListTile(
+          leading: Text('Sobremesa: ', style: style),
+          title: Text(cardapio.sobremesa, style: style2),
+        ),
+        ListTile(
+          leading: Text('Suco: ', style: style),
+          title: Text(cardapio.suco, style: style2),
+        )
+      ]);
+    }
   }
 }
 
 class MyListViewCafe extends StatelessWidget {
-
   MyListViewCafe();
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true, 
-      children: [
+    return ListView(shrinkWrap: true, children: [
+      ListTile(
+        leading: Text('07:00 - 08:00', style: style2),
+      ),
       ListTile(
         leading: Text('Leite', style: style),
       ),

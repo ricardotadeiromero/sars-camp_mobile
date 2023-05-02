@@ -34,7 +34,10 @@ class _saldoPageState extends State<saldoPage> {
     return Scaffold(
         appBar: const MyAppBar(shouldPopOnLogoPressed: true),
         body: Background(
-            components: (Column(
+            components: (
+              Container(
+                height: MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.bottom,
+                child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const TitleSaldoPage(),
@@ -210,6 +213,8 @@ class _saldoPageState extends State<saldoPage> {
                       ]),
                     ))),
           ],
-        ))));
+        ))
+              )
+            ));
   }
 }

@@ -47,7 +47,7 @@ class Connection {
     return res[0]["Saldo"].toString();
   }
 
-  static Future<bool> getFeriado(DateTime data) async {
+  static Future<bool> getFeriado(int data) async {
     var url = Uri.parse("https://brasilapi.com.br/api/feriados/v1/${data}");
 
     final response = await http.get(url);

@@ -6,8 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import '../model/Cardapio.dart';
 import '../connection/connection.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 
 class cardapioPage extends StatefulWidget {
   _CardapioPage createState() => _CardapioPage();
@@ -41,20 +40,90 @@ class _CardapioPage extends State<cardapioPage>
                     indicatorColor: const Color.fromARGB(255, 15, 142, 147),
                     tabs: [
                       Tab(
-                          text: DateFormat("dd/MM")
-                              .format(DiaDaSemana.obterData(DateTime.monday))),
+                        child: FutureBuilder<bool>(
+                          future: Connection.getFeriado(DateTime.monday),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(snapshot.data!
+                                  ? 'Feriado'
+                                  : DateFormat("dd/MM").format(
+                                      DiaDaSemana.obterData(DateTime.monday)));
+                            } else if (snapshot.hasError) {
+                              return const Text('Erro ao carregar');
+                            } else {
+                              return const MyProgressIndicator();
+                            }
+                          },
+                        ),
+                      ),
                       Tab(
-                          text: DateFormat("dd/MM")
-                              .format(DiaDaSemana.obterData(DateTime.tuesday))),
+                          child: FutureBuilder<bool>(
+                          future: Connection.getFeriado(DateTime.tuesday),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(snapshot.data!
+                                  ? 'Feriado'
+                                  : DateFormat("dd/MM").format(
+                                      DiaDaSemana.obterData(DateTime.tuesday)));
+                            } else if (snapshot.hasError) {
+                              return const Text('Erro ao carregar');
+                            } else {
+                              return const MyProgressIndicator();
+                            }
+                          },
+                        )
+                      ),
                       Tab(
-                          text: DateFormat("dd/MM").format(
-                              DiaDaSemana.obterData(DateTime.wednesday))),
+                          child: FutureBuilder<bool>(
+                          future: Connection.getFeriado(DateTime.wednesday),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(snapshot.data!
+                                  ? 'Feriado'
+                                  : DateFormat("dd/MM").format(
+                                      DiaDaSemana.obterData(DateTime.wednesday)));
+                            } else if (snapshot.hasError) {
+                              return const Text('Erro ao carregar');
+                            } else {
+                              return const MyProgressIndicator();
+                            }
+                          },
+                        ),
+                      ),
                       Tab(
-                          text: DateFormat("dd/MM").format(
-                              DiaDaSemana.obterData(DateTime.thursday))),
+                          child: FutureBuilder<bool>(
+                          future: Connection.getFeriado(DateTime.thursday),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(snapshot.data!
+                                  ? 'Feriado'
+                                  : DateFormat("dd/MM").format(
+                                      DiaDaSemana.obterData(DateTime.thursday)));
+                            } else if (snapshot.hasError) {
+                              return const Text('Erro ao carregar');
+                            } else {
+                              return const MyProgressIndicator();
+                            }
+                          },
+                        ),
+                      ),
                       Tab(
-                          text: DateFormat("dd/MM")
-                              .format(DiaDaSemana.obterData(DateTime.friday))),
+                        child: FutureBuilder<bool>(
+                          future: Connection.getFeriado(DateTime.friday),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(snapshot.data!
+                                  ? 'Feriado'
+                                  : DateFormat("dd/MM").format(
+                                      DiaDaSemana.obterData(DateTime.friday)));
+                            } else if (snapshot.hasError) {
+                              return const Text('Erro ao carregar');
+                            } else {
+                              return const MyProgressIndicator();
+                            }
+                          },
+                        ),
+                      ),
                     ],
                     onTap: (index) {
                       setState(() {

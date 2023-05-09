@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../../model/Cardapio.dart';
+import 'Background.dart';
 
 const TextStyle style =
     TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);
@@ -86,7 +89,7 @@ class CustomFutureBuilder<T> extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               heightFactor: 2,
-              child: CircularProgressIndicator(),
+              child: MyProgressIndicator(),
             );
           } else if (snapshot.hasData) {
             final list = snapshot.data!;
@@ -110,14 +113,21 @@ class CustomFutureBuilder<T> extends StatelessWidget {
               }
             }
           } else if (snapshot.hasError) {
-            return Text(
-              'Erro ao carregar cardápio!',
-              style: style,
-            );
+            if (snapshot.error is HttpException) {
+              return Text(
+                (snapshot.error as HttpException).message,
+                style: style,
+              );
+            } else {
+              return Text(
+                'Erro ao carregar cardápio!',
+                style: style,
+              );
+            }
           } else {
             return const Center(
               heightFactor: 2,
-              child: CircularProgressIndicator(),
+              child: MyProgressIndicator(),
             );
           }
         });

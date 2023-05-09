@@ -1,14 +1,9 @@
 import 'dart:io';
-
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc_telas/connection/connection.dart';
 import 'componentes/Background.dart';
 import 'Componentes/Saldo_page.dart';
-import 'home_page.dart';
+
 
 class saldoPage extends StatefulWidget {
   const saldoPage({super.key});
@@ -28,8 +23,8 @@ class _saldoPageState extends State<saldoPage> {
                     MediaQuery.of(context).viewInsets.bottom,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const TitleSaldoPage(),
+                  children: const [
+                    TitleSaldoPage(),
                     SaldoContainer(),
                   ],
                 )))));

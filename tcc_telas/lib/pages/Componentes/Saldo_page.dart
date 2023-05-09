@@ -13,7 +13,7 @@ class MainContainerSaldo extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           margin: const EdgeInsets.only(top: 100),
-          padding: EdgeInsets.only(bottom: 30),
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
           width: MediaQuery.of(context).size.width * 0.7,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -23,7 +23,7 @@ class MainContainerSaldo extends StatelessWidget {
                 color: Colors.black.withOpacity(0.5),
                 spreadRadius: 2,
                 blurRadius: 5,
-                offset: Offset(0, 3),
+                offset: const Offset(0, 3),
               ),
             ],
           ),

@@ -22,10 +22,7 @@ class homePage extends StatelessWidget {
                 imageAsset: 'image/cardapio.png',
                 title: 'Cardápio RU',
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => cardapioPage()),
-                  );
+                  Navigator.pushNamed(context, '/cardapioPage');
                 },
               ),
               CustomCard(
@@ -33,10 +30,7 @@ class homePage extends StatelessWidget {
                 imageAsset: 'image/carteira.png',
                 title: 'Saldo do RU',
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => saldoPage()),
-                  );
+                  Navigator.pushNamed(context, '/saldoPage');
                 },
               ),
               CustomCard(
@@ -44,10 +38,7 @@ class homePage extends StatelessWidget {
                 imageAsset: 'image/achados-e-perdidos.png',
                 title: 'Achados & Perdidos',
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => homePage()),
-                  );
+                  Navigator.pushNamed(context, '/');
                 },
               ),
             ],

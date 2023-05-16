@@ -1,6 +1,6 @@
 import 'package:tcc_telas/pages/Componentes/Background.dart';
 import 'package:tcc_telas/pages/Componentes/CardapioPage.dart';
-
+import 'dart:core';
 import '../controller/date_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +14,10 @@ class cardapioPage extends StatefulWidget {
 class _CardapioPage extends State<cardapioPage>
     with SingleTickerProviderStateMixin {
   late DateTime selectedDay;
-  late Future<List<Cardapio>> _future;
-  var index = DateTime.now().weekday - 1;
+  late List<CardapioBodyPage> bodyPage;
+  var _indice = 0;
+  late TabController _controller;
+  late List<bool> fon;
 
   Future<bool> checkFeriado(int date) async {
     final isFeriado = await Connection.getFeriado(date);
@@ -25,25 +27,60 @@ class _CardapioPage extends State<cardapioPage>
       return false;
   }
 
+  void fonfi()async {
+    fon = [
+      await checkFeriado(DateTime.monday),
+      await checkFeriado(DateTime.tuesday),
+      await checkFeriado(DateTime.wednesday),
+      await checkFeriado(DateTime.thursday),
+      await checkFeriado(DateTime.friday),
+    ];
+  }
+
+
   @override
   void initState() {
+    bodyPage = [
+      CardapioBodyPage(selectedDayWeek: DateTime.monday),
+      CardapioBodyPage(selectedDayWeek: DateTime.tuesday),
+      CardapioBodyPage(selectedDayWeek: DateTime.wednesday),
+      CardapioBodyPage(selectedDayWeek: DateTime.thursday),
+      CardapioBodyPage(selectedDayWeek: DateTime.friday),
+    ];
+    _controller = TabController(length: 5, vsync: this, initialIndex: DiaDaSemana.numberWeek());
     selectedDay = DateTime.now();
-    _future =
-        Connection.getCardapio(DateFormat("yyyy-MM-dd").format(selectedDay));
+    fonfi();
+    setDay();
     super.initState();
+  }
+
+  void setDay() async{
+    if(await checkFeriado(DateTime.monday)){
+                        _controller.index = 1;
+                      }
+                      if(await checkFeriado(DateTime.tuesday)){
+                        _controller.index = 0;
+                      }
+                      if(await checkFeriado(DateTime.thursday)){
+                        _controller.index = 1;
+                      }
+                      if(await checkFeriado(DateTime.wednesday)){
+                        _controller.index = 2;
+                      }
+                      if(await checkFeriado(DateTime.friday)){
+                        _controller.index = 3;
+                      }
   }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        initialIndex: DiaDaSemana.numberWeek(),
-        length: 5,
-        child: Scaffold(
+    return Scaffold(
             appBar: MyAppBar(
               shouldPopOnLogoPressed: true,
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(48),
                 child: TabBar(
+                  controller: _controller,
                   isScrollable: false,
                     indicatorColor: const Color.fromARGB(255, 15, 142, 147),
                     tabs: [
@@ -135,44 +172,23 @@ class _CardapioPage extends State<cardapioPage>
                       ),
                     ],
                     onTap: (index) {
-                      setState(() async {
-                        switch (index) {
-                          case 0:
-                            if (await checkFeriado(DateTime.monday)) {
-                              return;
-                            } else {
-                              selectedDay =
-                                  DiaDaSemana.obterData(DateTime.monday);
-                              _future = Connection.getCardapio(
-                                  DateFormat("yyyy-MM-dd").format(selectedDay));
-                              break;
-                            }
-
-                          case 1:
-                            selectedDay =
-                                DiaDaSemana.obterData(DateTime.tuesday);
-                            _future = Connection.getCardapio(
-                                DateFormat("yyyy-MM-dd").format(selectedDay));
-                            break;
-                          case 2:
-                            selectedDay =
-                                DiaDaSemana.obterData(DateTime.wednesday);
-                            _future = Connection.getCardapio(
-                                DateFormat("yyyy-MM-dd").format(selectedDay));
-                            break;
-                          case 3:
-                            selectedDay =
-                                DiaDaSemana.obterData(DateTime.thursday);
-                            _future = Connection.getCardapio(
-                                DateFormat("yyyy-MM-dd").format(selectedDay));
-                            break;
-                          case 4:
-                            selectedDay =
-                                DiaDaSemana.obterData(DateTime.friday);
-                            _future = Connection.getCardapio(
-                                DateFormat("yyyy-MM-dd").format(selectedDay));
-                            break;
-                        }
+                      if(fon[0]){
+                        _controller.index = 1;
+                      }
+                      if(fon[1]){
+                        _controller.index = 0;
+                      }
+                      if(fon[2]){
+                        _controller.index = 1;
+                      }
+                      if(fon[3]){
+                        _controller.index = 2;
+                      }
+                      if(fon[4]){
+                        _controller.index = 3;
+                      }
+                      setState(() {
+                        _indice = index;
                       });
                     }),
               ),
@@ -181,7 +197,26 @@ class _CardapioPage extends State<cardapioPage>
               components: Container(
                 alignment: AlignmentDirectional.topStart,
                 child: SingleChildScrollView(
-                  child: Column(
+                  child: bodyPage[_indice]
+                ),
+              ),
+            ));
+  }
+}
+
+class CardapioBodyPage extends StatelessWidget {
+   late Future<List<Cardapio>> future;
+  late int selectedDayWeek;
+
+  CardapioBodyPage({Key? key, required this.selectedDayWeek}) : super(key: key) {
+    var selectedDay = DiaDaSemana.obterData(selectedDayWeek);
+    future = Connection.getCardapio(
+        DateFormat("yyyy-MM-dd").format(selectedDay));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
                     children: [
                       ExpansionWidgetCafe(
                           leadingIcon: const Icon(Icons.sunny_snowing),
@@ -192,7 +227,7 @@ class _CardapioPage extends State<cardapioPage>
                           titleText: 'Almoço',
                           subtitleText: 'Comum',
                           future: CustomFutureBuilder<List<Cardapio>>(
-                            future: _future,
+                            future: future,
                             periodo: 0,
                             vegetariano: 0,
                           )),
@@ -201,7 +236,7 @@ class _CardapioPage extends State<cardapioPage>
                           titleText: 'Almoço',
                           subtitleText: 'Vegetariano',
                           future: CustomFutureBuilder<List<Cardapio>>(
-                            future: _future,
+                            future: future,
                             periodo: 0,
                             vegetariano: 1,
                           )),
@@ -210,7 +245,7 @@ class _CardapioPage extends State<cardapioPage>
                           titleText: 'Jantar',
                           subtitleText: 'Comum',
                           future: CustomFutureBuilder<List<Cardapio>>(
-                            future: _future,
+                            future: future,
                             periodo: 1,
                             vegetariano: 0,
                           )),
@@ -219,14 +254,11 @@ class _CardapioPage extends State<cardapioPage>
                           titleText: 'Jantar',
                           subtitleText: 'Vegetariano',
                           future: CustomFutureBuilder<List<Cardapio>>(
-                            future: _future,
+                            future: future,
                             periodo: 1,
                             vegetariano: 1,
                           )),
                     ],
-                  ),
-                ),
-              ),
-            )));
+                  );
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import '../model/Cardapio.dart';
+import '../model/cardapio.dart';
 import 'package:http/http.dart' as http;
 
 class Connection {

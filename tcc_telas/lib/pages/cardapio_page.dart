@@ -7,17 +7,17 @@ import 'package:flutter/material.dart';
 import '../model/Cardapio.dart';
 import '../connection/connection.dart';
 
-class cardapioPage extends StatefulWidget {
+class CardapioPage extends StatefulWidget {
   _CardapioPage createState() => _CardapioPage();
 }
 
-class _CardapioPage extends State<cardapioPage>
+class _CardapioPage extends State<CardapioPage>
     with SingleTickerProviderStateMixin {
   late DateTime selectedDay;
   late List<CardapioBodyPage> bodyPage;
   var _indice = 0;
   late TabController _controller;
-  late List<bool> fon;
+  late List<bool> verificaFeriado;
 
   Future<bool> checkFeriado(int date) async {
     final isFeriado = await Connection.getFeriado(date);
@@ -27,8 +27,8 @@ class _CardapioPage extends State<cardapioPage>
       return false;
   }
 
-  void fonfi()async {
-    fon = [
+  void defineFeriado()async {
+    verificaFeriado = [
       await checkFeriado(DateTime.monday),
       await checkFeriado(DateTime.tuesday),
       await checkFeriado(DateTime.wednesday),
@@ -49,7 +49,7 @@ class _CardapioPage extends State<cardapioPage>
     ];
     _controller = TabController(length: 5, vsync: this, initialIndex: DiaDaSemana.numberWeek());
     selectedDay = DateTime.now();
-    fonfi();
+    defineFeriado();
     setDay();
     super.initState();
   }
@@ -61,10 +61,10 @@ class _CardapioPage extends State<cardapioPage>
                       if(await checkFeriado(DateTime.tuesday)){
                         _controller.index = 0;
                       }
-                      if(await checkFeriado(DateTime.thursday)){
+                      if(await checkFeriado(DateTime.wednesday)){
                         _controller.index = 1;
                       }
-                      if(await checkFeriado(DateTime.wednesday)){
+                      if(await checkFeriado(DateTime.thursday)){
                         _controller.index = 2;
                       }
                       if(await checkFeriado(DateTime.friday)){
@@ -84,108 +84,33 @@ class _CardapioPage extends State<cardapioPage>
                   isScrollable: false,
                     indicatorColor: const Color.fromARGB(255, 15, 142, 147),
                     tabs: [
-                      Tab(
-                        child: FutureBuilder<bool>(
-                          future: Connection.getFeriado(DateTime.monday),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Text(snapshot.data!
-                                  ? 'Feriado'
-                                  : DateFormat("dd/MM").format(
-                                      DiaDaSemana.obterData(DateTime.monday)));
-                            } else if (snapshot.hasError) {
-                              return const Text('Erro ao carregar');
-                            } else {
-                              return const MyProgressIndicator();
-                            }
-                          },
-                        ),
-                      ),
-                      Tab(
-                          child: FutureBuilder<bool>(
-                        future: Connection.getFeriado(DateTime.tuesday),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Text(snapshot.data!
-                                ? 'Feriado'
-                                : DateFormat("dd/MM").format(
-                                    DiaDaSemana.obterData(DateTime.tuesday)));
-                          } else if (snapshot.hasError) {
-                            return const Text('Erro ao carregar');
-                          } else {
-                            return const MyProgressIndicator();
-                          }
-                        },
-                      )),
-                      Tab(
-                        child: FutureBuilder<bool>(
-                          future: Connection.getFeriado(DateTime.wednesday),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Text(snapshot.data!
-                                  ? 'Feriado'
-                                  : DateFormat("dd/MM").format(
-                                      DiaDaSemana.obterData(
-                                          DateTime.wednesday)));
-                            } else if (snapshot.hasError) {
-                              return const Text('Erro ao carregar');
-                            } else {
-                              return const MyProgressIndicator();
-                            }
-                          },
-                        ),
-                      ),
-                      Tab(
-                        child: FutureBuilder<bool>(
-                          future: Connection.getFeriado(DateTime.thursday),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Text(snapshot.data!
-                                  ? 'Feriado'
-                                  : DateFormat("dd/MM").format(
-                                      DiaDaSemana.obterData(
-                                          DateTime.thursday)));
-                            } else if (snapshot.hasError) {
-                              return const Text('Erro ao carregar');
-                            } else {
-                              return const MyProgressIndicator();
-                            }
-                          },
-                        ),
-                      ),
-                      Tab(
-                        child: FutureBuilder<bool>(
-                          future: Connection.getFeriado(DateTime.friday),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Text(snapshot.data!
-                                  ? 'Feriado'
-                                  : DateFormat("dd/MM").format(
-                                      DiaDaSemana.obterData(DateTime.friday)));
-                            } else if (snapshot.hasError) {
-                              return const Text('Erro ao carregar');
-                            } else {
-                              return const MyProgressIndicator();
-                            }
-                          },
-                        ),
-                      ),
+                      
+                      MyTab(date: DateTime.monday),
+                      MyTab(date: DateTime.tuesday),
+                      MyTab(date: DateTime.wednesday),
+                      MyTab(date: DateTime.thursday),
+                      MyTab(date: DateTime.friday),
                     ],
                     onTap: (index) {
-                      if(fon[0]){
-                        _controller.index = 1;
+                      if(verificaFeriado[0]&&index==0){
+                        _controller.index = _controller.previousIndex;
+                        _indice = _controller.previousIndex;
                       }
-                      if(fon[1]){
-                        _controller.index = 0;
+                      if(verificaFeriado[1]&&index==1){
+                        _controller.index = _controller.previousIndex;
+                        _indice = _controller.previousIndex;
                       }
-                      if(fon[2]){
-                        _controller.index = 1;
+                      if(verificaFeriado[2]&&index==2){
+                        _controller.index = _controller.previousIndex;
+                        _indice = _controller.previousIndex;
                       }
-                      if(fon[3]){
-                        _controller.index = 2;
+                      if(verificaFeriado[3]&&index==3){
+                        _controller.index = _controller.previousIndex;
+                        _indice = _controller.previousIndex;
                       }
-                      if(fon[4]){
-                        _controller.index = 3;
+                      if(verificaFeriado[4]&&index==4){
+                        _controller.index = _controller.previousIndex;
+                        _indice = _controller.previousIndex;
                       }
                       setState(() {
                         _indice = index;

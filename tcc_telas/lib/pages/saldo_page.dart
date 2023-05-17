@@ -4,15 +4,14 @@ import 'package:tcc_telas/connection/connection.dart';
 import 'componentes/Background.dart';
 import 'Componentes/Saldo_page.dart';
 
-
-class saldoPage extends StatefulWidget {
-  const saldoPage({super.key});
+class SaldoPage extends StatefulWidget {
+  const SaldoPage({super.key});
 
   @override
-  State<saldoPage> createState() => _saldoPageState();
+  State<SaldoPage> createState() => _SaldoPageState();
 }
 
-class _saldoPageState extends State<saldoPage> {
+class _SaldoPageState extends State<SaldoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

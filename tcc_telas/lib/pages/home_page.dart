@@ -7,7 +7,7 @@ import 'package:tcc_telas/pages/saldo_page.dart';
 import 'Componentes/CustomCard.dart';
 import 'Componentes/Background.dart';
 
-class homePage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

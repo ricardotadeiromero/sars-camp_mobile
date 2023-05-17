@@ -3,7 +3,7 @@ import 'package:tcc_telas/pages/cardapio_page.dart';
 import 'package:tcc_telas/pages/saldo_page.dart';
 import 'pages/home_page.dart';
 
-void main() {
+void main() { 
 
   runApp(const MyApp());
 }
@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/':(context) => homePage(),
-        '/saldoPage':(context) => saldoPage(),
-        '/cardapioPage':(context) => cardapioPage(),
+        '/':(context) => HomePage(),
+        '/saldoPage':(context) => SaldoPage(),
+        '/cardapioPage':(context) => CardapioPage(),
       },
     );
   }

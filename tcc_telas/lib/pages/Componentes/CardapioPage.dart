@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import '../../connection/connection.dart';
+import '../../controller/date_controller.dart';
 import '../../model/Cardapio.dart';
 import 'Background.dart';
 
@@ -40,6 +43,31 @@ class ExpansionWidget extends StatelessWidget {
       ),
       subtitle: Text(subtitleText),
       children: [future],
+    );
+  }
+}
+
+class MyTab extends StatelessWidget {
+  MyTab({super.key, required this.date});
+  int date;
+  @override
+  Widget build(BuildContext context) {
+    return Tab(
+      child: FutureBuilder<bool>(
+        future: Connection.getFeriado(date),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Text(snapshot.data!
+                ? 'Feriado'
+                : DateFormat("dd/MM")
+                    .format(DiaDaSemana.obterData(date)));
+          } else if (snapshot.hasError) {
+            return const Text('Erro ao carregar');
+          } else {
+            return const MyProgressIndicator();
+          }
+        },
+      ),
     );
   }
 }

@@ -1,5 +1,5 @@
+import 'package:tcc_telas/pages/Componentes/CardapioPage.dart';
 import 'package:tcc_telas/pages/Componentes/background.dart';
-import 'package:tcc_telas/pages/Componentes/cardapioPage.dart';
 import 'dart:core';
 import '../controller/date_controller.dart';
 import 'package:intl/intl.dart';
@@ -49,7 +49,8 @@ class _CardapioPage extends State<CardapioPage>
       CardapioBodyPage(selectedDayWeek: tuesday),
       CardapioBodyPage(selectedDayWeek: wednesday),
       CardapioBodyPage(selectedDayWeek: thursday),
-      CardapioBodyPage(selectedDayWeek: friday),
+      CardapioBodyPage(selectedDayWeek: friday
+      ),
     ];
     _controller = TabController(
         length: 5, vsync: this, initialIndex: DiaDaSemana.numberWeek());
@@ -77,7 +78,8 @@ class _CardapioPage extends State<CardapioPage>
       _controller.index = 2;
       _indice = 2;
     }
-    if (await checkFeriado(friday)) {
+    if (await checkFeriado(friday
+    )) {
       _controller.index = 3;
       _indice = 3;
     }
@@ -99,7 +101,8 @@ class _CardapioPage extends State<CardapioPage>
                   MyTab(date: tuesday),
                   MyTab(date: wednesday),
                   MyTab(date: thursday),
-                  MyTab(date: friday),
+                  MyTab(date: friday
+                  ),
                 ],
                 onTap: (index) {
                   if (verificaFeriado[0] && index == 0) {
@@ -152,46 +155,7 @@ class CardapioBodyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ExpansionWidgetCafe(
-            leadingIcon: const Icon(Icons.sunny_snowing),
-            titleText: 'Café da manhã',
-            future: MyListViewCafe()),
-        ExpansionWidget(
-            leadingIcon: const Icon(Icons.sunny),
-            titleText: 'Almoço',
-            subtitleText: 'Comum',
-            future: CustomFutureBuilder<List<Cardapio>>(
-              future: future,
-              periodo: 0,
-              vegetariano: 0,
-            )),
-        ExpansionWidget(
-            leadingIcon: const Icon(Icons.sunny),
-            titleText: 'Almoço',
-            subtitleText: 'Vegetariano',
-            future: CustomFutureBuilder<List<Cardapio>>(
-              future: future,
-              periodo: 0,
-              vegetariano: 1,
-            )),
-        ExpansionWidget(
-            leadingIcon: const Icon(Icons.nightlight),
-            titleText: 'Jantar',
-            subtitleText: 'Comum',
-            future: CustomFutureBuilder<List<Cardapio>>(
-              future: future,
-              periodo: 1,
-              vegetariano: 0,
-            )),
-        ExpansionWidget(
-            leadingIcon: const Icon(Icons.nightlight),
-            titleText: 'Jantar',
-            subtitleText: 'Vegetariano',
-            future: CustomFutureBuilder<List<Cardapio>>(
-              future: future,
-              periodo: 1,
-              vegetariano: 1,
-            )),
+        MyExpansionPanel(future: future)
       ],
     );
   }

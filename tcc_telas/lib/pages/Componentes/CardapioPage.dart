@@ -47,6 +47,129 @@ class ExpansionWidget extends StatelessWidget {
   }
 }
 
+class MyExpansionPanel extends StatefulWidget {
+  Color iconColor = Color.fromARGB(159, 255, 255, 255);
+  Color backgroundColor = Color.fromARGB(255, 193, 54, 57);
+  final Future<List<Cardapio>> future;
+
+
+  MyExpansionPanel({super.key,
+    required this.future, });
+
+  @override
+  State<MyExpansionPanel> createState() => _MyExpansionPanelState();
+}
+
+class _MyExpansionPanelState extends State<MyExpansionPanel> {
+  late List<bool> _isExpanded = [false,false,false,false,false];
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionPanelList(
+      elevation: 0,
+      expandedHeaderPadding: EdgeInsets.zero,
+      children: [
+        ExpansionPanel(
+          headerBuilder: (context, isExpanded) {
+            return ListTile(
+              iconColor: widget.iconColor,
+              title: Text('Café da manhã'),
+              leading: const Icon(Icons.sunny_snowing)
+            );
+          },
+          backgroundColor: _isExpanded[0]? widget.backgroundColor:Colors.transparent  ,
+          canTapOnHeader: true,
+          body: MyListViewCafe(),
+          isExpanded: _isExpanded[0]
+        ),
+        ExpansionPanel(
+          backgroundColor: _isExpanded[1]?widget.backgroundColor:Colors.transparent  ,
+          headerBuilder: (context, isExpanded) {
+            return ListTile(
+              iconColor: widget.iconColor,
+              title: Text('Almoço'),
+              subtitle: Text('Comum'),
+              leading: const Icon(Icons.sunny)
+            );
+          },
+          canTapOnHeader: true,
+          body: CustomFutureBuilder<List<Cardapio>>(
+              future: widget.future,
+              periodo: 0,
+              vegetariano: 0,
+            ),
+          isExpanded: _isExpanded[1]
+        ),
+        ExpansionPanel(
+          backgroundColor: _isExpanded[2]?widget.backgroundColor:Colors.transparent  ,
+          headerBuilder: (context, isExpanded) {
+            return ListTile(
+              iconColor: widget.iconColor,
+              title: Text('Almoço'),
+              subtitle: Text('Vegano'),
+              leading: const Icon(Icons.sunny)
+            );
+          },
+          canTapOnHeader: true,
+          body: CustomFutureBuilder<List<Cardapio>>(
+              future: widget.future,
+              periodo: 0,
+              vegetariano: 1,
+            ),
+          isExpanded: _isExpanded[2]
+        ),
+        ExpansionPanel(
+          backgroundColor: _isExpanded[3]?widget.backgroundColor:Colors.transparent  ,
+          headerBuilder: (context, isExpanded) {
+            return ListTile(
+              iconColor: widget.iconColor,
+              title: Text('Jantar'),
+              subtitle: Text('Comum'),
+              leading: const Icon(Icons.nightlight)
+            );
+          },
+          canTapOnHeader: true,
+          body: CustomFutureBuilder<List<Cardapio>>(
+              future: widget.future,
+              periodo: 1,
+              vegetariano: 0,
+            ),
+          isExpanded: _isExpanded[3]
+        ),
+        ExpansionPanel(
+          backgroundColor: _isExpanded[4]?widget.backgroundColor:Colors.transparent  ,
+          headerBuilder: (context, isExpanded) {
+            return ListTile(
+              iconColor: widget.iconColor,
+              title: Text('Jantar'),
+              subtitle: Text('Vegano'),
+              leading: const Icon(Icons.nightlight)
+            );
+          },
+          canTapOnHeader: true,
+          body: CustomFutureBuilder<List<Cardapio>>(
+              future: widget.future,
+              periodo: 1,
+              vegetariano: 1,
+            ),
+          isExpanded: _isExpanded[4]
+        ),
+        
+      ],
+      expansionCallback:(i, isExpanded) => 
+      setState(() { 
+        for(var j=0;j<=4;j++){
+          if(i==j){
+            _isExpanded[j] = !isExpanded;
+          }
+          else
+            _isExpanded[j] = false;
+        }
+        
+      })
+    );
+  }
+}
+
 class MyTab extends StatelessWidget {
   MyTab({super.key, required this.date});
   int date;

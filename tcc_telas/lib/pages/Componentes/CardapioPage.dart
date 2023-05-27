@@ -13,6 +13,7 @@ const TextStyle style2 = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 14,
     color: Color.fromARGB(157, 255, 255, 255));
+const TextStyle style3 = TextStyle(color: Color.fromARGB(157, 255, 255, 255));
 Color textColor = const Color.fromARGB(159, 255, 255, 255);
 
 class ExpansionWidget extends StatelessWidget {
@@ -48,125 +49,153 @@ class ExpansionWidget extends StatelessWidget {
 }
 
 class MyExpansionPanel extends StatefulWidget {
-  Color iconColor = Color.fromARGB(159, 255, 255, 255);
+  Color? iconColor = Color.fromARGB(159, 255, 255, 255);
   Color backgroundColor = Color.fromARGB(255, 193, 54, 57);
   final Future<List<Cardapio>> future;
 
-
-  MyExpansionPanel({super.key,
-    required this.future, });
+  MyExpansionPanel({
+    super.key,
+    required this.future,
+  });
 
   @override
   State<MyExpansionPanel> createState() => _MyExpansionPanelState();
 }
 
 class _MyExpansionPanelState extends State<MyExpansionPanel> {
-  late List<bool> _isExpanded = [false,false,false,false,false];
+  final List<bool> _isExpanded = [false, false, false, false, false];
   @override
   Widget build(BuildContext context) {
     return ExpansionPanelList(
-      elevation: 0,
-      expandedHeaderPadding: EdgeInsets.zero,
-      children: [
-        ExpansionPanel(
-          headerBuilder: (context, isExpanded) {
-            return ListTile(
-              iconColor: widget.iconColor,
-              title: Text('Café da manhã'),
-              leading: const Icon(Icons.sunny_snowing)
-            );
-          },
-          backgroundColor: _isExpanded[0]? widget.backgroundColor:Colors.transparent  ,
-          canTapOnHeader: true,
-          body: MyListViewCafe(),
-          isExpanded: _isExpanded[0]
-        ),
-        ExpansionPanel(
-          backgroundColor: _isExpanded[1]?widget.backgroundColor:Colors.transparent  ,
-          headerBuilder: (context, isExpanded) {
-            return ListTile(
-              iconColor: widget.iconColor,
-              title: Text('Almoço'),
-              subtitle: Text('Comum'),
-              leading: const Icon(Icons.sunny)
-            );
-          },
-          canTapOnHeader: true,
-          body: CustomFutureBuilder<List<Cardapio>>(
-              future: widget.future,
-              periodo: 0,
-              vegetariano: 0,
-            ),
-          isExpanded: _isExpanded[1]
-        ),
-        ExpansionPanel(
-          backgroundColor: _isExpanded[2]?widget.backgroundColor:Colors.transparent  ,
-          headerBuilder: (context, isExpanded) {
-            return ListTile(
-              iconColor: widget.iconColor,
-              title: Text('Almoço'),
-              subtitle: Text('Vegano'),
-              leading: const Icon(Icons.sunny)
-            );
-          },
-          canTapOnHeader: true,
-          body: CustomFutureBuilder<List<Cardapio>>(
-              future: widget.future,
-              periodo: 0,
-              vegetariano: 1,
-            ),
-          isExpanded: _isExpanded[2]
-        ),
-        ExpansionPanel(
-          backgroundColor: _isExpanded[3]?widget.backgroundColor:Colors.transparent  ,
-          headerBuilder: (context, isExpanded) {
-            return ListTile(
-              iconColor: widget.iconColor,
-              title: Text('Jantar'),
-              subtitle: Text('Comum'),
-              leading: const Icon(Icons.nightlight)
-            );
-          },
-          canTapOnHeader: true,
-          body: CustomFutureBuilder<List<Cardapio>>(
-              future: widget.future,
-              periodo: 1,
-              vegetariano: 0,
-            ),
-          isExpanded: _isExpanded[3]
-        ),
-        ExpansionPanel(
-          backgroundColor: _isExpanded[4]?widget.backgroundColor:Colors.transparent  ,
-          headerBuilder: (context, isExpanded) {
-            return ListTile(
-              iconColor: widget.iconColor,
-              title: Text('Jantar'),
-              subtitle: Text('Vegano'),
-              leading: const Icon(Icons.nightlight)
-            );
-          },
-          canTapOnHeader: true,
-          body: CustomFutureBuilder<List<Cardapio>>(
-              future: widget.future,
-              periodo: 1,
-              vegetariano: 1,
-            ),
-          isExpanded: _isExpanded[4]
-        ),
-        
-      ],
-      expansionCallback:(i, isExpanded) => 
-      setState(() { 
-        for(var j=0;j<=4;j++){
-          if(i==j){
-            _isExpanded[j] = !isExpanded;
-          }
-          else
-            _isExpanded[j] = false;
-        }
-        
-      })
-    );
+        animationDuration: Duration(seconds: 1),
+        elevation: 0,
+        expandedHeaderPadding: EdgeInsets.zero,
+        children: [
+          ExpansionPanel(
+              headerBuilder: (context, isExpanded) {
+                if (isExpanded) {
+                  return ListTile(
+                      iconColor: _isExpanded[0] ? widget.iconColor : null,
+                      title: Text(
+                        'Café da manhã',
+                        style: style,
+                      ),
+                      leading: const Icon(Icons.sunny_snowing));
+                } else
+                  return ListTile(
+                      iconColor: _isExpanded[0] ? widget.iconColor : null,
+                      title: Text(
+                        'Café da manhã',
+                        style: style,
+                      ),
+                      leading: const Icon(Icons.sunny_snowing));
+              },
+              backgroundColor:
+                  _isExpanded[0] ? widget.backgroundColor : Colors.transparent,
+              canTapOnHeader: true,
+              body: MyListViewCafe(),
+              isExpanded: _isExpanded[0]),
+          ExpansionPanel(
+              backgroundColor:
+                  _isExpanded[1] ? widget.backgroundColor : Colors.transparent,
+              headerBuilder: (context, isExpanded) {
+                return ListTile(
+                    iconColor: _isExpanded[1] ? widget.iconColor : null,
+                    title: Text(
+                      'Almoço',
+                      style: style,
+                    ),
+                    subtitle: Text(
+                      'Comum',
+                      style: _isExpanded[1] ? style3 : null,
+                    ),
+                    leading: const Icon(Icons.sunny));
+              },
+              canTapOnHeader: true,
+              body: CustomFutureBuilder<List<Cardapio>>(
+                future: widget.future,
+                periodo: 0,
+                vegetariano: 0,
+              ),
+              isExpanded: _isExpanded[1]),
+          ExpansionPanel(
+              backgroundColor:
+                  _isExpanded[2] ? widget.backgroundColor : Colors.transparent,
+              headerBuilder: (context, isExpanded) {
+                return ListTile(
+                    iconColor: _isExpanded[2] ? widget.iconColor : null,
+                    title: Text(
+                      'Almoço',
+                      style: style,
+                    ),
+                    subtitle: Text(
+                      'Vegano',
+                      style: _isExpanded[2] ? style3 : null,
+                    ),
+                    leading: const Icon(Icons.sunny));
+              },
+              canTapOnHeader: true,
+              body: CustomFutureBuilder<List<Cardapio>>(
+                future: widget.future,
+                periodo: 0,
+                vegetariano: 1,
+              ),
+              isExpanded: _isExpanded[2]),
+          ExpansionPanel(
+              backgroundColor:
+                  _isExpanded[3] ? widget.backgroundColor : Colors.transparent,
+              headerBuilder: (context, isExpanded) {
+                return ListTile(
+                    iconColor: _isExpanded[3] ? widget.iconColor : null,
+                    title: Text(
+                      'Jantar',
+                      style: style,
+                    ),
+                    subtitle: Text(
+                      'Comum',
+                      style: _isExpanded[3] ? style3 : null,
+                    ),
+                    leading: const Icon(Icons.nightlight));
+              },
+              canTapOnHeader: true,
+              body: CustomFutureBuilder<List<Cardapio>>(
+                future: widget.future,
+                periodo: 1,
+                vegetariano: 0,
+              ),
+              isExpanded: _isExpanded[3]),
+          ExpansionPanel(
+              backgroundColor:
+                  _isExpanded[4] ? widget.backgroundColor : Colors.transparent,
+              headerBuilder: (context, isExpanded) {
+                return ListTile(
+                    iconColor: _isExpanded[4] ? widget.iconColor : null,
+                    title: Text(
+                      'Jantar',
+                      style: style,
+                    ),
+                    subtitle: Text(
+                      'Vegano',
+                      style: _isExpanded[4] ? style3 : null,
+                    ),
+                    leading: const Icon(Icons.nightlight));
+              },
+              canTapOnHeader: true,
+              body: CustomFutureBuilder<List<Cardapio>>(
+                future: widget.future,
+                periodo: 1,
+                vegetariano: 1,
+              ),
+              isExpanded: _isExpanded[4]),
+        ],
+        expansionCallback: (i, isExpanded) => setState(() {
+              for (var j = 0; j <= 4; j++) {
+                if (i == j) {
+                  _isExpanded[j] = !isExpanded;
+                } else
+                  _isExpanded[j] = false;
+              }
+            }));
   }
 }
 
@@ -180,10 +209,12 @@ class MyTab extends StatelessWidget {
         future: Connection.getFeriado(date),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Text(snapshot.data!
-                ? 'Feriado'
-                : DateFormat("dd/MM")
-                    .format(DiaDaSemana.obterData(date)));
+            return Text(
+              snapshot.data!
+                  ? 'Feriado'
+                  : DateFormat("dd/MM").format(DiaDaSemana.obterData(date)),
+              style: snapshot.data! ? TextStyle(fontSize: 12) : null,
+            );
           } else if (snapshot.hasError) {
             return const Text('Erro ao carregar');
           } else {
@@ -295,7 +326,7 @@ class MyListView extends StatelessWidget {
       return ListView(shrinkWrap: true, children: [
         const ListTile(
           leading: Text(
-            '11:00 - 14:00',
+            '18:00 - 19:30',
             style: style2,
           ),
         ),
@@ -323,7 +354,7 @@ class MyListView extends StatelessWidget {
     } else {
       return ListView(shrinkWrap: true, children: [
         const ListTile(
-          leading: Text('18:00 - 20:00', style: style2),
+          leading: Text('11:00 - 14:00', style: style2),
         ),
         ListTile(
           leading: Text('Principal: ', style: style),

@@ -19,9 +19,9 @@ class _CardapioPage extends State<CardapioPage>
   late TabController _controller;
   late List<bool> verificaFeriado;
   int monday = DateTime.monday;
-  int tuesday= DateTime.tuesday;
-  int wednesday= DateTime.wednesday;
-  int thursday = DateTime.thursday;
+  int tuesday = DateTime.tuesday;
+  int wednesday = DateTime.wednesday;
+  int thursday = 2023;
   int friday = DateTime.friday;
 
   Future<bool> checkFeriado(int date) async {
@@ -49,8 +49,7 @@ class _CardapioPage extends State<CardapioPage>
       CardapioBodyPage(selectedDayWeek: tuesday),
       CardapioBodyPage(selectedDayWeek: wednesday),
       CardapioBodyPage(selectedDayWeek: thursday),
-      CardapioBodyPage(selectedDayWeek: friday
-      ),
+      CardapioBodyPage(selectedDayWeek: friday),
     ];
     _controller = TabController(
         length: 5, vsync: this, initialIndex: DiaDaSemana.numberWeek());
@@ -62,27 +61,30 @@ class _CardapioPage extends State<CardapioPage>
   }
 
   void setDay() async {
-    if (await checkFeriado(monday)) {
+    var _changeIndex = DiaDaSemana.numberWeek();
+    if (await checkFeriado(monday) && _controller.index == 0) {
       _controller.index = 1;
-      _indice = 1;
+      _changeIndex = 1;
     }
-    if (await checkFeriado(tuesday)) {
+    if (await checkFeriado(tuesday) && _controller.index == 1) {
       _controller.index = 0;
-      _indice = 0;
+      _changeIndex = 0;
     }
-    if (await checkFeriado(wednesday)) {
+    if (await checkFeriado(wednesday) && _controller.index == 2) {
       _controller.index = 1;
-      _indice = 1;
+      _changeIndex = 1;
     }
-    if (await checkFeriado(thursday)) {
+    if (await checkFeriado(thursday) && _controller.index == 3) {
       _controller.index = 2;
-      _indice = 2;
+      _changeIndex = 2;
     }
-    if (await checkFeriado(friday
-    )) {
+    if (await checkFeriado(friday) && _controller.index == 4) {
       _controller.index = 3;
-      _indice = 3;
+      _changeIndex = 3;
     }
+    setState(() {
+      _indice = _changeIndex;
+    });
   }
 
   @override
@@ -101,32 +103,32 @@ class _CardapioPage extends State<CardapioPage>
                   MyTab(date: tuesday),
                   MyTab(date: wednesday),
                   MyTab(date: thursday),
-                  MyTab(date: friday
-                  ),
+                  MyTab(date: friday),
                 ],
                 onTap: (index) {
+                  var _changeIndex = index;
                   if (verificaFeriado[0] && index == 0) {
                     _controller.index = _controller.previousIndex;
-                    _indice = _controller.previousIndex;
+                    _changeIndex = _controller.index;
                   }
                   if (verificaFeriado[1] && index == 1) {
                     _controller.index = _controller.previousIndex;
-                    _indice = _controller.previousIndex;
+                    _changeIndex = _controller.index;
                   }
                   if (verificaFeriado[2] && index == 2) {
                     _controller.index = _controller.previousIndex;
-                    _indice = _controller.previousIndex;
+                    _changeIndex = _controller.index;
                   }
                   if (verificaFeriado[3] && index == 3) {
                     _controller.index = _controller.previousIndex;
-                    _indice = _controller.previousIndex;
+                    _changeIndex = _controller.index;
                   }
                   if (verificaFeriado[4] && index == 4) {
                     _controller.index = _controller.previousIndex;
-                    _indice = _controller.previousIndex;
+                    _changeIndex = _controller.index;
                   }
                   setState(() {
-                    _indice = index;
+                    _indice = _changeIndex;
                   });
                 }),
           ),
@@ -154,9 +156,7 @@ class CardapioBodyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        MyExpansionPanel(future: future)
-      ],
+      children: [MyExpansionPanel(future: future)],
     );
   }
 }

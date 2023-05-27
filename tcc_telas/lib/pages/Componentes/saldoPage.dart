@@ -8,16 +8,28 @@ class MainContainerSaldo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 100),
-      height: MediaQuery.of(context).size.height * 0.3,
-      width: MediaQuery.of(context).size.width * 0.7,
-      decoration: BoxDecoration(
-        color: Color(0xFFA12E2F),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: input,
-    );
+    return Align(
+        alignment: Alignment.center,
+        child: Container(
+          alignment: Alignment.center,
+          margin: const EdgeInsets.only(top: 100),
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height * 0.02),
+          width: MediaQuery.of(context).size.width * 0.7,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: input,
+        ));
   }
 }
 
@@ -49,7 +61,8 @@ class TitleSaldoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Center(
+        child: Row(
       children: [
         Container(
           margin: EdgeInsets.only(right: 15, top: 10, left: 10),
@@ -65,6 +78,6 @@ class TitleSaldoPage extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ));
   }
 }

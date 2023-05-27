@@ -21,7 +21,7 @@ class _CardapioPage extends State<CardapioPage>
   int monday = DateTime.monday;
   int tuesday = DateTime.tuesday;
   int wednesday = DateTime.wednesday;
-  int thursday = 2023;
+  int thursday = DateTime.thursday;
   int friday = DateTime.friday;
 
   Future<bool> checkFeriado(int date) async {

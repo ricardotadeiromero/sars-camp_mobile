@@ -8,9 +8,9 @@ class Connection {
     var url = Uri.parse(
         "https://sars-camp.onrender.com/cardapio/${data}");
     final response = await http.get(url);
-    print(response.statusCode);
     if (response.statusCode == 200) {
       final cardapios = jsonDecode(response.body) as List;
+      print(cardapios);
       return cardapios.map((cardapio) => Cardapio.fromMap(cardapio)).toList();
     } else if (response.statusCode == 404) {
       throw HttpException('Cardápio indisponível!');
@@ -29,10 +29,10 @@ class Connection {
         body: jsonEncode(<String, String>{"ra": ra, "senha": senha}));
     var res = jsonDecode(response.body);
     print(response.statusCode);
-    if (response.statusCode == 404) {
+    if (response.statusCode != 200) {
       throw HttpException('RA ou senha inválidos!');
     } else {
-      return 'R\$' + res[0]["saldo"].toString();
+      return 'R\$' + res["saldo"].toString();
     }
   }
 

@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class Connection {
   static Future<List<Cardapio>> getCardapio(String data) async {
     var url = Uri.parse(
-        "https://oceanic-plant-production.up.railway.app/api/cardapio/${data}");
+        "https://sars-camp.onrender.com/cardapio/${data}");
     final response = await http.get(url);
     print(response.statusCode);
     if (response.statusCode == 200) {
@@ -20,7 +20,7 @@ class Connection {
 
   static Future<String> getSaldo2(String ra, String senha) async {
     var url =
-        Uri.parse("https://oceanic-plant-production.up.railway.app/api/saldo");
+        Uri.parse("https://sars-camp.onrender.com/saldo");
 
     final response = await http.post(url,
         headers: <String, String>{
@@ -38,7 +38,7 @@ class Connection {
 
   static Future<String> getSaldo(String ra, String senha) async {
     var url = Uri.parse(
-        "https://oceanic-plant-production.up.railway.app/api/saldo/${ra}/${senha}");
+        "https://sars-camp.onrender.com/saldo/${ra}/${senha}");
 
     final response = await http.get(url, headers: <String, String>{
       "Content-Type": "application/json;charset=UTF-8"

@@ -27,7 +27,6 @@ class Connection {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, String>{"ra": ra, "senha": senha}));
-
     var res = jsonDecode(response.body);
     print(response.statusCode);
     if (response.statusCode == 404) {

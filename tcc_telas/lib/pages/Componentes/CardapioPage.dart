@@ -388,7 +388,7 @@ class MyListViewCafe extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(shrinkWrap: true, children: [
       ListTile(
-        leading: Text('07:00 - 08:00', style: style2),
+        leading: Text('07:00 - 08:30', style: style2),
       ),
       ListTile(
         leading: Text('Leite', style: style),

@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc_telas/pages/cardapio_page.dart';
 import 'package:tcc_telas/pages/saldo_page.dart';
-import 'Componentes/CustomCard.dart';
-import 'Componentes/Background.dart';
+import 'Componentes/customCard.dart';
+import 'Componentes/background.dart';
 
-class homePage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,10 +22,7 @@ class homePage extends StatelessWidget {
                 imageAsset: 'image/cardapio.png',
                 title: 'Cardápio RU',
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => cardapioPage()),
-                  );
+                  Navigator.pushNamed(context, '/cardapioPage');
                 },
               ),
               CustomCard(
@@ -33,10 +30,7 @@ class homePage extends StatelessWidget {
                 imageAsset: 'image/carteira.png',
                 title: 'Saldo do RU',
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => saldoPage()),
-                  );
+                  Navigator.pushNamed(context, '/saldoPage');
                 },
               ),
               CustomCard(
@@ -44,10 +38,7 @@ class homePage extends StatelessWidget {
                 imageAsset: 'image/achados-e-perdidos.png',
                 title: 'Achados & Perdidos',
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => homePage()),
-                  );
+                  Navigator.pushNamed(context, '/');
                 },
               ),
             ],

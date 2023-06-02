@@ -1,15 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
-//import 'connection/connection.dart';
-import 'package:mysql1/mysql1.dart';
-import 'model/Cardapio.dart';
-import 'package:http/http.dart' as http;
+import 'package:tcc_telas/pages/cardapio_page.dart';
+import 'package:tcc_telas/pages/saldo_page.dart';
 import 'connection/connection.dart';
+import 'pages/home_page.dart';
 
 void main() {
-
   runApp(const MyApp());
 }
 
@@ -20,8 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: homePage(),
       debugShowCheckedModeBanner: false,
+      routes: {
+        '/': (context) => HomePage(),
+        '/saldoPage': (context) => SaldoPage(),
+        '/cardapioPage': (context) => CardapioPage(),
+      },
     );
   }
 }

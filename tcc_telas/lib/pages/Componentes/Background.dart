@@ -14,6 +14,18 @@ abrirUrl() async {
 
 Color myGreen = Color(0xFF0A6066);
 Color myRed = Color(0xFFA12E2F);
+Color myLightGreen = Color(0xFF007F82);
+
+class MyProgressIndicator extends StatelessWidget {
+  const MyProgressIndicator({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CircularProgressIndicator(
+      color: myLightGreen,
+    );
+  }
+}
 
 class Background extends StatelessWidget {
   Widget? components;

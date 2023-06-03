@@ -1,11 +1,14 @@
 import 'dart:ui';
-import 'package:tcc_telas/teste.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc_telas/pages/cardapio_page.dart';
 import 'package:tcc_telas/pages/saldo_page.dart';
-import 'Componentes/CustomCard.dart';
+import 'package:tcc_telas/teste.dart';
+
 import 'Componentes/Background.dart';
+import 'Componentes/CustomCard.dart';
+import 'achadosPerdidos.dart';
 
 class homePage extends StatelessWidget {
   @override
@@ -46,7 +49,7 @@ class homePage extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => homePage()),
+                    MaterialPageRoute(builder: (context) => achadosperdidos()),
                   );
                 },
               ),

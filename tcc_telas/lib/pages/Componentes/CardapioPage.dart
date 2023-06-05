@@ -201,7 +201,7 @@ class _MyExpansionPanelState extends State<MyExpansionPanel> {
 
 class MyTab extends StatelessWidget {
   MyTab({super.key, required this.date});
-  int date;
+  DateTime date;
   @override
   Widget build(BuildContext context) {
     return Tab(
@@ -210,9 +210,7 @@ class MyTab extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Text(
-              snapshot.data!
-                  ? 'Feriado'
-                  : DateFormat("dd/MM").format(DiaDaSemana.obterData(date)),
+              snapshot.data! ? 'Feriado' : DateFormat("dd/MM").format(date),
               style: snapshot.data! ? TextStyle(fontSize: 12) : null,
             );
           } else if (snapshot.hasError) {

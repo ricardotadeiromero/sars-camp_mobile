@@ -18,13 +18,13 @@ class _CardapioPage extends State<CardapioPage>
   var _indice = 0;
   late TabController _controller;
   late List<bool> verificaFeriado;
-  int monday = DateTime.monday;
-  int tuesday = DateTime.tuesday;
-  int wednesday = DateTime.wednesday;
-  int thursday = DateTime.thursday;
-  int friday = DateTime.friday;
+  DateTime monday = DiaDaSemana.obterData(DateTime.monday);
+  DateTime tuesday = DiaDaSemana.obterData(DateTime.tuesday);
+  DateTime wednesday = DiaDaSemana.obterData(DateTime.wednesday);
+  DateTime thursday = DiaDaSemana.obterData(DateTime.thursday);
+  DateTime friday = DiaDaSemana.obterData(DateTime.friday);
 
-  Future<bool> checkFeriado(int date) async {
+  Future<bool> checkFeriado(DateTime date) async {
     final isFeriado = await Connection.getFeriado(date);
     if (isFeriado) {
       return true;
@@ -32,14 +32,14 @@ class _CardapioPage extends State<CardapioPage>
       return false;
   }
 
-  void defineFeriado() async {
-    verificaFeriado = [
-      await checkFeriado(monday),
-      await checkFeriado(tuesday),
-      await checkFeriado(wednesday),
-      await checkFeriado(thursday),
-      await checkFeriado(friday),
-    ];
+  Future<void> defineFeriado() async {
+    verificaFeriado = await Future.wait([
+      checkFeriado(monday),
+      checkFeriado(tuesday),
+      checkFeriado(wednesday),
+      checkFeriado(thursday),
+      checkFeriado(friday),
+    ]);
   }
 
   @override
@@ -55,36 +55,56 @@ class _CardapioPage extends State<CardapioPage>
         length: 5, vsync: this, initialIndex: DiaDaSemana.numberWeek());
     selectedDay = DateTime.now();
     _indice = DiaDaSemana.numberWeek();
-    defineFeriado();
-    setDay();
+    print(thursday);
+    fon();
     super.initState();
   }
 
-  void setDay() async {
-    var _changeIndex = DiaDaSemana.numberWeek();
-    if (await checkFeriado(monday) && _controller.index == 0) {
+  Future<void> setDay() async {
+    //eu mato quem apagar essa poha
+    print(verificaFeriado[0]);
+    if (verificaFeriado[0] && _controller.index == 0) {
       _controller.index = 1;
-      _changeIndex = 1;
     }
-    if (await checkFeriado(tuesday) && _controller.index == 1) {
+    if (verificaFeriado[1] && _controller.index == 1) {
       _controller.index = 0;
-      _changeIndex = 0;
     }
-    if (await checkFeriado(wednesday) && _controller.index == 2) {
+    if (verificaFeriado[2] && _controller.index == 2) {
       _controller.index = 1;
-      _changeIndex = 1;
     }
-    if (await checkFeriado(thursday) && _controller.index == 3) {
+    if (verificaFeriado[3] && _controller.index == 3) {
       _controller.index = 2;
-      _changeIndex = 2;
     }
-    if (await checkFeriado(friday) && _controller.index == 4) {
+    if (verificaFeriado[4] && _controller.index == 4) {
       _controller.index = 3;
-      _changeIndex = 3;
     }
-    setState(() {
-      _indice = _changeIndex;
-    });
+  }
+
+  Future<void> setDay2() async {
+    //eu mato quem apagar essa poha
+    await () async {};
+    if (verificaFeriado[0] && _controller.index == 0) {
+      _controller.index = _controller.previousIndex;
+    }
+    if (verificaFeriado[1] && _controller.index == 1) {
+      _controller.index = _controller.previousIndex;
+    }
+    if (verificaFeriado[2] && _controller.index == 2) {
+      _controller.index = _controller.previousIndex;
+    }
+    if (verificaFeriado[3] && _controller.index == 3) {
+      _controller.index = _controller.previousIndex;
+    }
+    if (verificaFeriado[4] && _controller.index == 4) {
+      _controller.index = _controller.previousIndex;
+    }
+  }
+
+  void fon() async {
+    await defineFeriado();
+    print(verificaFeriado);
+    await setDay();
+    _controller.addListener(setDay2);
   }
 
   @override
@@ -95,48 +115,27 @@ class _CardapioPage extends State<CardapioPage>
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(48),
             child: TabBar(
-                controller: _controller,
-                isScrollable: false,
-                indicatorColor: const Color.fromARGB(255, 15, 142, 147),
-                tabs: [
-                  MyTab(date: monday),
-                  MyTab(date: tuesday),
-                  MyTab(date: wednesday),
-                  MyTab(date: thursday),
-                  MyTab(date: friday),
-                ],
-                onTap: (index) {
-                  var _changeIndex = index;
-                  if (verificaFeriado[0] && index == 0) {
-                    _controller.index = _controller.previousIndex;
-                    _changeIndex = _controller.index;
-                  }
-                  if (verificaFeriado[1] && index == 1) {
-                    _controller.index = _controller.previousIndex;
-                    _changeIndex = _controller.index;
-                  }
-                  if (verificaFeriado[2] && index == 2) {
-                    _controller.index = _controller.previousIndex;
-                    _changeIndex = _controller.index;
-                  }
-                  if (verificaFeriado[3] && index == 3) {
-                    _controller.index = _controller.previousIndex;
-                    _changeIndex = _controller.index;
-                  }
-                  if (verificaFeriado[4] && index == 4) {
-                    _controller.index = _controller.previousIndex;
-                    _changeIndex = _controller.index;
-                  }
-                  setState(() {
-                    _indice = _changeIndex;
-                  });
-                }),
+              controller: _controller,
+              isScrollable: false,
+              indicatorColor: const Color.fromARGB(255, 15, 142, 147),
+              tabs: [
+                MyTab(date: monday),
+                MyTab(date: tuesday),
+                MyTab(date: wednesday),
+                MyTab(date: thursday),
+                MyTab(date: friday),
+              ],
+            ),
           ),
         ),
         body: Background(
           components: Container(
             alignment: AlignmentDirectional.topStart,
-            child: SingleChildScrollView(child: bodyPage[_indice]),
+            child: TabBarView(
+              //physics: NeverScrollableScrollPhysics(),
+              controller: _controller,
+              children: bodyPage,
+            ),
           ),
         ));
   }
@@ -144,11 +143,11 @@ class _CardapioPage extends State<CardapioPage>
 
 class CardapioBodyPage extends StatelessWidget {
   late Future<List<Cardapio>> future;
-  late int selectedDayWeek;
+  late DateTime selectedDayWeek;
 
   CardapioBodyPage({Key? key, required this.selectedDayWeek})
       : super(key: key) {
-    var selectedDay = DiaDaSemana.obterData(selectedDayWeek);
+    var selectedDay = selectedDayWeek;
     future =
         Connection.getCardapio(DateFormat("yyyy-MM-dd").format(selectedDay));
   }

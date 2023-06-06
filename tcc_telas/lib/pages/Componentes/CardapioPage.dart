@@ -66,8 +66,7 @@ class _MyExpansionPanelState extends State<MyExpansionPanel> {
   final List<bool> _isExpanded = [false, false, false, false, false];
   @override
   Widget build(BuildContext context) {
-    return 
-    ExpansionPanelList(
+    return ExpansionPanelList(
         animationDuration: Duration(seconds: 1),
         elevation: 0,
         expandedHeaderPadding: EdgeInsets.zero,
@@ -130,7 +129,7 @@ class _MyExpansionPanelState extends State<MyExpansionPanel> {
                       style: style,
                     ),
                     subtitle: Text(
-                      'Vegano',
+                      'Vegetariano',
                       style: _isExpanded[2] ? style3 : null,
                     ),
                     leading: const Icon(Icons.sunny));
@@ -176,7 +175,7 @@ class _MyExpansionPanelState extends State<MyExpansionPanel> {
                       style: style,
                     ),
                     subtitle: Text(
-                      'Vegano',
+                      'Vegetariano',
                       style: _isExpanded[4] ? style3 : null,
                     ),
                     leading: const Icon(Icons.nightlight));
@@ -322,60 +321,149 @@ class MyListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (cardapio.periodo == 1) {
-      return ListView(shrinkWrap: true, children: [
-        const ListTile(
-          leading: Text(
-            '18:00 - 19:30',
-            style: style2,
+      if (cardapio.vegetariano == 0) {
+        return ListView(shrinkWrap: true, children: [
+          const ListTile(
+            leading: Text(
+              '18:00 - 19:45',
+              style: style2,
+            ),
           ),
-        ),
-        ListTile(
-          leading: Text('Principal: ', style: style),
-          title: Text(cardapio.principal, style: style2),
-        ),
-        ListTile(
-          leading: Text('Guarnição: ', style: style),
-          title: Text(cardapio.guarnicao, style: style2),
-        ),
-        ListTile(
-          leading: Text('Salada: ', style: style),
-          title: Text(cardapio.salada, style: style2),
-        ),
-        ListTile(
-          leading: Text('Sobremesa: ', style: style),
-          title: Text(cardapio.sobremesa, style: style2),
-        ),
-        ListTile(
-          leading: Text('Suco: ', style: style),
-          title: Text(cardapio.suco, style: style2),
-        )
-      ]);
+          ListTile(
+            leading: Text(
+              'Arroz e feijão',
+              style: style,
+            ),
+          ),
+          ListTile(
+            leading: Text('Principal: ', style: style),
+            title: Text(cardapio.principal, style: style2),
+          ),
+          ListTile(
+            leading: Text('Guarnição: ', style: style),
+            title: Text(cardapio.guarnicao, style: style2),
+          ),
+          ListTile(
+            leading: Text('Salada: ', style: style),
+            title: Text(cardapio.salada, style: style2),
+          ),
+          ListTile(
+            leading: Text('Sobremesa: ', style: style),
+            title: Text(cardapio.sobremesa, style: style2),
+          ),
+          ListTile(
+            leading: Text('Suco: ', style: style),
+            title: Text(cardapio.suco, style: style2),
+          )
+        ]);
+      } else {
+        return ListView(shrinkWrap: true, children: [
+          const ListTile(
+            leading: Text(
+              '18:00 - 19:45',
+              style: style2,
+            ),
+          ),
+          ListTile(
+            leading: Text(
+              'Arroz integral e feijão',
+              style: style,
+            ),
+          ),
+          ListTile(
+            leading: Text('Principal: ', style: style),
+            title: Text(cardapio.principal, style: style2),
+          ),
+          ListTile(
+            leading: Text('Guarnição: ', style: style),
+            title: Text(cardapio.guarnicao, style: style2),
+          ),
+          ListTile(
+            leading: Text('Salada: ', style: style),
+            title: Text(cardapio.salada, style: style2),
+          ),
+          ListTile(
+            leading: Text('Sobremesa: ', style: style),
+            title: Text(cardapio.sobremesa, style: style2),
+          ),
+          ListTile(
+            leading: Text('Suco: ', style: style),
+            title: Text(cardapio.suco, style: style2),
+          )
+        ]);
+      }
     } else {
-      return ListView(shrinkWrap: true, children: [
-        const ListTile(
-          leading: Text('11:00 - 14:00', style: style2),
-        ),
-        ListTile(
-          leading: Text('Principal: ', style: style),
-          title: Text(cardapio.principal, style: style2),
-        ),
-        ListTile(
-          leading: Text('Guarnição: ', style: style),
-          title: Text(cardapio.guarnicao, style: style2),
-        ),
-        ListTile(
-          leading: Text('Salada: ', style: style),
-          title: Text(cardapio.salada, style: style2),
-        ),
-        ListTile(
-          leading: Text('Sobremesa: ', style: style),
-          title: Text(cardapio.sobremesa, style: style2),
-        ),
-        ListTile(
-          leading: Text('Suco: ', style: style),
-          title: Text(cardapio.suco, style: style2),
-        )
-      ]);
+      if (cardapio.vegetariano == 0) {
+        return ListView(shrinkWrap: true, children: [
+          const ListTile(
+            leading: Text(
+              '11:00 - 14:00',
+              style: style2,
+            ),
+          ),
+          ListTile(
+            leading: Text(
+              'Arroz e feijão',
+              style: style,
+            ),
+          ),
+          ListTile(
+            leading: Text('Principal: ', style: style),
+            title: Text(cardapio.principal, style: style2),
+          ),
+          ListTile(
+            leading: Text('Guarnição: ', style: style),
+            title: Text(cardapio.guarnicao, style: style2),
+          ),
+          ListTile(
+            leading: Text('Salada: ', style: style),
+            title: Text(cardapio.salada, style: style2),
+          ),
+          ListTile(
+            leading: Text('Sobremesa: ', style: style),
+            title: Text(cardapio.sobremesa, style: style2),
+          ),
+          ListTile(
+            leading: Text('Suco: ', style: style),
+            title: Text(cardapio.suco, style: style2),
+          )
+        ]);
+      } else {
+        return ListView(shrinkWrap: true, children: [
+          const ListTile(
+            leading: Text(
+              '11:00 - 14:00',
+              style: style2,
+            ),
+          ),
+          ListTile(
+            leading: Text(
+              'Arroz integral e feijão',
+              style: style,
+            ),
+          ),
+          ListTile(
+            leading: Text('Principal: ', style: style),
+            title: Text(cardapio.principal, style: style2),
+          ),
+          ListTile(
+            leading: Text('Guarnição: ', style: style),
+            title: Text(cardapio.guarnicao, style: style2),
+          ),
+          ListTile(
+            leading: Text('Salada: ', style: style),
+            title: Text(cardapio.salada, style: style2),
+          ),
+          ListTile(
+            leading: Text('Sobremesa: ', style: style),
+            title: Text(cardapio.sobremesa, style: style2),
+          ),
+          ListTile(
+            leading: Text('Suco: ', style: style),
+            title: Text(cardapio.suco, style: style2),
+          )
+        ]);
+      }
     }
   }
 }

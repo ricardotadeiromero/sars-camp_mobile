@@ -14,7 +14,7 @@ class CardapioPage extends StatefulWidget {
 class _CardapioPage extends State<CardapioPage>
     with SingleTickerProviderStateMixin {
   late DateTime selectedDay;
-  late List<CardapioBodyPage> bodyPage;
+  late List<SingleChildScrollView> bodyPage;
   var _indice = 0;
   late TabController _controller;
   late List<bool> verificaFeriado;
@@ -45,11 +45,23 @@ class _CardapioPage extends State<CardapioPage>
   @override
   void initState() {
     bodyPage = [
-      CardapioBodyPage(selectedDayWeek: monday),
-      CardapioBodyPage(selectedDayWeek: tuesday),
-      CardapioBodyPage(selectedDayWeek: wednesday),
-      CardapioBodyPage(selectedDayWeek: thursday),
-      CardapioBodyPage(selectedDayWeek: friday),
+
+      SingleChildScrollView(
+        child: CardapioBodyPage(selectedDayWeek: monday),
+      ),
+      SingleChildScrollView(
+        child: CardapioBodyPage(selectedDayWeek: tuesday),
+      ),
+      SingleChildScrollView(
+        child: CardapioBodyPage(selectedDayWeek: wednesday),
+      ),
+      SingleChildScrollView(
+        child: CardapioBodyPage(selectedDayWeek: thursday),
+      ),
+      SingleChildScrollView(
+        child: CardapioBodyPage(selectedDayWeek: friday),
+      ),
+      
     ];
     _controller = TabController(
         length: 5, vsync: this, initialIndex: DiaDaSemana.numberWeek());
@@ -128,7 +140,8 @@ class _CardapioPage extends State<CardapioPage>
             ),
           ),
         ),
-        body: Background(
+        body: 
+        Background(
           components: Container(
             alignment: AlignmentDirectional.topStart,
             child: TabBarView(
@@ -137,7 +150,9 @@ class _CardapioPage extends State<CardapioPage>
               children: bodyPage,
             ),
           ),
-        ));
+          )
+          
+        );
   }
 }
 

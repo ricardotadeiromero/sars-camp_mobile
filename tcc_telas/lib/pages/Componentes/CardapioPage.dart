@@ -66,7 +66,8 @@ class _MyExpansionPanelState extends State<MyExpansionPanel> {
   final List<bool> _isExpanded = [false, false, false, false, false];
   @override
   Widget build(BuildContext context) {
-    return ExpansionPanelList(
+    return 
+    ExpansionPanelList(
         animationDuration: Duration(seconds: 1),
         elevation: 0,
         expandedHeaderPadding: EdgeInsets.zero,

@@ -53,12 +53,10 @@ class Connection {
 
   static Future<bool> getFeriado(DateTime data) async {
     var date = DateFormat("yyyy-MM-dd").format(data);
-    var url = Uri.parse("https://brasilapi.com.br/api/feriados/v1/${date}");
+    var url = Uri.parse("https://sars-camp.onrender.com/date/feriado/${date}");
 
     final response = await http.get(url);
-    if (response.statusCode == 200) {
-      return true;
-    } else
-      return false;
+    var res = jsonDecode(response.body) as bool;
+    return res;
   }
 }

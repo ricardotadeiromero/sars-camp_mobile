@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:intl/intl.dart';
+
 import '../model/cardapio.dart';
 import 'package:http/http.dart' as http;
 
@@ -49,13 +51,12 @@ class Connection {
     return res[0]["Saldo"].toString();
   }
 
-  static Future<bool> getFeriado(int data) async {
-    var url = Uri.parse("https://brasilapi.com.br/api/feriados/v1/${data}");
+  static Future<bool> getFeriado(DateTime data) async {
+    var date = DateFormat("yyyy-MM-dd").format(data);
+    var url = Uri.parse("https://sars-camp.onrender.com/date/feriado/${date}");
 
     final response = await http.get(url);
-    if (response.statusCode == 200) {
-      return true;
-    } else
-      return false;
+    var res = jsonDecode(response.body) as bool;
+    return res;
   }
 }

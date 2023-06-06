@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 abrirUrl() async {
-  var url = Uri.parse('https://flutterando.com.br/');
+  var url = Uri.parse('https://cotil.unicamp.br/');
   if (await canLaunchUrl(url)) {
     await launchUrl(url);
   } else {

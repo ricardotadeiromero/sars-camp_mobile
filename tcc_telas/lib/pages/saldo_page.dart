@@ -162,11 +162,12 @@ class _SaldoContainerState extends State<SaldoContainer> {
                                                 final result = snapshot.data!;
                                                 if (result == null) {
                                                   return Text(
-                                                    result,
+                                                    'O seu saldo é $result',
                                                     style: style,
                                                   );
                                                 } else
-                                                  return Text(result,
+                                                  return Text(
+                                                      'O seu saldo é: $result',
                                                       style: styleSaldo);
                                               } else if (snapshot.hasError) {
                                                 if (snapshot.error

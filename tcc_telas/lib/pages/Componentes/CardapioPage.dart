@@ -51,143 +51,37 @@ class ExpansionWidget extends StatelessWidget {
 class MyExpansionPanel extends StatefulWidget {
   Color? iconColor = Color.fromARGB(159, 255, 255, 255);
   Color backgroundColor = Color.fromARGB(255, 193, 54, 57);
-  final Future<List<Cardapio>> future;
+  final List<dynamic> cardapios;
 
-  MyExpansionPanel({
-    super.key,
-    required this.future,
-  });
+  MyExpansionPanel({super.key, required this.cardapios});
 
   @override
   State<MyExpansionPanel> createState() => _MyExpansionPanelState();
 }
 
 class _MyExpansionPanelState extends State<MyExpansionPanel> {
-  final List<bool> _isExpanded = [false, false, false, false, false];
+  final List<bool> _isExpanded = [false, false, true, false, false];
   @override
   Widget build(BuildContext context) {
+    print("fonfi2");
+    print(widget.cardapios);
     return ExpansionPanelList(
         animationDuration: Duration(seconds: 1),
         elevation: 0,
         expandedHeaderPadding: EdgeInsets.zero,
-        children: [
-          ExpansionPanel(
-              headerBuilder: (context, isExpanded) {
-                if (isExpanded) {
+        children: widget.cardapios
+            .map((cardapio) => ExpansionPanel(
+                backgroundColor: myGreen,
+                isExpanded: true,
+                headerBuilder: (context, isExpanded) {
                   return ListTile(
-                      iconColor: _isExpanded[0] ? widget.iconColor : null,
-                      title: Text(
-                        'Café da manhã',
-                        style: style,
-                      ),
-                      leading: const Icon(Icons.sunny_snowing));
-                } else
-                  return ListTile(
-                      iconColor: _isExpanded[0] ? widget.iconColor : null,
-                      title: Text(
-                        'Café da manhã',
-                        style: style,
-                      ),
-                      leading: const Icon(Icons.sunny_snowing));
-              },
-              backgroundColor:
-                  _isExpanded[0] ? widget.backgroundColor : Colors.transparent,
-              canTapOnHeader: true,
-              body: MyListViewCafe(),
-              isExpanded: _isExpanded[0]),
-          ExpansionPanel(
-              backgroundColor:
-                  _isExpanded[1] ? widget.backgroundColor : Colors.transparent,
-              headerBuilder: (context, isExpanded) {
-                return ListTile(
-                    iconColor: _isExpanded[1] ? widget.iconColor : null,
-                    title: Text(
-                      'Almoço',
-                      style: style,
-                    ),
+                    title: Text(cardapio.periodo == 1 ? "Janta" : "Almoço"),
                     subtitle: Text(
-                      'Comum',
-                      style: _isExpanded[1] ? style3 : null,
-                    ),
-                    leading: const Icon(Icons.sunny));
-              },
-              canTapOnHeader: true,
-              body: CustomFutureBuilder<List<Cardapio>>(
-                future: widget.future,
-                periodo: 0,
-                vegetariano: 0,
-              ),
-              isExpanded: _isExpanded[1]),
-          ExpansionPanel(
-              backgroundColor:
-                  _isExpanded[2] ? widget.backgroundColor : Colors.transparent,
-              headerBuilder: (context, isExpanded) {
-                return ListTile(
-                    iconColor: _isExpanded[2] ? widget.iconColor : null,
-                    title: Text(
-                      'Almoço',
-                      style: style,
-                    ),
-                    subtitle: Text(
-                      'Vegetariano',
-                      style: _isExpanded[2] ? style3 : null,
-                    ),
-                    leading: const Icon(Icons.sunny));
-              },
-              canTapOnHeader: true,
-              body: CustomFutureBuilder<List<Cardapio>>(
-                future: widget.future,
-                periodo: 0,
-                vegetariano: 1,
-              ),
-              isExpanded: _isExpanded[2]),
-          ExpansionPanel(
-              backgroundColor:
-                  _isExpanded[3] ? widget.backgroundColor : Colors.transparent,
-              headerBuilder: (context, isExpanded) {
-                return ListTile(
-                    iconColor: _isExpanded[3] ? widget.iconColor : null,
-                    title: Text(
-                      'Jantar',
-                      style: style,
-                    ),
-                    subtitle: Text(
-                      'Comum',
-                      style: _isExpanded[3] ? style3 : null,
-                    ),
-                    leading: const Icon(Icons.nightlight));
-              },
-              canTapOnHeader: true,
-              body: CustomFutureBuilder<List<Cardapio>>(
-                future: widget.future,
-                periodo: 1,
-                vegetariano: 0,
-              ),
-              isExpanded: _isExpanded[3]),
-          ExpansionPanel(
-              backgroundColor:
-                  _isExpanded[4] ? widget.backgroundColor : Colors.transparent,
-              headerBuilder: (context, isExpanded) {
-                return ListTile(
-                    iconColor: _isExpanded[4] ? widget.iconColor : null,
-                    title: Text(
-                      'Jantar',
-                      style: style,
-                    ),
-                    subtitle: Text(
-                      'Vegetariano',
-                      style: _isExpanded[4] ? style3 : null,
-                    ),
-                    leading: const Icon(Icons.nightlight));
-              },
-              canTapOnHeader: true,
-              body: CustomFutureBuilder<List<Cardapio>>(
-                future: widget.future,
-                periodo: 1,
-                vegetariano: 1,
-              ),
-              isExpanded: _isExpanded[4]),
-        ],
+                        cardapio.vegetariano == 1 ? "Vegetariano" : "Comum"),
+                  );
+                },
+                body: MyListView(cardapio: cardapio)))
+            .toList(),
         expansionCallback: (i, isExpanded) => setState(() {
               for (var j = 0; j <= 4; j++) {
                 if (i == j) {
@@ -254,16 +148,13 @@ class ExpansionWidgetCafe extends StatelessWidget {
 }
 
 class CustomFutureBuilder<T> extends StatelessWidget {
-  final int periodo;
-  final int vegetariano;
-  final Future<List<Cardapio>> future;
+  final Future<Cardapio> future;
 
-  CustomFutureBuilder(
-      {required this.future, required this.periodo, required this.vegetariano});
+  CustomFutureBuilder({required this.future});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Cardapio>>(
+    return FutureBuilder<Cardapio>(
         future: future,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -272,38 +163,7 @@ class CustomFutureBuilder<T> extends StatelessWidget {
               child: MyProgressIndicator(),
             );
           } else if (snapshot.hasData) {
-            final list = snapshot.data!;
-            if (list.isEmpty) {
-              return Text('Erro ao carregar cardápio!', style: style);
-            } else {
-              var cardapio = null;
-              for (var item in list) {
-                if (item.periodo == periodo &&
-                    item.vegetariano == vegetariano) {
-                  cardapio = item;
-                }
-              }
-              if (cardapio != null) {
-                return MyListView(cardapio: cardapio);
-              } else {
-                return Text(
-                  'Cardápio indisponível!',
-                  style: style,
-                );
-              }
-            }
-          } else if (snapshot.hasError) {
-            if (snapshot.error is HttpException) {
-              return Text(
-                (snapshot.error as HttpException).message,
-                style: style,
-              );
-            } else {
-              return Text(
-                'Erro ao carregar cardápio!',
-                style: style,
-              );
-            }
+            return MyListView(cardapio: snapshot.data!);
           } else {
             return const Center(
               heightFactor: 2,
@@ -315,11 +175,13 @@ class CustomFutureBuilder<T> extends StatelessWidget {
 }
 
 class MyListView extends StatelessWidget {
-  final cardapio;
+  final Cardapio cardapio;
   MyListView({required this.cardapio});
 
   @override
   Widget build(BuildContext context) {
+    print("fonfi3");
+    print(cardapio);
     if (cardapio.periodo == 1) {
       if (cardapio.vegetariano == 0) {
         return ListView(shrinkWrap: true, children: [

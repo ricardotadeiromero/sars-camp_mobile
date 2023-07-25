@@ -7,6 +7,28 @@ import 'package:flutter/material.dart';
 import '../model/cardapio.dart';
 import '../connection/connection.dart';
 
+int qntDias(List<dynamic> list) {
+  int count = 0;
+  for (var dia in list) {
+    if (dia != null && dia != "feriado") {
+      count++;
+    }
+  }
+  return count;
+}
+
+List<Cardapio> filtraDias(List<dynamic> list) {
+  List<Cardapio> filtrada = [];
+  for (var dia in list) {
+    if (dia != null && dia != "feriado") {
+      filtrada.add(Cardapio.fromMap(dia));
+    }
+  }
+  print("foronfon");
+  print(filtrada);
+  return filtrada;
+}
+
 class CardapioPage extends StatefulWidget {
   _CardapioPage createState() => _CardapioPage();
 }
@@ -18,6 +40,7 @@ class _CardapioPage extends State<CardapioPage>
   var _indice = 0;
   late TabController _controller;
   late List<bool> verificaFeriado;
+  late Future future;
   DateTime monday = DiaDaSemana.obterData(DateTime.monday);
   DateTime tuesday = DiaDaSemana.obterData(DateTime.tuesday);
   DateTime wednesday = DiaDaSemana.obterData(DateTime.wednesday);
@@ -44,27 +67,6 @@ class _CardapioPage extends State<CardapioPage>
 
   @override
   void initState() {
-    bodyPage = [
-
-      SingleChildScrollView(
-        child: CardapioBodyPage(selectedDayWeek: monday),
-      ),
-      SingleChildScrollView(
-        child: CardapioBodyPage(selectedDayWeek: tuesday),
-      ),
-      SingleChildScrollView(
-        child: CardapioBodyPage(selectedDayWeek: wednesday),
-      ),
-      SingleChildScrollView(
-        child: CardapioBodyPage(selectedDayWeek: thursday),
-      ),
-      SingleChildScrollView(
-        child: CardapioBodyPage(selectedDayWeek: friday),
-      ),
-      
-    ];
-    _controller = TabController(
-        length: 5, vsync: this, initialIndex: DiaDaSemana.numberWeek());
     selectedDay = DateTime.now();
     _indice = DiaDaSemana.numberWeek();
     print(thursday);
@@ -121,56 +123,72 @@ class _CardapioPage extends State<CardapioPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: MyAppBar(
-          shouldPopOnLogoPressed: true,
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(48),
-            child: TabBar(
-              controller: _controller,
-              isScrollable: false,
-              indicatorColor: const Color.fromARGB(255, 15, 142, 147),
-              tabs: [
-                MyTab(date: monday),
-                MyTab(date: tuesday),
-                MyTab(date: wednesday),
-                MyTab(date: thursday),
-                MyTab(date: friday),
-              ],
-            ),
-          ),
-        ),
-        body: 
-        Background(
-          components: Container(
-            alignment: AlignmentDirectional.topStart,
-            child: TabBarView(
-              //physics: NeverScrollableScrollPhysics(),
-              controller: _controller,
-              children: bodyPage,
-            ),
-          ),
-          )
-          
-        );
+    return FutureBuilder(
+        future: Connection.getCardapio(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              heightFactor: 2,
+              child: MyProgressIndicator(),
+            );
+          } else if (snapshot.hasData) {
+            final lista = snapshot.data!;
+            final listaFiltrada = filtraDias(lista);
+            _controller = TabController(
+                length: 5, vsync: this, initialIndex: DiaDaSemana.numberWeek());
+            return Scaffold(
+                appBar: MyAppBar(
+                  shouldPopOnLogoPressed: true,
+                  bottom: PreferredSize(
+                      preferredSize: const Size.fromHeight(48),
+                      child: TabBar(
+                        controller: _controller,
+                        isScrollable: false,
+                        indicatorColor: const Color.fromARGB(255, 15, 142, 147),
+                        tabs: [
+                          MyTab(date: monday),
+                          MyTab(date: tuesday),
+                          MyTab(date: wednesday),
+                          MyTab(date: thursday),
+                          MyTab(date: friday),
+                        ],
+                      )),
+                ),
+                body: Background(
+                  components: Container(
+                      alignment: AlignmentDirectional.topStart,
+                      child: TabBarView(
+                        //physics: NeverScrollableScrollPhysics(),
+                        controller: _controller,
+                        children: lista
+                            .map((res) => CardapioBodyPage(req: res))
+                            .toList(),
+                      )),
+                ));
+          } else {
+            return const MyProgressIndicator();
+          }
+        });
   }
 }
 
 class CardapioBodyPage extends StatelessWidget {
-  late Future<List<Cardapio>> future;
-  late DateTime selectedDayWeek;
-
-  CardapioBodyPage({Key? key, required this.selectedDayWeek})
-      : super(key: key) {
-    var selectedDay = selectedDayWeek;
-    future =
-        Connection.getCardapio(DateFormat("yyyy-MM-dd").format(selectedDay));
-  }
+  dynamic req;
+  CardapioBodyPage({Key? key, required this.req}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [MyExpansionPanel(future: future)],
-    );
+    if (req == "feriado") {
+      return Text("Feriado");
+    }
+    if (req != null) {
+      return SingleChildScrollView(
+        child: MyExpansionPanel(
+            cardapios: req.map((cardapio) {
+          return Cardapio.fromMap(cardapio);
+        }).toList()),
+      );
+    }
+    return Text("Cardápio indisponível");
   }
 }

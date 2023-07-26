@@ -1,5 +1,5 @@
 import 'package:tcc_telas/pages/Componentes/CardapioPage.dart';
-import 'package:tcc_telas/pages/Componentes/background.dart';
+import 'package:tcc_telas/pages/Componentes/Background.dart';
 import 'dart:core';
 import '../controller/date_controller.dart';
 import 'package:intl/intl.dart';

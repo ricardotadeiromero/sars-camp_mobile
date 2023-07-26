@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../../connection/connection.dart';
 import '../../controller/date_controller.dart';
 import '../../model/Cardapio.dart';
-import 'background.dart';
+import 'Background.dart';
 
 const TextStyle style =
     TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);

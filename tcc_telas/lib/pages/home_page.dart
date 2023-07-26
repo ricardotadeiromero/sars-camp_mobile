@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc_telas/pages/cardapio_page.dart';
 import 'package:tcc_telas/pages/saldo_page.dart';
-import 'Componentes/customCard.dart';
-import 'Componentes/background.dart';
+import 'Componentes/CustomCard.dart';
+import 'Componentes/Background.dart';
 
 class HomePage extends StatelessWidget {
   @override

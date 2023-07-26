@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tcc_telas/connection/connection.dart';
-import 'componentes/background.dart';
+import 'Componentes/Background.dart';
 import 'Componentes/saldoPage.dart';
 
 class SaldoPage extends StatefulWidget {
@@ -115,7 +115,7 @@ class _SaldoContainerState extends State<SaldoContainer> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         setState(() {
-                          _future = Connection.getSaldo2(
+                          _future = Connection.getSaldo(
                               _raController.text, _senhaController.text);
                         });
                         showDialog(

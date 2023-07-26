@@ -4,7 +4,7 @@ import 'dart:core';
 import '../controller/date_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import '../model/cardapio.dart';
+import '../model/Cardapio.dart';
 import '../connection/connection.dart';
 
 int qntDias(List<dynamic> list) {
@@ -17,11 +17,11 @@ int qntDias(List<dynamic> list) {
   return count;
 }
 
-List<Cardapio> filtraDias(List<dynamic> list) {
-  List<Cardapio> filtrada = [];
+List<dynamic> filtraDias(List<dynamic> list) {
+  List<dynamic> filtrada = [];
   for (var dia in list) {
     if (dia != null && dia != "feriado") {
-      filtrada.add(Cardapio.fromMap(dia));
+      filtrada.add(dia);
     }
   }
   print("foronfon");
@@ -67,10 +67,6 @@ class _CardapioPage extends State<CardapioPage>
 
   @override
   void initState() {
-    selectedDay = DateTime.now();
-    _indice = DiaDaSemana.numberWeek();
-    print(thursday);
-    fon();
     super.initState();
   }
 
@@ -127,15 +123,14 @@ class _CardapioPage extends State<CardapioPage>
         future: Connection.getCardapio(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              heightFactor: 2,
-              child: MyProgressIndicator(),
+            return LoadingPage(
+              type: true,
             );
           } else if (snapshot.hasData) {
             final lista = snapshot.data!;
             final listaFiltrada = filtraDias(lista);
-            _controller = TabController(
-                length: 5, vsync: this, initialIndex: DiaDaSemana.numberWeek());
+            _controller =
+                TabController(length: listaFiltrada.length, vsync: this);
             return Scaffold(
                 appBar: MyAppBar(
                   shouldPopOnLogoPressed: true,
@@ -145,13 +140,12 @@ class _CardapioPage extends State<CardapioPage>
                         controller: _controller,
                         isScrollable: false,
                         indicatorColor: const Color.fromARGB(255, 15, 142, 147),
-                        tabs: [
-                          MyTab(date: monday),
-                          MyTab(date: tuesday),
-                          MyTab(date: wednesday),
-                          MyTab(date: thursday),
-                          MyTab(date: friday),
-                        ],
+                        tabs: listaFiltrada.map((e) {
+                          var car = (e as List)
+                              .map((fon) => Cardapio.fromMap(fon))
+                              .toList();
+                          return MyTab(date: car[0].data);
+                        }).toList(),
                       )),
                 ),
                 body: Background(
@@ -160,13 +154,13 @@ class _CardapioPage extends State<CardapioPage>
                       child: TabBarView(
                         //physics: NeverScrollableScrollPhysics(),
                         controller: _controller,
-                        children: lista
+                        children: listaFiltrada
                             .map((res) => CardapioBodyPage(req: res))
                             .toList(),
                       )),
                 ));
           } else {
-            return const MyProgressIndicator();
+            return LoadingPage(type: false);
           }
         });
   }

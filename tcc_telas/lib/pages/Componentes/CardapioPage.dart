@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../connection/connection.dart';
 import '../../controller/date_controller.dart';
-import '../../model/cardapio.dart';
+import '../../model/Cardapio.dart';
 import 'background.dart';
 
 const TextStyle style =
@@ -59,37 +59,81 @@ class MyExpansionPanel extends StatefulWidget {
   State<MyExpansionPanel> createState() => _MyExpansionPanelState();
 }
 
-class _MyExpansionPanelState extends State<MyExpansionPanel> {
-  final List<bool> _isExpanded = [false, false, true, false, false];
+class LoadingPage extends StatelessWidget {
+  bool type;
+  LoadingPage({required this.type});
+
   @override
   Widget build(BuildContext context) {
-    print("fonfi2");
-    print(widget.cardapios);
+    return Container(
+      color: myRed,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 250, child: Image.asset('image/cardapio.png')),
+            SizedBox(
+              height: 10,
+            ),
+            type
+                ? MyProgressIndicator()
+                : Text(
+                    'Cardápios indisponíveis!',
+                    style: style,
+                  )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MyExpansionPanelState extends State<MyExpansionPanel> {
+  late List<bool> _isExpanded;
+
+  @override
+  void initState() {
+    super.initState();
+    // Inicialize _isExpanded com o tamanho correto e defina todos os valores como false.
+    _isExpanded = List.filled(widget.cardapios.length, false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return ExpansionPanelList(
-        animationDuration: Duration(seconds: 1),
-        elevation: 0,
-        expandedHeaderPadding: EdgeInsets.zero,
-        children: widget.cardapios
-            .map((cardapio) => ExpansionPanel(
-                backgroundColor: myGreen,
-                isExpanded: true,
-                headerBuilder: (context, isExpanded) {
-                  return ListTile(
-                    title: Text(cardapio.periodo == 1 ? "Janta" : "Almoço"),
-                    subtitle: Text(
-                        cardapio.vegetariano == 1 ? "Vegetariano" : "Comum"),
-                  );
-                },
-                body: MyListView(cardapio: cardapio)))
-            .toList(),
-        expansionCallback: (i, isExpanded) => setState(() {
-              for (var j = 0; j <= 4; j++) {
-                if (i == j) {
-                  _isExpanded[j] = !isExpanded;
-                } else
-                  _isExpanded[j] = false;
-              }
-            }));
+      animationDuration: Duration(seconds: 1),
+      elevation: 0,
+      expandedHeaderPadding: EdgeInsets.zero,
+      children: widget.cardapios.asMap().entries.map((entry) {
+        int index = entry.key;
+        dynamic cardapio = entry.value;
+        return ExpansionPanel(
+          isExpanded: _isExpanded[index],
+          canTapOnHeader: true,
+          backgroundColor:
+              _isExpanded[index] ? widget.backgroundColor : Colors.transparent,
+          headerBuilder: (context, isExpanded) {
+            return ListTile(
+              iconColor: _isExpanded[index] ? widget.iconColor : null,
+              leading:
+                  Icon(cardapio.periodo == 1 ? Icons.nightlight : Icons.sunny),
+              title: Text(cardapio.periodo == 1 ? "Janta" : "Almoço"),
+              subtitle:
+                  Text(cardapio.vegetariano == 1 ? "Vegetariano" : "Comum"),
+            );
+          },
+          body: MyListView(cardapio: cardapio),
+        );
+      }).toList(),
+      expansionCallback: (i, isExpanded) {
+        setState(() {
+          for (var j = 0; j < _isExpanded.length; j++) {
+            _isExpanded[j] = j == i ? !isExpanded : false;
+          }
+        });
+      },
+    );
   }
 }
 

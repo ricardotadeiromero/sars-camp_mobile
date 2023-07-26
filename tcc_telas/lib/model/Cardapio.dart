@@ -1,4 +1,5 @@
 class Cardapio {
+  DateTime data;
   String principal;
   String guarnicao;
   String salada;
@@ -8,7 +9,8 @@ class Cardapio {
   int vegetariano;
 
   Cardapio(
-      {required this.principal,
+      {required this.data,
+      required this.principal,
       required this.guarnicao,
       required this.salada,
       required this.sobremesa,
@@ -17,8 +19,8 @@ class Cardapio {
       required this.vegetariano});
 
   factory Cardapio.fromMap(dynamic map) {
-    print(map);
     return Cardapio(
+        data: DateTime.parse(map["data"]),
         principal: map["principal"] ?? "",
         guarnicao: map["guarnicao"] ?? "",
         salada: map["salada"] ?? "",

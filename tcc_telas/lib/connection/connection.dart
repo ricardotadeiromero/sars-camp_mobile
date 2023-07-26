@@ -12,11 +12,12 @@ class Connection {
   }
 
   static Future<List<dynamic>> getCardapio() async {
-    var url = Uri.parse("http://192.168.15.7:3000/cardapio/semana/23");
+    var url = Uri.parse("http://192.168.15.7:3000/cardapio/semana/21");
     final response = await http.get(url);
     print("fon");
     print(response);
     if (response.statusCode == 200) {
+      await Future.delayed(Duration(seconds: 1));
       final cardapios = jsonDecode(response.body);
       print(cardapios);
       print(cardapios.runtimeType);

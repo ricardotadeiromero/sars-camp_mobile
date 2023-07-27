@@ -1,17 +1,14 @@
-import 'dart:ui';
-import 'package:tcc_telas/teste.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tcc_telas/pages/cardapio_page.dart';
-import 'package:tcc_telas/pages/saldo_page.dart';
 import 'Componentes/CustomCard.dart';
 import 'Componentes/Background.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MyAppBar(shouldPopOnLogoPressed: false),
+        appBar: const MyAppBar(shouldPopOnLogoPressed: false),
         body: Background(
           components: Column(
             mainAxisAlignment: MainAxisAlignment.center,

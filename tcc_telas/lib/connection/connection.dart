@@ -14,7 +14,7 @@ class Connection {
   }
 
   static Future<List<dynamic>> getCardapio() async {
-    var url = Uri.parse("$api/cardapio/semana/23");
+    var url = Uri.parse("$api/cardapio/ano");
     final response = await http.get(url);
     if (kDebugMode) {
       print("fon");
@@ -57,7 +57,7 @@ class Connection {
     return "R\$ ${parsed['saldo']}";
   }
 
-  static Future<bool> getFeriado(DateTime data) async {
+  static Future<bool> isFeriado(DateTime data) async {
     var date = DateFormat("yyyy-MM-dd").format(data);
     var url = Uri.parse("$api/date/feriado/$date");
     final response = await http.get(url);

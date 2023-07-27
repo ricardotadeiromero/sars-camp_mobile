@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Cardapio {
   DateTime data;
   String principal;
@@ -19,6 +21,12 @@ class Cardapio {
       required this.vegetariano});
 
   factory Cardapio.fromMap(dynamic map) {
+    if (kDebugMode) {
+      print("fromMap");
+      print(map);
+      print(map.runtimeType);
+    }
+
     return Cardapio(
         data: DateTime.parse(map["data"]),
         principal: map["principal"] ?? "",

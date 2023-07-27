@@ -1,5 +1,3 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,9 +10,9 @@ abrirUrl() async {
   }
 }
 
-Color myGreen = Color(0xFF0A6066);
-Color myRed = Color(0xFFA12E2F);
-Color myLightGreen = Color(0xFF007F82);
+Color myGreen = const Color(0xFF0A6066);
+Color myRed = const Color(0xFFA12E2F);
+Color myLightGreen = const Color(0xFF007F82);
 
 class MyProgressIndicator extends StatelessWidget {
   const MyProgressIndicator({super.key});
@@ -28,8 +26,8 @@ class MyProgressIndicator extends StatelessWidget {
 }
 
 class Background extends StatelessWidget {
-  Widget? components;
-  Background({super.key, this.components});
+  final Widget? components;
+  const Background({super.key, this.components});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +41,7 @@ class Background extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 300,
                     child: Opacity(
                       opacity: 0.12,
@@ -63,7 +61,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   final bool shouldPopOnLogoPressed;
 
-  const MyAppBar({this.bottom, this.shouldPopOnLogoPressed = false});
+  const MyAppBar({super.key, this.bottom, this.shouldPopOnLogoPressed = false});
 
   @override
   Size get preferredSize =>
@@ -196,7 +194,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                           overlayColor:
                               MaterialStateProperty.all<Color>(myGreen),
                         ),
-                        child: Text('OK'),
+                        child: const Text('OK'),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },

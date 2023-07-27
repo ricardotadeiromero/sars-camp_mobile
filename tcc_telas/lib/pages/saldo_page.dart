@@ -17,12 +17,12 @@ class _SaldoPageState extends State<SaldoPage> {
     return Scaffold(
         appBar: const MyAppBar(shouldPopOnLogoPressed: true),
         body: Background(
-            components: (Container(
+            components: (SizedBox(
                 height: MediaQuery.of(context).size.height -
                     MediaQuery.of(context).viewInsets.bottom,
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     TitleSaldoPage(),
                     SaldoContainer(),
                   ],
@@ -39,22 +39,22 @@ class SaldoContainer extends StatefulWidget {
 
 class _SaldoContainerState extends State<SaldoContainer> {
   final style = const TextStyle(color: Colors.white, fontSize: 18);
-  final styleSaldo = TextStyle(color: Colors.white, fontSize: 20);
+  final styleSaldo = const TextStyle(color: Colors.white, fontSize: 20);
   final _formKey = GlobalKey<FormState>();
   final _raController = TextEditingController();
   final _senhaController = TextEditingController();
   late Future<String> _future;
-  bool _raObrigatorio = false;
-  final Color _darkRed = Color.fromARGB(255, 131, 33, 35);
-  final Color _myRed = Color(0xFFA12E2F);
-  final Color _lightRed = Color(0xFFD42A2A);
-  final Color _colorButton = Color(0xFF007F82);
-  final Color _inputColor = Color(0xFF0A6066);
+  // bool _raObrigatorio = false;
+  // final Color _darkRed = Color.fromARGB(255, 131, 33, 35);
+  final Color _myRed = const Color(0xFFA12E2F);
+  // final Color _lightRed = Color(0xFFD42A2A);
+  final Color _colorButton = const Color(0xFF007F82);
+  final Color _inputColor = const Color(0xFF0A6066);
   @override
   Widget build(BuildContext context) {
     return MainContainerSaldo(
         input: Padding(
-            padding: EdgeInsets.only(top: 20, left: 15, right: 15),
+            padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
             child: Form(
               key: _formKey,
               child: Column(children: [
@@ -108,7 +108,7 @@ class _SaldoContainerState extends State<SaldoContainer> {
                     hintText: 'Senha',
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Align(
                   alignment: Alignment.center,
                   child: ElevatedButton(
@@ -123,7 +123,7 @@ class _SaldoContainerState extends State<SaldoContainer> {
                             barrierDismissible: false,
                             builder: (context) {
                               return AlertDialog(
-                                backgroundColor: Color(0xFFA12E2F),
+                                backgroundColor: const Color(0xFFA12E2F),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
@@ -159,16 +159,17 @@ class _SaldoContainerState extends State<SaldoContainer> {
                                                   ),
                                                 );
                                               } else if (snapshot.hasData) {
-                                                final result = snapshot.data!;
+                                                final result = snapshot.data;
                                                 if (result == null) {
                                                   return Text(
                                                     'O seu saldo é $result',
                                                     style: style,
                                                   );
-                                                } else
+                                                } else {
                                                   return Text(
                                                       'O seu saldo é: $result',
                                                       style: styleSaldo);
+                                                }
                                               } else if (snapshot.hasError) {
                                                 if (snapshot.error
                                                     is HttpException) {
@@ -198,25 +199,25 @@ class _SaldoContainerState extends State<SaldoContainer> {
                                 ),
                                 actions: [
                                   ElevatedButton(
-                                    child: Text('OK'),
                                     style: ElevatedButton.styleFrom(
-                                      primary: _colorButton,
+                                      backgroundColor: _colorButton,
                                     ),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
+                                    child: const Text('OK'),
                                   )
                                 ],
                               );
                             });
                       }
                     },
-                    child: Text('Consultar'),
                     style: ElevatedButton.styleFrom(
-                      primary: _myRed,
+                      backgroundColor: _myRed,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                     ),
+                    child: const Text('Consultar'),
                   ),
                 )
               ]),

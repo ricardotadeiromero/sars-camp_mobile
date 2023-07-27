@@ -20,9 +20,9 @@ class _SaldoPageState extends State<SaldoPage> {
             components: (SizedBox(
                 height: MediaQuery.of(context).size.height -
                     MediaQuery.of(context).viewInsets.bottom,
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     TitleSaldoPage(),
                     SaldoContainer(),
                   ],

@@ -29,13 +29,28 @@ List<List<Cardapio>> filtraDias(List<dynamic> list) {
       filtrada.add(cardapiosDia);
     }
   }
-
   if (kDebugMode) {
     print("foronfon");
     print(filtrada);
   }
 
   return filtrada;
+}
+
+int numberWeek(List<List<Cardapio>> list, int dayWeek) {
+  //calculo do initial index;
+  int mday = 0;
+  for (var card in list) {
+    print(card[0].data.weekday);
+    if (card[0].data.weekday == dayWeek) {
+      mday = list.indexOf(card);
+    } else if (card[0].data.weekday > dayWeek) {
+      mday = list.indexOf(card);
+    } else if (list.indexOf(card) > mday) {
+      mday = list.indexOf(card);
+    }
+  }
+  return mday;
 }
 
 class CardapioPage extends StatefulWidget {
@@ -66,8 +81,11 @@ class _CardapioPage extends State<CardapioPage>
           } else if (snapshot.hasData) {
             final lista = snapshot.data!;
             final listaFiltrada = filtraDias(lista);
-            _controller =
-                TabController(length: listaFiltrada.length, vsync: this);
+            final initial = numberWeek(listaFiltrada, DiaDaSemana.numberWeek());
+            _controller = TabController(
+                length: listaFiltrada.length,
+                vsync: this,
+                initialIndex: initial);
             return Scaffold(
                 appBar: MyAppBar(
                   shouldPopOnLogoPressed: true,

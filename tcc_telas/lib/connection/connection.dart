@@ -1,67 +1,72 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
-import '../model/cardapio.dart';
 import 'package:http/http.dart' as http;
+
+const api = "http://192.168.1.236:3000";
 
 class Connection {
   static void startApi() async {
-    var url = Uri.parse("https://sars-camp.onrender.com");
-    final response = await http.get(url);
+    var url = Uri.parse(api);
+    await http.get(url);
   }
 
   static Future<List<dynamic>> getCardapio() async {
-    var url = Uri.parse("http://192.168.15.7:3000/cardapio/semana/21");
+    var url = Uri.parse("$api/cardapio/ano");
     final response = await http.get(url);
-    print("fon");
-    print(response);
+    if (kDebugMode) {
+      print("fon");
+      print(response);
+    }
     if (response.statusCode == 200) {
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       final cardapios = jsonDecode(response.body);
-      print(cardapios);
-      print(cardapios.runtimeType);
+      if (kDebugMode) {
+        print(cardapios);
+        print(cardapios.runtimeType);
+      }
       return cardapios;
     } else if (response.statusCode == 404) {
-      throw HttpException('Cardápio indisponível!');
-    } else
-      throw HttpException('Falha ao carregar cardápio');
-  }
-
-  static Future<String> getSaldo2(String ra, String senha) async {
-    var url = Uri.parse("http://192.168.15.7:3000/saldo");
-    final body = jsonEncode(<String, String>{"ra": ra, "senha": senha});
-    print(body);
-    final response = await http.post(url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: body);
-    if (response.statusCode == 403) {
-      throw const HttpException('RA ou senha inválidos!');
+      throw const HttpException('Cardápio indisponível!');
     } else {
-      var res = jsonDecode(response.body);
-      return 'R\$' + res["saldo"].toString();
+      throw const HttpException('Falha ao carregar cardápio');
     }
   }
 
   static Future<String> getSaldo(String ra, String senha) async {
-    var url = Uri.parse("http://192.168.15.7/saldo/${ra}/${senha}");
+    var url = Uri.parse("$api/saldo");
+    final encodedBody = json.encode({"ra": ra, "senha": senha});
 
-    final response = await http.get(url, headers: <String, String>{
-      "Content-Type": "application/json;charset=UTF-8"
-    });
+    final response = await http.post(url,
+        headers: {"Content-Type": "application/json"}, body: encodedBody);
 
-    var res = jsonDecode(response.body);
+    if (kDebugMode) {
+      print("Requisição de Saldo");
+      print(encodedBody);
+      print(response.body);
+      print(response.statusCode);
+    }
 
-    return res[0]["Saldo"].toString();
+    if (response.statusCode == 404 || response.statusCode == 401) {
+      throw HttpException(response.body);
+    }
+
+    final parsed = jsonDecode(response.body);
+    return "R\$ ${parsed['saldo']}";
   }
 
-  static Future<bool> getFeriado(DateTime data) async {
+  static Future<bool> isFeriado(DateTime data) async {
     var date = DateFormat("yyyy-MM-dd").format(data);
-    var url = Uri.parse("http://192.168.15.7:3000/date/dia/${date}");
-
+    var url = Uri.parse("$api/date/feriado/$date");
     final response = await http.get(url);
+
+    if (kDebugMode) {
+      print(url);
+      print(response.body);
+    }
+
     var res = jsonDecode(response.body) as bool;
     return res;
   }

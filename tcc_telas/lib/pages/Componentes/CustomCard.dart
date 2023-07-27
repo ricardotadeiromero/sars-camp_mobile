@@ -7,7 +7,8 @@ class CustomCard extends StatelessWidget {
   final double size;
 
   const CustomCard(
-      {required this.imageAsset,
+      {super.key,
+      required this.imageAsset,
       required this.title,
       required this.onTap,
       required this.size});

@@ -1,11 +1,8 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../connection/connection.dart';
-import '../../controller/date_controller.dart';
 import '../../model/Cardapio.dart';
-import 'background.dart';
+import 'Background.dart';
 
 const TextStyle style =
     TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);
@@ -16,69 +13,26 @@ const TextStyle style2 = TextStyle(
 const TextStyle style3 = TextStyle(color: Color.fromARGB(157, 255, 255, 255));
 Color textColor = const Color.fromARGB(159, 255, 255, 255);
 
-class ExpansionWidget extends StatelessWidget {
-  Color iconColor = Color.fromARGB(159, 255, 255, 255);
-  Color backgroundColor = Color.fromARGB(255, 193, 54, 57);
-  Icon leadingIcon;
-  String titleText;
-  String subtitleText;
-  Widget future;
-
-  ExpansionWidget({
-    required this.leadingIcon,
-    required this.titleText,
-    required this.subtitleText,
-    required this.future,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ExpansionTile(
-      iconColor: iconColor,
-      textColor: textColor,
-      backgroundColor: backgroundColor,
-      leading: leadingIcon,
-      title: Text(
-        titleText,
-        style: style,
-      ),
-      subtitle: Text(subtitleText),
-      children: [future],
-    );
-  }
-}
-
-class MyExpansionPanel extends StatefulWidget {
-  Color? iconColor = Color.fromARGB(159, 255, 255, 255);
-  Color backgroundColor = Color.fromARGB(255, 193, 54, 57);
-  final List<dynamic> cardapios;
-
-  MyExpansionPanel({super.key, required this.cardapios});
-
-  @override
-  State<MyExpansionPanel> createState() => _MyExpansionPanelState();
-}
-
 class LoadingPage extends StatelessWidget {
-  bool type;
-  LoadingPage({required this.type});
+  final bool type;
+  const LoadingPage({super.key, required this.type});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: myRed,
-      child: Center(
+    return Scaffold(
+      backgroundColor: myRed,
+      body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 250, child: Image.asset('image/cardapio.png')),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             type
-                ? MyProgressIndicator()
-                : Text(
+                ? const MyProgressIndicator()
+                : const Text(
                     'Cardápios indisponíveis!',
                     style: style,
                   )
@@ -89,43 +43,72 @@ class LoadingPage extends StatelessWidget {
   }
 }
 
-class _MyExpansionPanelState extends State<MyExpansionPanel> {
+/// Uma ExpasionPanelList com um ExpansionPanel para cada Cardapio de um dia.
+class CardapiosDiaPanel extends StatefulWidget {
+  final Color? iconColor = const Color.fromARGB(159, 255, 255, 255);
+  final Color backgroundColor = const Color.fromARGB(255, 193, 54, 57);
+  final List<Cardapio> cardapios;
+
+  const CardapiosDiaPanel({super.key, required this.cardapios});
+
+  @override
+  State<CardapiosDiaPanel> createState() => _CardapiosDiaPanelState();
+}
+
+class _CardapiosDiaPanelState extends State<CardapiosDiaPanel> {
   late List<bool> _isExpanded;
 
   @override
   void initState() {
     super.initState();
     // Inicialize _isExpanded com o tamanho correto e defina todos os valores como false.
-    _isExpanded = List.filled(widget.cardapios.length, false);
+    _isExpanded = List.filled(widget.cardapios.length + 1, false);
   }
 
   @override
   Widget build(BuildContext context) {
+    List<ExpansionPanel> cardapioPanels = [];
+
+    cardapioPanels.add(ExpansionPanel(
+        isExpanded: _isExpanded[0],
+        canTapOnHeader: true,
+        backgroundColor:
+            _isExpanded[0] ? widget.backgroundColor : Colors.transparent,
+        headerBuilder: (context, isExpanded) {
+          return ListTile(
+            iconColor: _isExpanded[0] ? widget.iconColor : null,
+            leading: const Icon(Icons.breakfast_dining),
+            title: const Text("Café da Manhã"),
+          );
+        },
+        body: const MyListViewCafe()));
+
+    cardapioPanels.addAll(widget.cardapios.asMap().entries.map((entry) {
+      int index = entry.key + 1;
+      var cardapio = entry.value;
+      return ExpansionPanel(
+        isExpanded: _isExpanded[index],
+        canTapOnHeader: true,
+        backgroundColor:
+            _isExpanded[index] ? widget.backgroundColor : Colors.transparent,
+        headerBuilder: (context, isExpanded) {
+          return ListTile(
+            iconColor: _isExpanded[index] ? widget.iconColor : null,
+            leading:
+                Icon(cardapio.periodo == 1 ? Icons.nightlight : Icons.sunny),
+            title: Text(cardapio.periodo == 1 ? "Janta" : "Almoço"),
+            subtitle: Text(cardapio.vegetariano == 1 ? "Vegetariano" : "Comum"),
+          );
+        },
+        body: CardapioView(cardapio: cardapio),
+      );
+    }));
+
     return ExpansionPanelList(
-      animationDuration: Duration(seconds: 1),
+      animationDuration: const Duration(seconds: 1),
       elevation: 0,
       expandedHeaderPadding: EdgeInsets.zero,
-      children: widget.cardapios.asMap().entries.map((entry) {
-        int index = entry.key;
-        dynamic cardapio = entry.value;
-        return ExpansionPanel(
-          isExpanded: _isExpanded[index],
-          canTapOnHeader: true,
-          backgroundColor:
-              _isExpanded[index] ? widget.backgroundColor : Colors.transparent,
-          headerBuilder: (context, isExpanded) {
-            return ListTile(
-              iconColor: _isExpanded[index] ? widget.iconColor : null,
-              leading:
-                  Icon(cardapio.periodo == 1 ? Icons.nightlight : Icons.sunny),
-              title: Text(cardapio.periodo == 1 ? "Janta" : "Almoço"),
-              subtitle:
-                  Text(cardapio.vegetariano == 1 ? "Vegetariano" : "Comum"),
-            );
-          },
-          body: MyListView(cardapio: cardapio),
-        );
-      }).toList(),
+      children: cardapioPanels,
       expansionCallback: (i, isExpanded) {
         setState(() {
           for (var j = 0; j < _isExpanded.length; j++) {
@@ -137,39 +120,30 @@ class _MyExpansionPanelState extends State<MyExpansionPanel> {
   }
 }
 
-class MyTab extends StatelessWidget {
-  MyTab({super.key, required this.date});
-  DateTime date;
+/// A Tab da NavBar com os cardápios do dia
+class CardapiosDiaTab extends StatelessWidget {
+  const CardapiosDiaTab({super.key, required this.date});
+  final DateTime date;
+
   @override
   Widget build(BuildContext context) {
     return Tab(
-      child: FutureBuilder<bool>(
-        future: Connection.getFeriado(date),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Text(
-              snapshot.data! ? 'Feriado' : DateFormat("dd/MM").format(date),
-              style: snapshot.data! ? TextStyle(fontSize: 12) : null,
-            );
-          } else if (snapshot.hasError) {
-            return const Text('Erro ao carregar');
-          } else {
-            return const MyProgressIndicator();
-          }
-        },
-      ),
-    );
+        child: Text(
+      DateFormat("dd/MM").format(date),
+      style: const TextStyle(fontSize: 12),
+    ));
   }
 }
 
 class ExpansionWidgetCafe extends StatelessWidget {
-  Color iconColor = Color.fromARGB(159, 255, 255, 255);
-  Color backgroundColor = Color.fromARGB(255, 193, 54, 57);
-  Icon leadingIcon;
-  String titleText;
-  Widget future;
+  final Color iconColor = const Color.fromARGB(159, 255, 255, 255);
+  final Color backgroundColor = const Color.fromARGB(255, 193, 54, 57);
+  final Icon leadingIcon;
+  final String titleText;
+  final Widget future;
 
-  ExpansionWidgetCafe({
+  const ExpansionWidgetCafe({
+    super.key,
     required this.leadingIcon,
     required this.titleText,
     required this.future,
@@ -194,7 +168,7 @@ class ExpansionWidgetCafe extends StatelessWidget {
 class CustomFutureBuilder<T> extends StatelessWidget {
   final Future<Cardapio> future;
 
-  CustomFutureBuilder({required this.future});
+  const CustomFutureBuilder({super.key, required this.future});
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +181,7 @@ class CustomFutureBuilder<T> extends StatelessWidget {
               child: MyProgressIndicator(),
             );
           } else if (snapshot.hasData) {
-            return MyListView(cardapio: snapshot.data!);
+            return CardapioView(cardapio: snapshot.data!);
           } else {
             return const Center(
               heightFactor: 2,
@@ -218,14 +192,17 @@ class CustomFutureBuilder<T> extends StatelessWidget {
   }
 }
 
-class MyListView extends StatelessWidget {
+class CardapioView extends StatelessWidget {
   final Cardapio cardapio;
-  MyListView({required this.cardapio});
+  const CardapioView({super.key, required this.cardapio});
 
   @override
   Widget build(BuildContext context) {
-    print("fonfi3");
-    print(cardapio);
+    if (kDebugMode) {
+      print("fonfi3");
+      print(cardapio);
+    }
+
     if (cardapio.periodo == 1) {
       if (cardapio.vegetariano == 0) {
         return ListView(shrinkWrap: true, children: [
@@ -235,30 +212,30 @@ class MyListView extends StatelessWidget {
               style: style2,
             ),
           ),
-          ListTile(
+          const ListTile(
             leading: Text(
               'Arroz e feijão',
               style: style,
             ),
           ),
           ListTile(
-            leading: Text('Principal: ', style: style),
+            leading: const Text('Principal: ', style: style),
             title: Text(cardapio.principal, style: style2),
           ),
           ListTile(
-            leading: Text('Guarnição: ', style: style),
+            leading: const Text('Guarnição: ', style: style),
             title: Text(cardapio.guarnicao, style: style2),
           ),
           ListTile(
-            leading: Text('Salada: ', style: style),
+            leading: const Text('Salada: ', style: style),
             title: Text(cardapio.salada, style: style2),
           ),
           ListTile(
-            leading: Text('Sobremesa: ', style: style),
+            leading: const Text('Sobremesa: ', style: style),
             title: Text(cardapio.sobremesa, style: style2),
           ),
           ListTile(
-            leading: Text('Suco: ', style: style),
+            leading: const Text('Suco: ', style: style),
             title: Text(cardapio.suco, style: style2),
           )
         ]);
@@ -270,30 +247,30 @@ class MyListView extends StatelessWidget {
               style: style2,
             ),
           ),
-          ListTile(
+          const ListTile(
             leading: Text(
               'Arroz integral e feijão',
               style: style,
             ),
           ),
           ListTile(
-            leading: Text('Principal: ', style: style),
+            leading: const Text('Principal: ', style: style),
             title: Text(cardapio.principal, style: style2),
           ),
           ListTile(
-            leading: Text('Guarnição: ', style: style),
+            leading: const Text('Guarnição: ', style: style),
             title: Text(cardapio.guarnicao, style: style2),
           ),
           ListTile(
-            leading: Text('Salada: ', style: style),
+            leading: const Text('Salada: ', style: style),
             title: Text(cardapio.salada, style: style2),
           ),
           ListTile(
-            leading: Text('Sobremesa: ', style: style),
+            leading: const Text('Sobremesa: ', style: style),
             title: Text(cardapio.sobremesa, style: style2),
           ),
           ListTile(
-            leading: Text('Suco: ', style: style),
+            leading: const Text('Suco: ', style: style),
             title: Text(cardapio.suco, style: style2),
           )
         ]);
@@ -307,30 +284,30 @@ class MyListView extends StatelessWidget {
               style: style2,
             ),
           ),
-          ListTile(
+          const ListTile(
             leading: Text(
               'Arroz e feijão',
               style: style,
             ),
           ),
           ListTile(
-            leading: Text('Principal: ', style: style),
+            leading: const Text('Principal: ', style: style),
             title: Text(cardapio.principal, style: style2),
           ),
           ListTile(
-            leading: Text('Guarnição: ', style: style),
+            leading: const Text('Guarnição: ', style: style),
             title: Text(cardapio.guarnicao, style: style2),
           ),
           ListTile(
-            leading: Text('Salada: ', style: style),
+            leading: const Text('Salada: ', style: style),
             title: Text(cardapio.salada, style: style2),
           ),
           ListTile(
-            leading: Text('Sobremesa: ', style: style),
+            leading: const Text('Sobremesa: ', style: style),
             title: Text(cardapio.sobremesa, style: style2),
           ),
           ListTile(
-            leading: Text('Suco: ', style: style),
+            leading: const Text('Suco: ', style: style),
             title: Text(cardapio.suco, style: style2),
           )
         ]);
@@ -342,30 +319,30 @@ class MyListView extends StatelessWidget {
               style: style2,
             ),
           ),
-          ListTile(
+          const ListTile(
             leading: Text(
               'Arroz integral e feijão',
               style: style,
             ),
           ),
           ListTile(
-            leading: Text('Principal: ', style: style),
+            leading: const Text('Principal: ', style: style),
             title: Text(cardapio.principal, style: style2),
           ),
           ListTile(
-            leading: Text('Guarnição: ', style: style),
+            leading: const Text('Guarnição: ', style: style),
             title: Text(cardapio.guarnicao, style: style2),
           ),
           ListTile(
-            leading: Text('Salada: ', style: style),
+            leading: const Text('Salada: ', style: style),
             title: Text(cardapio.salada, style: style2),
           ),
           ListTile(
-            leading: Text('Sobremesa: ', style: style),
+            leading: const Text('Sobremesa: ', style: style),
             title: Text(cardapio.sobremesa, style: style2),
           ),
           ListTile(
-            leading: Text('Suco: ', style: style),
+            leading: const Text('Suco: ', style: style),
             title: Text(cardapio.suco, style: style2),
           )
         ]);
@@ -375,11 +352,11 @@ class MyListView extends StatelessWidget {
 }
 
 class MyListViewCafe extends StatelessWidget {
-  MyListViewCafe();
+  const MyListViewCafe({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView(shrinkWrap: true, children: [
+    return ListView(shrinkWrap: true, children: const [
       ListTile(
         leading: Text('07:00 - 08:30', style: style2),
       ),

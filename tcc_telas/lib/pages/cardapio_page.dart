@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:tcc_telas/pages/Componentes/CardapioPage.dart';
 import 'package:tcc_telas/pages/Componentes/Background.dart';
@@ -5,6 +6,7 @@ import 'dart:core';
 import '../controller/date_controller.dart';
 import 'package:flutter/material.dart';
 import '../model/Cardapio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../connection/connection.dart';
 
 int qntDias(List<dynamic> list) {
@@ -15,6 +17,23 @@ int qntDias(List<dynamic> list) {
     }
   }
   return count;
+}
+
+Future<List<dynamic>?> cardapio() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  try {
+    final result = await Connection.getCardapio();
+    if (result != null) {
+      await prefs.setString('card', json.encode(result));
+    }
+    return result;
+  } catch (e) {
+    var errorJson = prefs.getString('card');
+    if (errorJson != null) {
+      return json.decode(errorJson);
+    }
+    return null;
+  }
 }
 
 List<List<Cardapio>> filtraDias(List<dynamic> list) {
@@ -37,17 +56,20 @@ List<List<Cardapio>> filtraDias(List<dynamic> list) {
   return filtrada;
 }
 
-int numberWeek(List<List<Cardapio>> list, int dayWeek) {
+int numberWeek(List<List<Cardapio>> list) {
   //calculo do initial index;
   int mday = 0;
   for (var card in list) {
-    print(card[0].data.weekday);
-    if (card[0].data.weekday == dayWeek) {
+    print('fonfifon');
+    print(DateTime.now().day);
+    if (list.indexOf(card) > mday) {
       mday = list.indexOf(card);
-    } else if (card[0].data.weekday > dayWeek) {
-      mday = list.indexOf(card);
-    } else if (list.indexOf(card) > mday) {
-      mday = list.indexOf(card);
+      if (mday > DateTime.now().day) {
+        return list.indexOf(card);
+      }
+      if (card[0].data.day == DateTime.now().day) {
+        return list.indexOf(card);
+      }
     }
   }
   return mday;
@@ -74,14 +96,14 @@ class _CardapioPage extends State<CardapioPage>
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Connection.getCardapio(),
+        future: cardapio(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingPage(type: true);
           } else if (snapshot.hasData) {
             final lista = snapshot.data!;
             final listaFiltrada = filtraDias(lista);
-            final initial = numberWeek(listaFiltrada, DiaDaSemana.numberWeek());
+            final initial = numberWeek(listaFiltrada);
             _controller = TabController(
                 length: listaFiltrada.length,
                 vsync: this,

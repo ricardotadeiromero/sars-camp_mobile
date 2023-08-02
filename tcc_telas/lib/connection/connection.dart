@@ -14,7 +14,7 @@ class Connection {
   }
 
   static Future<List<dynamic>> getCardapio() async {
-    var url = Uri.parse("$api/cardapio/semana");
+    var url = Uri.parse("$api/cardapio/ano");
     final response = await http.get(url);
     if (kDebugMode) {
       print("fon");
@@ -31,7 +31,7 @@ class Connection {
     } else if (response.statusCode == 404) {
       throw const HttpException('Cardápio indisponível!');
     } else {
-      throw const HttpException('Falha ao carregar cardápio');
+      throw Exception('Falha ao carregar cardápio');
     }
   }
 

@@ -64,10 +64,10 @@ int numberWeek(List<List<Cardapio>> list) {
     print(DateTime.now().day);
     if (list.indexOf(card) > mday) {
       mday = list.indexOf(card);
-      if (mday > DateTime.now().day) {
+      if (card[0].data.day > DateTime.now().day && card[0].data.month == DateTime.now().month) {
         return list.indexOf(card);
       }
-      if (card[0].data.day == DateTime.now().day) {
+      if (card[0].data.day == DateTime.now().day && card[0].data.month == DateTime.now().month) {
         return list.indexOf(card);
       }
     }
@@ -96,7 +96,7 @@ class _CardapioPage extends State<CardapioPage>
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: cardapio(),
+        future: Connection.getCardapio(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingPage(type: true);

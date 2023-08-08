@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 import 'package:http/http.dart' as http;
 
-const api = "http://192.168.15.7:3000";
+const api = "http://localhost:3000";
 
 class Connection {
   static void startApi() async {

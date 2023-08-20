@@ -26,7 +26,11 @@ class LoadingPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 250, child: Image.asset('image/cardapio.png')),
+            SizedBox(
+                height: 250,
+                child: Hero(
+                    tag: 'image/cardapio.png',
+                    child: Image.asset('image/cardapio.png'))),
             const SizedBox(
               height: 10,
             ),
@@ -112,7 +116,7 @@ class _CardapiosDiaPanelState extends State<CardapiosDiaPanel> {
       expansionCallback: (i, isExpanded) {
         setState(() {
           for (var j = 0; j < _isExpanded.length; j++) {
-            _isExpanded[j] = j == i ? !isExpanded : false;
+            _isExpanded[j] = j == i ? isExpanded : false;
           }
         });
       },

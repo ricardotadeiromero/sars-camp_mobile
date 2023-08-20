@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 import 'package:http/http.dart' as http;
 
-const api = "http://localhost:3000";
+const api = "http://192.168.15.7:3000";
 
 class Connection {
   static void startApi() async {
@@ -14,7 +14,7 @@ class Connection {
   }
 
   static Future<List<dynamic>> getCardapio() async {
-    var url = Uri.parse("$api/cardapio/ano");
+    var url = Uri.parse("$api/cardapio/semana/23");
     final response = await http.get(url);
     if (kDebugMode) {
       print("fon");

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:tcc_telas/pages/Componentes/CardapioPage.dart';
-import 'package:tcc_telas/pages/Componentes/Background.dart';
+import 'package:tcc_telas/pages/componentes/cardapioPage.dart';
+import 'package:tcc_telas/pages/componentes/background.dart';
 import 'dart:core';
 import '../controller/date_controller.dart';
 import 'package:flutter/material.dart';
@@ -64,10 +64,12 @@ int numberWeek(List<List<Cardapio>> list) {
     print(DateTime.now().day);
     if (list.indexOf(card) > mday) {
       mday = list.indexOf(card);
-      if (card[0].data.day > DateTime.now().day && card[0].data.month == DateTime.now().month) {
+      if (card[0].data.day > DateTime.now().day &&
+          card[0].data.month == DateTime.now().month) {
         return list.indexOf(card);
       }
-      if (card[0].data.day == DateTime.now().day && card[0].data.month == DateTime.now().month) {
+      if (card[0].data.day == DateTime.now().day &&
+          card[0].data.month == DateTime.now().month) {
         return list.indexOf(card);
       }
     }

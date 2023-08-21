@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tcc_telas/pages/a&p_page.dart';
 import 'package:tcc_telas/pages/cardapio_page.dart';
 import 'package:tcc_telas/pages/saldo_page.dart';
 import 'pages/home_page.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const HomePage(),
         '/saldoPage': (context) => const SaldoPage(),
         '/cardapioPage': (context) => const CardapioPage(),
+        '/a&pPage': (context) => const AchaPerdi()
       },
     );
   }

@@ -98,7 +98,7 @@ class _CardapioPage extends State<CardapioPage>
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Connection.getCardapio(),
+        future: cardapio(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingPage(type: true);

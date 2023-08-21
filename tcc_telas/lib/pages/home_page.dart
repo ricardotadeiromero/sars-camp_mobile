@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Componentes/CustomCard.dart';
+import 'Componentes/customCard.dart';
 import 'Componentes/Background.dart';
 
 class HomePage extends StatelessWidget {
@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                 imageAsset: 'image/achados-e-perdidos.png',
                 title: 'Achados & Perdidos',
                 onTap: () {
-                  Navigator.pushNamed(context, '/');
+                  Navigator.pushNamed(context, '/a&pPage');
                 },
               ),
             ],

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-Color _inputColor = Color(0xFF0A6066);
+Color _inputColor = const Color(0xFF0A6066);
 
 class MainContainerSaldo extends StatelessWidget {
-  Widget? input;
-  MainContainerSaldo({super.key, this.input});
+  final Widget? input;
+  const MainContainerSaldo({super.key, this.input});
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,8 @@ class MainContainerSaldo extends StatelessWidget {
 }
 
 class MyTextField extends StatelessWidget {
-  String text;
-  MyTextField({super.key, required this.text});
+  final String text;
+  const MyTextField({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -65,13 +65,13 @@ class TitleSaldoPage extends StatelessWidget {
         child: Row(
       children: [
         Container(
-          margin: EdgeInsets.only(right: 15, top: 10, left: 10),
+          margin: const EdgeInsets.only(right: 15, top: 10, left: 10),
           width: 70,
           child: Image.asset('image/carteira.png'),
         ),
         Container(
-          margin: EdgeInsets.only(top: 30),
-          child: Text(
+          margin: const EdgeInsets.only(top: 30),
+          child: const Text(
             'Consulta do saldo RU',
             style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 22, color: Colors.white),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tcc_telas/pages/cardapio_page.dart';
 import 'package:tcc_telas/pages/saldo_page.dart';
-import 'connection/connection.dart';
 import 'pages/home_page.dart';
 
 void main() {
@@ -17,9 +16,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => HomePage(),
-        '/saldoPage': (context) => SaldoPage(),
-        '/cardapioPage': (context) => CardapioPage(),
+        '/': (context) => const HomePage(),
+        '/saldoPage': (context) => const SaldoPage(),
+        '/cardapioPage': (context) => const CardapioPage(),
       },
     );
   }

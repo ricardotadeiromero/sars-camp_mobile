@@ -19,14 +19,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - run: cd tcc_telas
       - name: Install flutter
         uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           cache: true
       - name: Install dependencies
-        run: flutter pub get
+        run: cd tcc_telas; flutter pub get
       - name: Build
         run: flutter build web --release --base-href "/TCC/"
       - name: Configure GitHub Pages

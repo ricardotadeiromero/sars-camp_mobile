@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: cd tcc_telas; flutter pub get
       - name: Build
-        run: flutter build web --release --base-href "/TCC/"
+        run: cd tcc_telas; flutter build web --release --base-href "/TCC/"
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v3.0.4
       - name: Upload Pages artifact

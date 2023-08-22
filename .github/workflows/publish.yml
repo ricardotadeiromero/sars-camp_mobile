@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - run: cd TCC
+      - run: cd tcc_telas
       - name: Install flutter
         uses: subosito/flutter-action@v2
         with:

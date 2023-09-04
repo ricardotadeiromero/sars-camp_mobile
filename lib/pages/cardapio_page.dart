@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:tcc_telas/pages/componentes/cardapioPage.dart';
-import 'package:tcc_telas/pages/componentes/background.dart';
+import 'package:TCC/pages/componentes/cardapioPage.dart';
+import 'package:TCC/pages/componentes/background.dart';
 import 'dart:core';
 import '../controller/date_controller.dart';
 import 'package:flutter/material.dart';

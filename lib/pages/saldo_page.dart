@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:tcc_telas/connection/connection.dart';
-import 'Componentes/Background.dart';
-import 'Componentes/saldoPage.dart';
+import 'package:TCC/connection/connection.dart';
+import 'componentes/background.dart';
+import 'componentes/saldoPage.dart';
 
 class SaldoPage extends StatefulWidget {
   const SaldoPage({super.key});

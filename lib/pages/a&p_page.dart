@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_telas/pages/Componentes/background.dart';
+import 'package:TCC/pages/componentes/background.dart';
 
 class AchaPerdi extends StatefulWidget {
   const AchaPerdi({super.key});

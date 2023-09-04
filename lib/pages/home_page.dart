@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'Componentes/customCard.dart';
-import 'Componentes/Background.dart';
+import 'componentes/customCard.dart';
+import 'componentes/background.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

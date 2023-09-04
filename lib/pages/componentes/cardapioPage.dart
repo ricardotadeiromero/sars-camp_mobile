@@ -209,147 +209,159 @@ class CardapioView extends StatelessWidget {
 
     if (cardapio.periodo == 1) {
       if (cardapio.vegetariano == 0) {
-        return ListView(shrinkWrap: true, children: [
-          const ListTile(
-            leading: Text(
-              '18:00 - 19:45',
-              style: style2,
-            ),
-          ),
-          const ListTile(
-            leading: Text(
-              'Arroz e feijão',
-              style: style,
-            ),
-          ),
-          ListTile(
-            leading: const Text('Principal: ', style: style),
-            title: Text(cardapio.principal, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Guarnição: ', style: style),
-            title: Text(cardapio.guarnicao, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Salada: ', style: style),
-            title: Text(cardapio.salada, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Sobremesa: ', style: style),
-            title: Text(cardapio.sobremesa, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Suco: ', style: style),
-            title: Text(cardapio.suco, style: style2),
-          )
-        ]);
+        return ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: [
+              const ListTile(
+                leading: Text(
+                  '18:00 - 19:45',
+                  style: style2,
+                ),
+              ),
+              const ListTile(
+                leading: Text(
+                  'Arroz e feijão',
+                  style: style,
+                ),
+              ),
+              ListTile(
+                leading: const Text('Principal: ', style: style),
+                title: Text(cardapio.principal, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Guarnição: ', style: style),
+                title: Text(cardapio.guarnicao, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Salada: ', style: style),
+                title: Text(cardapio.salada, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Sobremesa: ', style: style),
+                title: Text(cardapio.sobremesa, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Suco: ', style: style),
+                title: Text(cardapio.suco, style: style2),
+              )
+            ]);
       } else {
-        return ListView(shrinkWrap: true, children: [
-          const ListTile(
-            leading: Text(
-              '18:00 - 19:45',
-              style: style2,
-            ),
-          ),
-          const ListTile(
-            leading: Text(
-              'Arroz integral e feijão',
-              style: style,
-            ),
-          ),
-          ListTile(
-            leading: const Text('Principal: ', style: style),
-            title: Text(cardapio.principal, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Guarnição: ', style: style),
-            title: Text(cardapio.guarnicao, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Salada: ', style: style),
-            title: Text(cardapio.salada, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Sobremesa: ', style: style),
-            title: Text(cardapio.sobremesa, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Suco: ', style: style),
-            title: Text(cardapio.suco, style: style2),
-          )
-        ]);
+        return ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: [
+              const ListTile(
+                leading: Text(
+                  '18:00 - 19:45',
+                  style: style2,
+                ),
+              ),
+              const ListTile(
+                leading: Text(
+                  'Arroz integral e feijão',
+                  style: style,
+                ),
+              ),
+              ListTile(
+                leading: const Text('Principal: ', style: style),
+                title: Text(cardapio.principal, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Guarnição: ', style: style),
+                title: Text(cardapio.guarnicao, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Salada: ', style: style),
+                title: Text(cardapio.salada, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Sobremesa: ', style: style),
+                title: Text(cardapio.sobremesa, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Suco: ', style: style),
+                title: Text(cardapio.suco, style: style2),
+              )
+            ]);
       }
     } else {
       if (cardapio.vegetariano == 0) {
-        return ListView(shrinkWrap: true, children: [
-          const ListTile(
-            leading: Text(
-              '11:00 - 14:00',
-              style: style2,
-            ),
-          ),
-          const ListTile(
-            leading: Text(
-              'Arroz e feijão',
-              style: style,
-            ),
-          ),
-          ListTile(
-            leading: const Text('Principal: ', style: style),
-            title: Text(cardapio.principal, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Guarnição: ', style: style),
-            title: Text(cardapio.guarnicao, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Salada: ', style: style),
-            title: Text(cardapio.salada, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Sobremesa: ', style: style),
-            title: Text(cardapio.sobremesa, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Suco: ', style: style),
-            title: Text(cardapio.suco, style: style2),
-          )
-        ]);
+        return ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: [
+              const ListTile(
+                leading: Text(
+                  '11:00 - 14:00',
+                  style: style2,
+                ),
+              ),
+              const ListTile(
+                leading: Text(
+                  'Arroz e feijão',
+                  style: style,
+                ),
+              ),
+              ListTile(
+                leading: const Text('Principal: ', style: style),
+                title: Text(cardapio.principal, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Guarnição: ', style: style),
+                title: Text(cardapio.guarnicao, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Salada: ', style: style),
+                title: Text(cardapio.salada, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Sobremesa: ', style: style),
+                title: Text(cardapio.sobremesa, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Suco: ', style: style),
+                title: Text(cardapio.suco, style: style2),
+              )
+            ]);
       } else {
-        return ListView(shrinkWrap: true, children: [
-          const ListTile(
-            leading: Text(
-              '11:00 - 14:00',
-              style: style2,
-            ),
-          ),
-          const ListTile(
-            leading: Text(
-              'Arroz integral e feijão',
-              style: style,
-            ),
-          ),
-          ListTile(
-            leading: const Text('Principal: ', style: style),
-            title: Text(cardapio.principal, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Guarnição: ', style: style),
-            title: Text(cardapio.guarnicao, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Salada: ', style: style),
-            title: Text(cardapio.salada, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Sobremesa: ', style: style),
-            title: Text(cardapio.sobremesa, style: style2),
-          ),
-          ListTile(
-            leading: const Text('Suco: ', style: style),
-            title: Text(cardapio.suco, style: style2),
-          )
-        ]);
+        return ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: [
+              const ListTile(
+                leading: Text(
+                  '11:00 - 14:00',
+                  style: style2,
+                ),
+              ),
+              const ListTile(
+                leading: Text(
+                  'Arroz integral e feijão',
+                  style: style,
+                ),
+              ),
+              ListTile(
+                leading: const Text('Principal: ', style: style),
+                title: Text(cardapio.principal, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Guarnição: ', style: style),
+                title: Text(cardapio.guarnicao, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Salada: ', style: style),
+                title: Text(cardapio.salada, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Sobremesa: ', style: style),
+                title: Text(cardapio.sobremesa, style: style2),
+              ),
+              ListTile(
+                leading: const Text('Suco: ', style: style),
+                title: Text(cardapio.suco, style: style2),
+              )
+            ]);
       }
     }
   }
@@ -360,31 +372,34 @@ class MyListViewCafe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(shrinkWrap: true, children: const [
-      ListTile(
-        leading: Text('07:00 - 08:30', style: style2),
-      ),
-      ListTile(
-        leading: Text('Leite', style: style),
-      ),
-      ListTile(
-        leading: Text('Café', style: style),
-      ),
-      ListTile(
-        leading: Text('Achocolatado', style: style),
-      ),
-      ListTile(
-        leading: Text('Pão Francês', style: style),
-      ),
-      ListTile(
-        leading: Text('Margarina', style: style),
-      ),
-      ListTile(
-        leading: Text('Geléia', style: style),
-      ),
-      ListTile(
-        leading: Text('Fruta', style: style),
-      ),
-    ]);
+    return ListView(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        children: const [
+          ListTile(
+            leading: Text('07:00 - 08:30', style: style2),
+          ),
+          ListTile(
+            leading: Text('Leite', style: style),
+          ),
+          ListTile(
+            leading: Text('Café', style: style),
+          ),
+          ListTile(
+            leading: Text('Achocolatado', style: style),
+          ),
+          ListTile(
+            leading: Text('Pão Francês', style: style),
+          ),
+          ListTile(
+            leading: Text('Margarina', style: style),
+          ),
+          ListTile(
+            leading: Text('Geléia', style: style),
+          ),
+          ListTile(
+            leading: Text('Fruta', style: style),
+          ),
+        ]);
   }
 }

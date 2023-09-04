@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../model/Cardapio.dart';
-import 'Background.dart';
+import 'background.dart';
 
 const TextStyle style =
     TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);

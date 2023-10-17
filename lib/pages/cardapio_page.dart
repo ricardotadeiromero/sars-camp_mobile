@@ -118,7 +118,7 @@ class _CardapioPage extends State<CardapioPage>
                       child: TabBar(
                         controller: _controller,
                         isScrollable: false,
-                        indicatorColor: const Color.fromARGB(255, 15, 142, 147),
+                        indicatorColor: myAquaGreen,
                         tabs: listaFiltrada
                             .map((e) => CardapiosDiaTab(date: e[0].data))
                             .toList(),
@@ -128,7 +128,7 @@ class _CardapioPage extends State<CardapioPage>
                   components: Container(
                       alignment: AlignmentDirectional.topStart,
                       child: TabBarView(
-                        //physics: NeverScrollableScrollPhysics(),
+                        //physics: ClampingScrollPhysics(),
                         controller: _controller,
                         children: listaFiltrada
                             .map((cardapios) =>

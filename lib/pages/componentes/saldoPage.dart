@@ -1,6 +1,5 @@
+import 'package:TCC/pages/componentes/background.dart';
 import 'package:flutter/material.dart';
-
-Color _inputColor = const Color(0xFF0A6066);
 
 class MainContainerSaldo extends StatelessWidget {
   final Widget? input;
@@ -17,11 +16,11 @@ class MainContainerSaldo extends StatelessWidget {
               bottom: MediaQuery.of(context).size.height * 0.02),
           width: MediaQuery.of(context).size.width * 0.7,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: myWhite,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.5),
+                color: myBlack.withOpacity(0.5),
                 spreadRadius: 2,
                 blurRadius: 5,
                 offset: const Offset(0, 3),
@@ -40,16 +39,16 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      cursorColor: _inputColor,
+      cursorColor: myGreen,
       decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide(
                 width: 3,
-                color: _inputColor,
+                color: myGreen,
               )),
           filled: true,
-          fillColor: Colors.grey,
+          fillColor: myFillGrey,
           hintText: text,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5))),
     );

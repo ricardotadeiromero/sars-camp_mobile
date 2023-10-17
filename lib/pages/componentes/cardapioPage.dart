@@ -6,12 +6,13 @@ import 'background.dart';
 
 const TextStyle style =
     TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);
+
 const TextStyle style2 = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 14,
     color: Color.fromARGB(157, 255, 255, 255));
+
 const TextStyle style3 = TextStyle(color: Color.fromARGB(157, 255, 255, 255));
-Color textColor = const Color.fromARGB(159, 255, 255, 255);
 
 class LoadingPage extends StatelessWidget {
   final bool type;
@@ -49,8 +50,8 @@ class LoadingPage extends StatelessWidget {
 
 /// Uma ExpasionPanelList com um ExpansionPanel para cada Cardapio de um dia.
 class CardapiosDiaPanel extends StatefulWidget {
-  final Color? iconColor = const Color.fromARGB(159, 255, 255, 255);
-  final Color backgroundColor = const Color.fromARGB(255, 193, 54, 57);
+  final Color myBackgroundRed = const Color.fromARGB(255, 193, 54, 57);
+  final Color? myIconGray = const Color.fromARGB(159, 255, 255, 255);
   final List<Cardapio> cardapios;
 
   const CardapiosDiaPanel({super.key, required this.cardapios});
@@ -77,10 +78,10 @@ class _CardapiosDiaPanelState extends State<CardapiosDiaPanel> {
         isExpanded: _isExpanded[0],
         canTapOnHeader: true,
         backgroundColor:
-            _isExpanded[0] ? widget.backgroundColor : Colors.transparent,
+            _isExpanded[0] ? widget.myBackgroundRed : myTransparent,
         headerBuilder: (context, isExpanded) {
           return ListTile(
-            iconColor: _isExpanded[0] ? widget.iconColor : null,
+            iconColor: _isExpanded[0] ? widget.myIconGray : null,
             leading: const Icon(Icons.breakfast_dining),
             title: const Text("Café da Manhã"),
           );
@@ -94,10 +95,10 @@ class _CardapiosDiaPanelState extends State<CardapiosDiaPanel> {
         isExpanded: _isExpanded[index],
         canTapOnHeader: true,
         backgroundColor:
-            _isExpanded[index] ? widget.backgroundColor : Colors.transparent,
+            _isExpanded[index] ? widget.myBackgroundRed : myTransparent,
         headerBuilder: (context, isExpanded) {
           return ListTile(
-            iconColor: _isExpanded[index] ? widget.iconColor : null,
+            iconColor: _isExpanded[index] ? widget.myIconGray : null,
             leading:
                 Icon(cardapio.periodo == 1 ? Icons.nightlight : Icons.sunny),
             title: Text(cardapio.periodo == 1 ? "Janta" : "Almoço"),
@@ -140,8 +141,8 @@ class CardapiosDiaTab extends StatelessWidget {
 }
 
 class ExpansionWidgetCafe extends StatelessWidget {
-  final Color iconColor = const Color.fromARGB(159, 255, 255, 255);
-  final Color backgroundColor = const Color.fromARGB(255, 193, 54, 57);
+  final Color myIconExpansionGray = const Color.fromARGB(159, 255, 255, 255);
+  final Color myBackgroundExpansionRed = const Color.fromARGB(255, 193, 54, 57);
   final Icon leadingIcon;
   final String titleText;
   final Widget future;
@@ -156,9 +157,9 @@ class ExpansionWidgetCafe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      iconColor: iconColor,
-      textColor: textColor,
-      backgroundColor: backgroundColor,
+      iconColor: myIconExpansionGray,
+      textColor: myLightGray,
+      backgroundColor: myBackgroundExpansionRed,
       leading: leadingIcon,
       title: Text(
         titleText,

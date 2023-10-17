@@ -44,12 +44,7 @@ class _SaldoContainerState extends State<SaldoContainer> {
   final _raController = TextEditingController();
   final _senhaController = TextEditingController();
   late Future<String> _future;
-  // bool _raObrigatorio = false;
-  // final Color _darkRed = Color.fromARGB(255, 131, 33, 35);
-  final Color _myRed = const Color(0xFFA12E2F);
-  // final Color _lightRed = Color(0xFFD42A2A);
-  final Color _colorButton = const Color(0xFF007F82);
-  final Color _inputColor = const Color(0xFF0A6066);
+
   @override
   Widget build(BuildContext context) {
     return MainContainerSaldo(
@@ -66,19 +61,19 @@ class _SaldoContainerState extends State<SaldoContainer> {
                     }
                     return null;
                   },
-                  cursorColor: _myRed,
+                  cursorColor: myFormRed,
                   decoration: InputDecoration(
                     focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                       width: 2,
-                      color: _myRed,
+                      color: myFormRed,
                     )),
                     errorBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: _inputColor)),
+                        borderSide: BorderSide(color: myInputGreen)),
                     focusedErrorBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: _myRed)),
+                        borderSide: BorderSide(color: myFormRed)),
                     errorStyle: TextStyle(
-                        color: _inputColor, fontWeight: FontWeight.w600),
+                        color: myInputGreen, fontWeight: FontWeight.w600),
                     hintText: 'RA',
                   ),
                 ),
@@ -91,20 +86,20 @@ class _SaldoContainerState extends State<SaldoContainer> {
                     }
                     return null;
                   },
-                  cursorColor: _myRed,
+                  cursorColor: myFormRed,
                   obscureText: true,
                   decoration: InputDecoration(
                     focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                       width: 2,
-                      color: _myRed,
+                      color: myFormRed,
                     )),
                     errorBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: _inputColor)),
+                        borderSide: BorderSide(color: myInputGreen)),
                     focusedErrorBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: _myRed)),
+                        borderSide: BorderSide(color: myFormRed)),
                     errorStyle: TextStyle(
-                        color: _inputColor, fontWeight: FontWeight.w600),
+                        color: myInputGreen, fontWeight: FontWeight.w600),
                     hintText: 'Senha',
                   ),
                 ),
@@ -123,7 +118,7 @@ class _SaldoContainerState extends State<SaldoContainer> {
                             barrierDismissible: false,
                             builder: (context) {
                               return AlertDialog(
-                                backgroundColor: const Color(0xFFA12E2F),
+                                backgroundColor: myFormRed,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
@@ -155,7 +150,7 @@ class _SaldoContainerState extends State<SaldoContainer> {
                                                   heightFactor: 2,
                                                   child:
                                                       CircularProgressIndicator(
-                                                    color: _colorButton,
+                                                    color: myButtonGreen,
                                                   ),
                                                 );
                                               } else if (snapshot.hasData) {
@@ -190,7 +185,7 @@ class _SaldoContainerState extends State<SaldoContainer> {
                                                   heightFactor: 2,
                                                   child:
                                                       CircularProgressIndicator(
-                                                    color: _colorButton,
+                                                    color: myButtonGreen,
                                                   ),
                                                 );
                                               }
@@ -200,7 +195,7 @@ class _SaldoContainerState extends State<SaldoContainer> {
                                 actions: [
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: _colorButton,
+                                      backgroundColor: myButtonGreen,
                                     ),
                                     onPressed: () {
                                       Navigator.of(context).pop();
@@ -213,7 +208,7 @@ class _SaldoContainerState extends State<SaldoContainer> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: _myRed,
+                      backgroundColor: myFormRed,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                     ),

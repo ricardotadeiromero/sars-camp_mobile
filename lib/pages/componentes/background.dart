@@ -10,9 +10,19 @@ abrirUrl() async {
   }
 }
 
-Color myGreen = const Color(0xFF0A6066);
+Color myFillGrey = Colors.grey;
+Color myTransparent = Colors.transparent;
 Color myRed = const Color(0xFFA12E2F);
+Color myWhite = const Color(0xFFFFFFFF);
+Color myBlack = const Color(0xFF000000);
+Color myGreen = const Color(0xFF0A6066);
+Color myFormRed = const Color(0xFFA12E2F);
 Color myLightGreen = const Color(0xFF007F82);
+Color myInputGreen = const Color(0xFF0A6066);
+Color myButtonGreen = const Color(0xFF007F82);
+Color myAquaGreen = const Color.fromARGB(255, 15, 142, 147);
+Color myLightGray = const Color.fromARGB(250, 210, 210, 210);
+Color myShinyGray = const Color.fromARGB(159, 255, 255, 255);
 
 class MyProgressIndicator extends StatelessWidget {
   const MyProgressIndicator({super.key});
@@ -98,7 +108,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      backgroundColor: const Color.fromARGB(255, 210, 210, 210),
+                      backgroundColor: myLightGray,
                       title: const Text(
                         'Deseja avaliar o aplicativo?',
                         textAlign: TextAlign.center,
@@ -110,8 +120,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 MaterialStateProperty.resolveWith<Color>(
                               (Set<MaterialState> states) {
                                 if (states.contains(MaterialState.pressed)) {
-                                  return Colors
-                                      .white; // cor do texto do botão quando pressionado
+                                  return myWhite; // cor do texto do botão quando pressionado
                                 }
                                 return myGreen; // cor do texto do botão quando não pressionado
                               },
@@ -130,8 +139,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 MaterialStateProperty.resolveWith<Color>(
                               (Set<MaterialState> states) {
                                 if (states.contains(MaterialState.pressed)) {
-                                  return Colors
-                                      .white; // cor do texto do botão quando pressionado
+                                  return myWhite; // cor do texto do botão quando pressionado
                                 }
                                 return myGreen; // cor do texto do botão quando não pressionado
                               },
@@ -162,7 +170,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    backgroundColor: const Color.fromARGB(255, 210, 210, 210),
+                    backgroundColor: myLightGray,
                     title: const Text(
                       'SARsCamp',
                       textAlign: TextAlign.center,
@@ -185,8 +193,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                               MaterialStateProperty.resolveWith<Color>(
                             (Set<MaterialState> states) {
                               if (states.contains(MaterialState.pressed)) {
-                                return Colors
-                                    .white; // cor do texto do botão quando pressionado
+                                return myWhite; // cor do texto do botão quando pressionado
                               }
                               return myGreen; // cor do texto do botão quando não pressionado
                             },

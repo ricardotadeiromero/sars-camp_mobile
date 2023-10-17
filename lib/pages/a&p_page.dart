@@ -56,11 +56,11 @@ class _AchaPerdiState extends State<AchaPerdi> {
                   16.0, 32.0, 16.0, 16.0), // Adiciona margens nas bordas
               padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                color: Colors.lightBlueAccent, // Cor de fundo azul claro
+                color: myRed, // Cor de fundo azul claro
                 borderRadius: BorderRadius.circular(10.0), // Borda arredondada
               ),
               child: const Text(
-                'Obs: Horário para retirada de achados e perdidos na vigilância: 8:30 às 17:30 de segunda à sexta-feira Limeira Campus I - SAR/Central de Atendimentos: exceto feriados. 07h30 às 17h30.\n\nLimeira Campus II - SAR/Central de Atendimentos: 07H30 às 16h30.',
+                'OBS: Horário para retirada de achados e perdidos: \nVigilância: 8h30 às 17h30 de segunda à sexta-feira. \nLimeira Campus I - SAR/Central de Atendimentos: 07h às 19h excetio feriados.\nLimeira Campus II - SAR/Central de Atendimentos: 07h às 19h exceto feriados.',
                 style: TextStyle(fontSize: 16.0, color: Colors.white),
               ),
             ),
@@ -72,15 +72,23 @@ class _AchaPerdiState extends State<AchaPerdi> {
               child: TextFormField(
                 onChanged:
                     pesquisar, // Chama a função pesquisar quando o texto da barra de pesquisa é alterado
+                    cursorColor: myGreen,
                 decoration: InputDecoration(
-                  labelText: 'Pesquisar',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(30.0), // Aumenta o raio da borda
-                  ),
+                  hintText: 'Pesquisar',
                   filled: true, // Preenche o fundo da barra de pesquisa
-                  fillColor: Colors.white, // Cor de fundo branca
+                  fillColor: myWhite, // Cor de fundo branca
+                  prefixIcon: Icon(Icons.search, color: myGreen),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: myGreen,
+                      )),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          20.0), // Aumenta o raio da borda
+                      borderSide: BorderSide.none),
+                      
                 ),
                 // Aqui você pode adicionar lógica para tratar a pesquisa
               ),
@@ -96,7 +104,7 @@ class _AchaPerdiState extends State<AchaPerdi> {
                         horizontal: 16.0, vertical: 8.0),
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
-                      color: Colors.white, // Cor de fundo branca
+                      color: myWhite, // Cor de fundo branca
                       borderRadius:
                           BorderRadius.circular(10.0), // Borda arredondada
                     ),

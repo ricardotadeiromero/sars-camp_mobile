@@ -144,14 +144,4 @@ class _CardapioPage extends State<CardapioPage>
 }
 
 /// Tela de cardápios de um dia específico
-class CardapioBodyPage extends StatelessWidget {
-  final List<Cardapio> cardapios;
-  const CardapioBodyPage({Key? key, required this.cardapios}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: CardapiosDiaPanel(cardapios: cardapios),
-    );
-  }
-}

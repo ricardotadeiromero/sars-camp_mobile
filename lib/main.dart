@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:TCC/pages/a&p_page.dart';
-import 'package:TCC/pages/cardapio_page.dart';
+import 'package:TCC/pages/cardapio/cardapio_container.dart';
 import 'package:TCC/pages/saldo_page.dart';
 import 'pages/home_page.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const HomePage(),
         '/saldoPage': (context) => const SaldoPage(),
-        '/cardapioPage': (context) => const CardapioPage(),
+        '/cardapioPage': (context) => CardapioContainer(),
         '/a&pPage': (context) => const AchaPerdi()
       },
     );

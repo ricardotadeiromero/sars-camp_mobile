@@ -37,4 +37,17 @@ class Cardapio {
         periodo: map["periodo"] ?? 0,
         vegetariano: map["vegetariano"] ?? 0);
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "data": data.toIso8601String(),
+      "principal": principal,
+      "guarnicao": guarnicao,
+      "salada": salada,
+      "sobremesa": sobremesa,
+      "suco": suco,
+      "periodo": periodo,
+      "vegetariano": vegetariano,
+    };
+  }
 }

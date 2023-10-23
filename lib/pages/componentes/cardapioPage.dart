@@ -14,6 +14,17 @@ const TextStyle style2 = TextStyle(
 
 const TextStyle style3 = TextStyle(color: Color.fromARGB(157, 255, 255, 255));
 
+class CardapioBodyPage extends StatelessWidget {
+  final List<Cardapio> cardapios;
+  const CardapioBodyPage({Key? key, required this.cardapios}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: CardapiosDiaPanel(cardapios: cardapios),
+    );
+  }
+}
 class LoadingPage extends StatelessWidget {
   final bool type;
   const LoadingPage({super.key, required this.type});

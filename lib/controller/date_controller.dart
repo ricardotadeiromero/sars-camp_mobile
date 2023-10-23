@@ -1,4 +1,6 @@
-class DiaDaSemana {
+import 'package:TCC/model/Cardapio.dart';
+
+class DateController {
   static DateTime obterData(int diaSemana) {
     DateTime now = DateTime.now();
     int diff = diaSemana - now.weekday;
@@ -6,16 +8,24 @@ class DiaDaSemana {
     return DateTime(data.year, data.month, data.day);
   }
 
-  static int numberWeek() {
-    DateTime now = DateTime.now();
-    int weekday = now.weekday - 1;
-
-    if (weekday >= 0 && weekday <= 4) {
-      // dia útil, retorna o número do dia (segunda = 1, terça = 2, etc)
-      return weekday;
-    } else {
-      // final de semana, retorna o número da sexta-feira (6)
-      return DateTime.friday - 1;
+  static int numberWeek(List<List<Cardapio>> list) {
+    //calculo do initial index;
+    int mday = 0;
+    for (var card in list) {
+      print('fonfifon');
+      print(DateTime.now().day);
+      if (list.indexOf(card) > mday) {
+        mday = list.indexOf(card);
+        if (card[0].data.day > DateTime.now().day &&
+            card[0].data.month == DateTime.now().month) {
+          return list.indexOf(card);
+        }
+        if (card[0].data.day == DateTime.now().day &&
+            card[0].data.month == DateTime.now().month) {
+          return list.indexOf(card);
+        }
+      }
     }
+    return mday;
   }
 }

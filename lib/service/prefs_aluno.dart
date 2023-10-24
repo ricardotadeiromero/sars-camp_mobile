@@ -12,4 +12,9 @@ class PrefsAluno {
     if (token == null) return '';
     return token.toString();
   }
+
+  Future<void> destroy() async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
 }

@@ -4,16 +4,15 @@ import 'package:dio/dio.dart';
 
 abstract class IAlunoRepository {
   Future<String> login(Aluno aluno);
-  Future<double> saldo(String token);
+  Future<String> saldo(String token);
 }
 
 class AlunoRepository implements IAlunoRepository {
-  final Dio dio = Dio(BaseOptions(baseUrl: Api.url));
 
   @override
   Future<String> login(Aluno aluno) async {
     try {
-      final response = await dio.post(Api.login, data: aluno);
+      final response = await api.post(Api.login, data: aluno.toMap(), options: Options());
       return response.data;
     } catch (e) {
       throw Exception(e);
@@ -21,9 +20,9 @@ class AlunoRepository implements IAlunoRepository {
   }
 
   @override
-  Future<double> saldo(String token) async {
+  Future<String> saldo(String token) async {
     try {
-      final response = await dio.get(Api.saldo, options: Options(headers: {"access_token": token}));
+      final response = await api.get(Api.saldo, options: Options(headers: {"Authorization": "Bearer $token"}));
       return response.data;
     } catch (e) {
       throw Exception(e);

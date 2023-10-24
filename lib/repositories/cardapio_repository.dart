@@ -10,12 +10,11 @@ abstract class ICardapioRepository {
 }
 
 class CardapioRepository implements ICardapioRepository {
-  final Dio dio = Dio(BaseOptions(baseUrl: Api.url));
 
   @override
   Future<List<dynamic>> findWeek() async {
     try {
-      final response = await dio.get(Api.cardapioWeek);
+      final response = await api.get(Api.cardapioWeek);
       if (kDebugMode) {
         print("fon");
         print(response);
@@ -39,7 +38,7 @@ class CardapioRepository implements ICardapioRepository {
   @override
   Future<List<dynamic>> findByWeek(int week) async {
     try {
-      final response = await dio.get(Api.cardapioByWeek + week.toString());
+      final response = await api.get(Api.cardapioByWeek + week.toString());
       if (kDebugMode) {
         print("fon");
         print(response);

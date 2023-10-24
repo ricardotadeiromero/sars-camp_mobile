@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:TCC/model/Cardapio.dart';
+import 'package:TCC/model/cardapio.dart';
 import 'package:TCC/repositories/cardapio_repository.dart';
 import 'package:TCC/service/prefs_cardapio.dart';
 

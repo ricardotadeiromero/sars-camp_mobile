@@ -5,7 +5,7 @@ import 'package:TCC/pages/componentes/background.dart';
 import 'dart:core';
 import '../controller/date_controller.dart';
 import 'package:flutter/material.dart';
-import '../model/Cardapio.dart';
+import '../model/cardapio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../connection/connection.dart';
 

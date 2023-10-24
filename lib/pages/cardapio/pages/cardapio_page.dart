@@ -1,5 +1,5 @@
 import 'package:TCC/controller/date_controller.dart';
-import 'package:TCC/model/Cardapio.dart';
+import 'package:TCC/model/cardapio.dart';
 import 'package:TCC/pages/componentes/background.dart';
 import 'package:TCC/pages/componentes/cardapioPage.dart';
 import 'package:flutter/material.dart';

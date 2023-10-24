@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../model/Cardapio.dart';
+import '../../model/cardapio.dart';
 import 'background.dart';
 
 const TextStyle style =

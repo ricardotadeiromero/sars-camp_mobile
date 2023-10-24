@@ -2,33 +2,35 @@ import 'package:TCC/pages/componentes/background.dart';
 import 'package:flutter/material.dart';
 
 class MainContainerSaldo extends StatelessWidget {
-  final Widget? input;
-  const MainContainerSaldo({super.key, this.input});
+  final FutureBuilder<dynamic> input;
+  MainContainerSaldo({super.key, required this.input});
 
   @override
   Widget build(BuildContext context) {
     return Align(
-        alignment: Alignment.center,
-        child: Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.only(top: 100),
-          padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).size.height * 0.02),
-          width: MediaQuery.of(context).size.width * 0.7,
-          decoration: BoxDecoration(
-            color: myWhite,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: myBlack.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: const Offset(0, 3),
-              ),
-            ],
+      child: Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.only(top: 100),
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.02),
+            height: MediaQuery.of(context).size.height * 0.25,
+            width: MediaQuery.of(context).size.width * 0.7,
+            decoration: BoxDecoration(
+              color: myWhite,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: myBlack.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: input,
+            
           ),
-          child: input,
-        ));
+    );
   }
 }
 

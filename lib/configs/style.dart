@@ -26,4 +26,7 @@ class Style {
 
   static TextStyle style3 =
       const TextStyle(color: Color.fromARGB(157, 255, 255, 255));
+  static TextStyle saldo =
+      const TextStyle(fontSize: 30,color: Color.fromARGB(157, 0, 0, 0));
+
 }

@@ -2,8 +2,6 @@ import 'package:TCC/controller/aluno_controller.dart';
 import 'package:TCC/pages/componentes/background.dart';
 import 'package:TCC/pages/componentes/saldoPage.dart';
 import 'package:TCC/pages/saldo/pages/saldo_page.dart';
-import 'package:TCC/repositories/aluno_repository.dart';
-import 'package:TCC/service/prefs_aluno.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

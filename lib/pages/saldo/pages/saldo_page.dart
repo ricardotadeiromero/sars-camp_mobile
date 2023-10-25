@@ -160,27 +160,40 @@ class WithToken extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-         (FutureBuilder(
-                future: controller.saldo(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData &&
-                      snapshot.connectionState == ConnectionState.done) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                            onPressed: () => controller.destroy(),
-                            child: Text('Sair')),
-                        Text("RS: " + snapshot.data!,style: Style.saldo,),
-                      ],
-                    );
-                  }
-                  if (snapshot.hasError) {
-                    print(snapshot.error.toString());
-                  }
-                  return Container();
-                }));
+    return (FutureBuilder(
+        future: controller.saldo(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData &&
+              snapshot.connectionState == ConnectionState.done) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Stack(
+                children: [
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: IconButton(
+                        onPressed: () {
+                          controller.destroy();
+                        },
+                        icon: Icon(
+                          Icons.arrow_circle_left,
+                          color: Style.myRed,
+                        ),
+                      )),
+                  Center(
+                    child: Text(
+                      "RS: " + snapshot.data!,
+                      style: Style.saldo,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+          if (snapshot.hasError) {
+            print(snapshot.error.toString());
+          }
+          return Container();
+        }));
   }
 }

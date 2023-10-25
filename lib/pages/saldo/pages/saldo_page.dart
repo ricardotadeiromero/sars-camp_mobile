@@ -134,11 +134,19 @@ class _WithoutTokenState extends State<WithoutToken> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    setState(() {
-                      Aluno aluno =
+                                          Aluno aluno =
                           Aluno(_raController.text, _senhaController.text);
-                      _future = widget.controller.loginSaldo(aluno);
-                    });
+                      widget.controller.loginSaldo(aluno).catchError((error) {
+                        final errorText = error.message;
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return SaldoDialog(errorText);
+                        },
+                      );
+                      });
+
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -165,29 +173,37 @@ class WithToken extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData &&
               snapshot.connectionState == ConnectionState.done) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Stack(
-                children: [
-                  Align(
+            final saldo = snapshot.data!;
+            return Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
                       alignment: Alignment.topLeft,
                       child: IconButton(
+                        iconSize: 30,
                         onPressed: () {
                           controller.destroy();
                         },
                         icon: Icon(
                           Icons.arrow_circle_left,
-                          color: Style.myRed,
+                          color: myRed,
                         ),
                       )),
-                  Center(
-                    child: Text(
-                      "RS: " + snapshot.data!,
-                      style: Style.saldo,
-                    ),
+                ),
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(saldo.name,style: nomeStyle,),
+                      Text(
+                        "R\$: " + saldo.saldo.toString(),
+                        style: saldoStyle,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           }
           if (snapshot.hasError) {

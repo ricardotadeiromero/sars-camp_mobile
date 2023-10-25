@@ -1,3 +1,4 @@
+import 'package:TCC/configs/style.dart';
 import 'package:TCC/pages/componentes/background.dart';
 import 'package:flutter/material.dart';
 
@@ -9,27 +10,26 @@ class MainContainerSaldo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       child: Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.only(top: 100),
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.02),
-            height: MediaQuery.of(context).size.height * 0.25,
-            width: MediaQuery.of(context).size.width * 0.7,
-            decoration: BoxDecoration(
-              color: myWhite,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: myBlack.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
-                ),
-              ],
+        alignment: Alignment.center,
+        margin: const EdgeInsets.only(top: 100),
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
+        height: MediaQuery.of(context).size.height * 0.25,
+        width: MediaQuery.of(context).size.width * 0.7,
+        decoration: BoxDecoration(
+          color: myWhite,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: myBlack.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
             ),
-            child: input,
-            
-          ),
+          ],
+        ),
+        child: input,
+      ),
     );
   }
 }
@@ -80,5 +80,37 @@ class TitleSaldoPage extends StatelessWidget {
         ),
       ],
     ));
+  }
+}
+
+class SaldoDialog extends StatelessWidget {
+  final String error;
+  const SaldoDialog(this.error,{super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: const Color(0xFFA12E2F),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      title: const Text('Erro'),
+      content: Wrap(
+        children: [
+          Center(child: Text(error)),
+        ],
+      ),
+      actions: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: myInputGreen,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop(); // Fechar o diálogo
+          },
+          child: const Text('OK'),
+        ),
+      ],
+    );
   }
 }

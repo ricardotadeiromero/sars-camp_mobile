@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:TCC/configs/style.dart';
 import 'package:flutter/foundation.dart';
 import 'package:TCC/pages/componentes/cardapioPage.dart';
 import 'package:TCC/pages/componentes/background.dart';

@@ -1,3 +1,4 @@
+import 'package:TCC/configs/style.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -9,20 +10,6 @@ abrirUrl() async {
     throw 'Não é possível redirecionar ao link.';
   }
 }
-
-Color myFillGrey = Colors.grey;
-Color myTransparent = Colors.transparent;
-Color myRed = const Color(0xFFA12E2F);
-Color myWhite = const Color(0xFFFFFFFF);
-Color myBlack = const Color(0xFF000000);
-Color myGreen = const Color(0xFF0A6066);
-Color myFormRed = const Color(0xFFA12E2F);
-Color myLightGreen = const Color(0xFF007F82);
-Color myInputGreen = const Color(0xFF0A6066);
-Color myButtonGreen = const Color(0xFF007F82);
-Color myAquaGreen = const Color.fromARGB(255, 15, 142, 147);
-Color myLightGray = const Color.fromARGB(250, 210, 210, 210);
-Color myShinyGray = const Color.fromARGB(159, 255, 255, 255);
 
 class MyProgressIndicator extends StatelessWidget {
   const MyProgressIndicator({super.key});

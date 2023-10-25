@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:TCC/controller/aluno_controller.dart';
 import 'package:TCC/repositories/aluno_repository.dart';
 import 'package:TCC/service/prefs_aluno.dart';

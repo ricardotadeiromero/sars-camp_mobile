@@ -1,3 +1,4 @@
+import 'package:TCC/configs/style.dart';
 import 'package:TCC/controller/date_controller.dart';
 import 'package:TCC/model/cardapio.dart';
 import 'package:TCC/pages/componentes/background.dart';

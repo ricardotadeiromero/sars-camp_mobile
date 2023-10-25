@@ -1,10 +1,12 @@
 import 'package:TCC/configs/api.dart';
 import 'package:TCC/model/aluno.dart';
+import 'package:TCC/model/error.dart';
+import 'package:TCC/model/saldo.dart';
 import 'package:dio/dio.dart';
 
 abstract class IAlunoRepository {
   Future<String> login(Aluno aluno);
-  Future<String> saldo(String token);
+  Future<Saldo> saldo(String token);
 }
 
 class AlunoRepository implements IAlunoRepository {
@@ -14,16 +16,27 @@ class AlunoRepository implements IAlunoRepository {
     try {
       final response = await api.post(Api.login, data: aluno.toMap(), options: Options());
       return response.data;
-    } catch (e) {
-      throw Exception(e);
+    } on DioException catch (e) {
+      if(e.response!=null){
+        if(e.response!.statusCode==401){
+          throw const FonError('Senha inválida!');
+        }
+        if(e.response!.statusCode==404){
+          throw const FonError('RA inválido!');
+        }
+      }
+      throw Exception('Erro ao consultar aluno');
     }
   }
 
   @override
-  Future<String> saldo(String token) async {
+  Future<Saldo> saldo(String token) async {
     try {
       final response = await api.get(Api.saldo, options: Options(headers: {"Authorization": "Bearer $token"}));
-      return response.data;
+      print(response.data);
+      final saldo = Saldo.fromMap(response.data);
+      print(saldo);
+      return saldo;
     } catch (e) {
       throw Exception(e);
     }

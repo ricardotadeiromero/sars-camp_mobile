@@ -8,7 +8,7 @@ class CardapioError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Style.myRed,
+      backgroundColor: myRed,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -22,7 +22,7 @@ class CardapioError extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(error, style: Style.style)
+            Text(error, style: style)
           ],
         ),
       ),

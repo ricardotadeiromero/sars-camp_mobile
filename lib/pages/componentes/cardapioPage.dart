@@ -1,18 +1,10 @@
+import 'package:TCC/configs/style.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../model/cardapio.dart';
 import 'background.dart';
 
-const TextStyle style =
-    TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);
-
-const TextStyle style2 = TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
-    color: Color.fromARGB(157, 255, 255, 255));
-
-const TextStyle style3 = TextStyle(color: Color.fromARGB(157, 255, 255, 255));
 
 class CardapioBodyPage extends StatelessWidget {
   final List<Cardapio> cardapios;
@@ -47,8 +39,8 @@ class LoadingPage extends StatelessWidget {
               height: 10,
             ),
             type
-                ? const MyProgressIndicator()
-                : const Text(
+                ?  MyProgressIndicator()
+                :  Text(
                     'Cardápios indisponíveis!',
                     style: style,
                   )
@@ -225,36 +217,36 @@ class CardapioView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: [
-              const ListTile(
+               ListTile(
                 leading: Text(
                   '18:00 - 19:45',
                   style: style2,
                 ),
               ),
-              const ListTile(
+               ListTile(
                 leading: Text(
                   'Arroz e feijão',
                   style: style,
                 ),
               ),
               ListTile(
-                leading: const Text('Principal: ', style: style),
+                leading: Text('Principal: ', style: style),
                 title: Text(cardapio.principal, style: style2),
               ),
               ListTile(
-                leading: const Text('Guarnição: ', style: style),
+                leading: Text('Guarnição: ', style: style),
                 title: Text(cardapio.guarnicao, style: style2),
               ),
               ListTile(
-                leading: const Text('Salada: ', style: style),
+                leading: Text('Salada: ', style: style),
                 title: Text(cardapio.salada, style: style2),
               ),
               ListTile(
-                leading: const Text('Sobremesa: ', style: style),
+                leading: Text('Sobremesa: ', style: style),
                 title: Text(cardapio.sobremesa, style: style2),
               ),
               ListTile(
-                leading: const Text('Suco: ', style: style),
+                leading: Text('Suco: ', style: style),
                 title: Text(cardapio.suco, style: style2),
               )
             ]);
@@ -263,36 +255,36 @@ class CardapioView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: [
-              const ListTile(
+               ListTile(
                 leading: Text(
                   '18:00 - 19:45',
                   style: style2,
                 ),
               ),
-              const ListTile(
+               ListTile(
                 leading: Text(
                   'Arroz integral e feijão',
                   style: style,
                 ),
               ),
               ListTile(
-                leading: const Text('Principal: ', style: style),
+                leading: Text('Principal: ', style: style),
                 title: Text(cardapio.principal, style: style2),
               ),
               ListTile(
-                leading: const Text('Guarnição: ', style: style),
+                leading: Text('Guarnição: ', style: style),
                 title: Text(cardapio.guarnicao, style: style2),
               ),
               ListTile(
-                leading: const Text('Salada: ', style: style),
+                leading: Text('Salada: ', style: style),
                 title: Text(cardapio.salada, style: style2),
               ),
               ListTile(
-                leading: const Text('Sobremesa: ', style: style),
+                leading: Text('Sobremesa: ', style: style),
                 title: Text(cardapio.sobremesa, style: style2),
               ),
               ListTile(
-                leading: const Text('Suco: ', style: style),
+                leading: Text('Suco: ', style: style),
                 title: Text(cardapio.suco, style: style2),
               )
             ]);
@@ -303,36 +295,36 @@ class CardapioView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: [
-              const ListTile(
+              ListTile(
                 leading: Text(
                   '11:00 - 14:00',
                   style: style2,
                 ),
               ),
-              const ListTile(
+              ListTile(
                 leading: Text(
                   'Arroz e feijão',
                   style: style,
                 ),
               ),
               ListTile(
-                leading: const Text('Principal: ', style: style),
+                leading: Text('Principal: ', style: style),
                 title: Text(cardapio.principal, style: style2),
               ),
               ListTile(
-                leading: const Text('Guarnição: ', style: style),
+                leading: Text('Guarnição: ', style: style),
                 title: Text(cardapio.guarnicao, style: style2),
               ),
               ListTile(
-                leading: const Text('Salada: ', style: style),
+                leading: Text('Salada: ', style: style),
                 title: Text(cardapio.salada, style: style2),
               ),
               ListTile(
-                leading: const Text('Sobremesa: ', style: style),
+                leading: Text('Sobremesa: ', style: style),
                 title: Text(cardapio.sobremesa, style: style2),
               ),
               ListTile(
-                leading: const Text('Suco: ', style: style),
+                leading: Text('Suco: ', style: style),
                 title: Text(cardapio.suco, style: style2),
               )
             ]);
@@ -341,36 +333,36 @@ class CardapioView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: [
-              const ListTile(
+              ListTile(
                 leading: Text(
                   '11:00 - 14:00',
                   style: style2,
                 ),
               ),
-              const ListTile(
+              ListTile(
                 leading: Text(
                   'Arroz integral e feijão',
                   style: style,
                 ),
               ),
               ListTile(
-                leading: const Text('Principal: ', style: style),
+                leading: Text('Principal: ', style: style),
                 title: Text(cardapio.principal, style: style2),
               ),
               ListTile(
-                leading: const Text('Guarnição: ', style: style),
+                leading: Text('Guarnição: ', style: style),
                 title: Text(cardapio.guarnicao, style: style2),
               ),
               ListTile(
-                leading: const Text('Salada: ', style: style),
+                leading: Text('Salada: ', style: style),
                 title: Text(cardapio.salada, style: style2),
               ),
               ListTile(
-                leading: const Text('Sobremesa: ', style: style),
+                leading: Text('Sobremesa: ', style: style),
                 title: Text(cardapio.sobremesa, style: style2),
               ),
               ListTile(
-                leading: const Text('Suco: ', style: style),
+                leading: Text('Suco: ', style: style),
                 title: Text(cardapio.suco, style: style2),
               )
             ]);
@@ -387,7 +379,7 @@ class MyListViewCafe extends StatelessWidget {
     return ListView(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        children: const [
+        children: [
           ListTile(
             leading: Text('07:00 - 08:30', style: style2),
           ),

@@ -1,3 +1,4 @@
+import 'package:TCC/configs/style.dart';
 import 'package:flutter/material.dart';
 import 'package:TCC/pages/componentes/background.dart';
 

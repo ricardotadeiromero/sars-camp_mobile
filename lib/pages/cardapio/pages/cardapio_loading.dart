@@ -9,7 +9,7 @@ class CardapioLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      backgroundColor: Style.myRed,
+      backgroundColor: myRed,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

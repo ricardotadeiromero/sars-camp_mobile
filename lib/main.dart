@@ -9,12 +9,10 @@ import 'package:provider/provider.dart';
 import 'pages/home_page.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => AlunoController(AlunoRepository(),PrefsAluno()),
-      child: const MyApp(),
-    )
-  );
+  runApp(ChangeNotifierProvider(
+    create: (context) => AlunoController(AlunoRepository(), PrefsAluno()),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -27,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => const HomePage(),
-        '/saldoPage': (context) => SaldoContainer(),
+        '/saldoPage': (context) => const SaldoContainer(),
         '/cardapioPage': (context) => CardapioContainer(),
         '/a&pPage': (context) => const AchaPerdi()
       },

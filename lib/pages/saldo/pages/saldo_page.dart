@@ -134,10 +134,10 @@ class _WithoutTokenState extends State<WithoutToken> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                                          Aluno aluno =
-                          Aluno(_raController.text, _senhaController.text);
-                      widget.controller.loginSaldo(aluno).catchError((error) {
-                        final errorText = error.message;
+                    Aluno aluno =
+                        Aluno(_raController.text, _senhaController.text);
+                    widget.controller.loginSaldo(aluno).catchError((error) {
+                      final errorText = error.message;
                       showDialog(
                         context: context,
                         barrierDismissible: false,
@@ -145,8 +145,7 @@ class _WithoutTokenState extends State<WithoutToken> {
                           return SaldoDialog(errorText);
                         },
                       );
-                      });
-
+                    });
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -183,7 +182,15 @@ class WithToken extends StatelessWidget {
                       child: IconButton(
                         iconSize: 30,
                         onPressed: () {
-                          controller.destroy();
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return SaldoDialogDestroy(
+                                  act: () {
+                                    controller.destroy();
+                                  },
+                                );
+                              });
                         },
                         icon: Icon(
                           Icons.arrow_circle_left,
@@ -195,7 +202,10 @@ class WithToken extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(saldo.name,style: nomeStyle,),
+                      Text(
+                        saldo.name,
+                        style: nomeStyle,
+                      ),
                       Text(
                         "R\$: " + saldo.saldo.toString(),
                         style: saldoStyle,

@@ -85,7 +85,7 @@ class TitleSaldoPage extends StatelessWidget {
 
 class SaldoDialog extends StatelessWidget {
   final String error;
-  const SaldoDialog(this.error,{super.key});
+  const SaldoDialog(this.error, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +94,17 @@ class SaldoDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      title: const Text('Erro'),
+      title: Text(
+        'Erro',
+        style: styleDialog,
+      ),
       content: Wrap(
         children: [
-          Center(child: Text(error)),
+          Center(
+              child: Text(
+            error,
+            style: style,
+          )),
         ],
       ),
       actions: [
@@ -109,6 +116,59 @@ class SaldoDialog extends StatelessWidget {
             Navigator.of(context).pop(); // Fechar o diálogo
           },
           child: const Text('OK'),
+        ),
+      ],
+    );
+  }
+}
+
+class SaldoDialogDestroy extends StatelessWidget {
+  final VoidCallback act;
+  const SaldoDialogDestroy({super.key, required this.act});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: const Color(0xFFA12E2F),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      content: Wrap(
+        children: [
+          Center(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30),
+            child: Text("Deseja mesmo sair?", style: styleDialog),
+          )),
+        ],
+      ),
+      actions: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: myInputGreen,
+          ),
+          onPressed: () {
+            act();
+            Navigator.of(context).pop(); // Fechar o diálogo
+          },
+          child: const Text('Sair'),
+        ),
+        TextButton(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.pressed)) {
+                  return myWhite; // cor do texto do botão quando pressionado
+                }
+                return myGreen; // cor do texto do botão quando não pressionado
+              },
+            ), // cor do texto do botão// cor de fundo do botão
+            overlayColor: MaterialStateProperty.all<Color>(myGreen),
+          ),
+          child: const Text('Cancelar'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ],
     );

@@ -30,7 +30,7 @@ class CardapioController {
       return agroup(response);
     } catch (e) {
       print(e);
-      if (e is HttpException) {
+      if (e.toString().contains('404')) {
         rethrow;
       }
       final response = await prefsCardapio.get();
@@ -44,7 +44,6 @@ class CardapioController {
   Future<List<List<Cardapio>>> findByWeek(int week) async {
     try {
       final response = await repository.findByWeek(week);
-      print("fooooooooon");
       await prefsCardapio.save(response);
       return agroup(response);
     } catch (e) {

@@ -6,5 +6,7 @@ class Api {
   static String cardapioByWeek = "cardapio/semana/";
   static String login = "aluno/login";
   static String saldo = "saldo";
+  static String achadosPerdidos = "achados-perdidos";
 }
-  final api = Dio(BaseOptions(baseUrl: Api.url));
+
+final api = Dio(BaseOptions(baseUrl: Api.url));

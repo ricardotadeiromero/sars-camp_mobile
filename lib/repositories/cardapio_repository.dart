@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:TCC/configs/api.dart';
+import 'package:TCC/model/error.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -26,12 +27,12 @@ class CardapioRepository implements ICardapioRepository {
       print(e.response);
       if (e.response != null) {
         if (e.response!.statusCode == 404) {
-          throw const HttpException('Cardápio indisponível!');
+          throw const FonError('Cardápio indisponível!');
         } else {
-          throw Exception('Falha ao carregar cardápio');
+          throw const FonError('Falha ao carregar cardápio');
         }
       }
-      throw Exception('Falha ao carregar cardápio');
+      throw const FonError('Falha ao carregar cardápio');
     }
   }
 
@@ -50,12 +51,12 @@ class CardapioRepository implements ICardapioRepository {
       print(e.response);
       if (e.response != null) {
         if (e.response!.statusCode == 404) {
-          throw const HttpException('Cardápio indisponível!');
+          throw const FonError('Cardápio indisponível!');
         } else {
-          throw Exception('Falha ao carregar cardápio');
+          throw const FonError('Falha ao carregar cardápio');
         }
       }
-      throw Exception('Falha ao carregar cardápio');
+      throw const FonError('Falha ao carregar cardápio');
     }
   }
 }

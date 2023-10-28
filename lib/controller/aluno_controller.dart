@@ -11,9 +11,17 @@ class AlunoController with ChangeNotifier {
   AlunoController(this.repository, this.prefsAluno);
 
   Future<Saldo> saldo() async {
-    final token = await prefsAluno.get();
-    final saldo = await repository.saldo(token);
-    return saldo;
+    try{
+      final token = await prefsAluno.get();
+      final saldo = await repository.saldo(token);
+      return saldo;
+    } catch (e) {
+      if(e.toString().contains('401')){
+        await prefsAluno.destroy();
+        notifyListeners();
+      }
+      rethrow;
+    }
   }
 
   Future<Saldo> loginSaldo(Aluno aluno) async {

@@ -24,7 +24,8 @@ class CardapioContainer extends StatelessWidget {
           return CardapioPage(snapshot.data!);
         }
         if (snapshot.hasError) {
-          return const CardapioError('Cardápio não encontrado!');
+          final errorText = snapshot.error as dynamic;
+          return CardapioError(errorText.message);
         }
 
         return Container();

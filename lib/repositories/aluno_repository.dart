@@ -25,7 +25,7 @@ class AlunoRepository implements IAlunoRepository {
           throw const FonError('RA inválido!');
         }
       }
-      throw Exception('Erro ao consultar aluno');
+      throw const FonError('Erro ao consultar aluno');
     }
   }
 

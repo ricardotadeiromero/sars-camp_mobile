@@ -1,4 +1,5 @@
 import 'package:TCC/controller/aluno_controller.dart';
+import 'package:TCC/pages/a&p/a&p_container.dart';
 import 'package:TCC/repositories/aluno_repository.dart';
 import 'package:TCC/service/prefs_aluno.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const HomePage(),
         '/saldoPage': (context) => const SaldoContainer(),
         '/cardapioPage': (context) => CardapioContainer(),
-        '/a&pPage': (context) => const AchaPerdi()
+        '/a&pPage': (context) => AchadosPerdidosContainer( )
       },
     );
   }

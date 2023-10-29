@@ -11,12 +11,17 @@ class AchadosPerdidosRepository implements IAchadosPerdidosRepository {
   @override
   Future<List<Perdido>> finalAll() async {
     try {
+      Future.delayed(const Duration(seconds: 2));
       final response = await api.get(Api.achadosPerdidos);
-      final data = response.data.map((e) => Perdido.fromMap(e)).toList();
+      print(response);
+      List<Perdido> data = [];
+      for (var json in (response.data as List)) {
+        data.add(Perdido.fromMap(json));
+      }
       return data;
-    } on DioException catch(e) {
-      if(e.response!=null){
-        if(e.response!.statusCode==404){
+    } on DioException catch (e) {
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
           throw const FonError('Nenhum item encontrado!');
         }
       }

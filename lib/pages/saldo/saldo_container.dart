@@ -40,7 +40,7 @@ class SaldoContainer extends StatelessWidget {
                           if (snapshot.hasError) {
                             return Text(snapshot.error.toString());
                           }
-                          return Container();
+                          return const MyProgressIndicator();
                         },
                       ),
                     )

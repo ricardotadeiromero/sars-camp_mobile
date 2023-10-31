@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:TCC/configs/style.dart';
 import 'package:TCC/controller/aluno_controller.dart';
 import 'package:TCC/model/aluno.dart';
+import 'package:TCC/model/error.dart';
 import 'package:TCC/pages/componentes/background.dart';
 import 'package:TCC/pages/componentes/saldoPage.dart';
 import 'package:TCC/repositories/aluno_repository.dart';
@@ -170,6 +171,9 @@ class WithToken extends StatelessWidget {
     return (FutureBuilder(
         future: controller.saldo(),
         builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const MyProgressIndicator();
+          }
           if (snapshot.hasData &&
               snapshot.connectionState == ConnectionState.done) {
             final saldo = snapshot.data!;
@@ -217,7 +221,11 @@ class WithToken extends StatelessWidget {
             );
           }
           if (snapshot.hasError) {
-            print(snapshot.error.toString());
+            final errorText = snapshot.error as FonError;
+            return Text(
+              errorText.message,
+              style: saldoStyle,
+            );
           }
           return Container();
         }));

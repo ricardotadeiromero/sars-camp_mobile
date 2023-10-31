@@ -10,18 +10,18 @@ abstract class IAlunoRepository {
 }
 
 class AlunoRepository implements IAlunoRepository {
-
   @override
   Future<String> login(Aluno aluno) async {
     try {
-      final response = await api.post(Api.login, data: aluno.toMap(), options: Options());
+      final response =
+          await api.post(Api.login, data: aluno.toMap(), options: Options());
       return response.data;
     } on DioException catch (e) {
-      if(e.response!=null){
-        if(e.response!.statusCode==401){
+      if (e.response != null) {
+        if (e.response!.statusCode == 401) {
           throw const FonError('Senha inválida!');
         }
-        if(e.response!.statusCode==404){
+        if (e.response!.statusCode == 404) {
           throw const FonError('RA inválido!');
         }
       }
@@ -32,13 +32,19 @@ class AlunoRepository implements IAlunoRepository {
   @override
   Future<Saldo> saldo(String token) async {
     try {
-      final response = await api.get(Api.saldo, options: Options(headers: {"Authorization": "Bearer $token"}));
+      final response = await api.get(Api.saldo,
+          options: Options(headers: {"Authorization": "Bearer $token"}));
       print(response.data);
       final saldo = Saldo.fromMap(response.data);
       print(saldo);
       return saldo;
-    } catch (e) {
-      throw Exception(e);
+    } on DioException catch (e) {
+      if (e.response != null) {
+        if (e.response!.statusCode == 401) {
+          throw const FonError('Token inválido!');
+        }
+      }
+      throw const FonError('Erro ao consultar saldo!');
     }
-  } 
+  }
 }

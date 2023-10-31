@@ -11,12 +11,12 @@ class AlunoController with ChangeNotifier {
   AlunoController(this.repository, this.prefsAluno);
 
   Future<Saldo> saldo() async {
-    try{
+    try {
       final token = await prefsAluno.get();
       final saldo = await repository.saldo(token);
       return saldo;
     } catch (e) {
-      if(e.toString().contains('401')){
+      if (e.toString().contains('401')) {
         await prefsAluno.destroy();
         notifyListeners();
       }

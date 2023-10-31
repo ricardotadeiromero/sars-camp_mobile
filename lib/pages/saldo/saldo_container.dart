@@ -21,7 +21,7 @@ class SaldoContainer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const TitleSaldoPage(),
-                    MainContainerSaldo(
+                    ContainerSaldo(
                       input: FutureBuilder(
                         future: controller.hasToken(),
                         builder: (context, snapshot) {
@@ -32,11 +32,11 @@ class SaldoContainer extends StatelessWidget {
                           if (snapshot.hasData &&
                               snapshot.connectionState ==
                                   ConnectionState.done) {
-                                    if(snapshot.data!){
-                                      return WithToken(controller);
-                                    }
-                                    return WithoutToken(controller);
-                                  }
+                            if (snapshot.data!) {
+                              return WithToken(controller);
+                            }
+                            return WithoutToken(controller);
+                          }
                           if (snapshot.hasError) {
                             return Text(snapshot.error.toString());
                           }

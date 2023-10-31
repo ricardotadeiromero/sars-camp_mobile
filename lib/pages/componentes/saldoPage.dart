@@ -1,10 +1,9 @@
 import 'package:TCC/configs/style.dart';
-import 'package:TCC/pages/componentes/background.dart';
 import 'package:flutter/material.dart';
 
-class MainContainerSaldo extends StatelessWidget {
+class ContainerSaldo extends StatelessWidget {
   final FutureBuilder<dynamic> input;
-  MainContainerSaldo({super.key, required this.input});
+  ContainerSaldo({super.key, required this.input});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,7 @@ class MainContainerSaldo extends StatelessWidget {
         margin: const EdgeInsets.only(top: 100),
         padding:
             EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-        height: MediaQuery.of(context).size.height * 0.25,
+        height: MediaQuery.of(context).size.height * 0.27,
         width: MediaQuery.of(context).size.width * 0.7,
         decoration: BoxDecoration(
           color: myWhite,

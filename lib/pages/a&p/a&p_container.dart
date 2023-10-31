@@ -24,7 +24,7 @@ class AchadosPerdidosContainer extends StatelessWidget {
         }
         if (snapshot.hasError) {
           final errorText = snapshot.error as dynamic;
-          return AchadosPerdidosError(errorText.toString());
+          return AchadosPerdidosError(errorText.message);
         }
         return Container();
       },

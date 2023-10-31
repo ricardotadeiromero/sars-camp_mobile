@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:TCC/configs/api.dart';
 import 'package:TCC/model/error.dart';
 import 'package:dio/dio.dart';

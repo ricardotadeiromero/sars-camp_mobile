@@ -27,7 +27,7 @@ TextStyle style2 = const TextStyle(
 TextStyle style3 = const TextStyle(color: Color.fromARGB(157, 255, 255, 255));
 TextStyle nomeStyle = const TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: 30,
+    fontSize: 36,
     color: Color.fromARGB(157, 0, 0, 0));
 TextStyle saldoStyle =
-    const TextStyle(fontSize: 22, color: Color.fromARGB(157, 0, 0, 0));
+    const TextStyle(fontSize: 28, color: Color.fromARGB(157, 0, 0, 0));

@@ -37,6 +37,7 @@ class AlunoController with ChangeNotifier {
   }
 
   Future<bool> hasToken() async {
+    await Future.delayed(const Duration(seconds: 1));
     final token = await prefsAluno.get();
     if (token == '') {
       return false;

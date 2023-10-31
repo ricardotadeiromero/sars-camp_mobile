@@ -11,7 +11,7 @@ class AchadosPerdidosRepository implements IAchadosPerdidosRepository {
   @override
   Future<List<Perdido>> finalAll() async {
     try {
-      Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
       final response = await api.get(Api.achadosPerdidos);
       print(response);
       List<Perdido> data = [];

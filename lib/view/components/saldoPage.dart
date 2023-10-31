@@ -2,7 +2,7 @@ import 'package:TCC/configs/style.dart';
 import 'package:flutter/material.dart';
 
 class ContainerSaldo extends StatelessWidget {
-  final FutureBuilder<dynamic> input;
+  final Widget input;
   ContainerSaldo({super.key, required this.input});
 
   @override
@@ -13,8 +13,8 @@ class ContainerSaldo extends StatelessWidget {
         margin: const EdgeInsets.only(top: 100),
         padding:
             EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-        height: MediaQuery.of(context).size.height * 0.27,
         width: MediaQuery.of(context).size.width * 0.7,
+
         decoration: BoxDecoration(
           color: myWhite,
           borderRadius: BorderRadius.circular(20),
@@ -159,7 +159,7 @@ class SaldoDialogDestroy extends StatelessWidget {
                 if (states.contains(MaterialState.pressed)) {
                   return myWhite; // cor do texto do botão quando pressionado
                 }
-                return myGreen; // cor do texto do botão quando não pressionado
+                return myWhite; // cor do texto do botão quando não pressionado
               },
             ), // cor do texto do botão// cor de fundo do botão
             overlayColor: MaterialStateProperty.all<Color>(myGreen),

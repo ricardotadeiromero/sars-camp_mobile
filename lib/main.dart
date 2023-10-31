@@ -1,12 +1,12 @@
 import 'package:TCC/controller/aluno_controller.dart';
-import 'package:TCC/pages/a&p/a&p_container.dart';
+import 'package:TCC/view/a&p/a&p_container.dart';
 import 'package:TCC/repositories/aluno_repository.dart';
 import 'package:TCC/service/prefs_aluno.dart';
 import 'package:flutter/material.dart';
-import 'package:TCC/pages/cardapio/cardapio_container.dart';
-import 'package:TCC/pages/saldo/saldo_container.dart';
+import 'package:TCC/view/cardapio/cardapio_container.dart';
+import 'package:TCC/view/saldo/saldo_container.dart';
 import 'package:provider/provider.dart';
-import 'pages/home_page.dart';
+import 'view/home_page.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(

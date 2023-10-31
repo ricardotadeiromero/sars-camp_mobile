@@ -7,6 +7,7 @@ class PrefsAluno {
   }
 
   Future<String> get() async {
+    
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     if (token == null) return '';

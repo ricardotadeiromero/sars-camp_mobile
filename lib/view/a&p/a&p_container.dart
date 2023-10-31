@@ -1,7 +1,7 @@
 import 'package:TCC/controller/achados_perdidos_controller.dart';
-import 'package:TCC/pages/a&p/pages/a&p_error.dart';
-import 'package:TCC/pages/a&p/pages/a&p_loading.dart';
-import 'package:TCC/pages/a&p/pages/a&p_page.dart';
+import 'package:TCC/view/a&p/pages/a&p_error.dart';
+import 'package:TCC/view/a&p/pages/a&p_loading.dart';
+import 'package:TCC/view/a&p/pages/a&p_page.dart';
 import 'package:TCC/repositories/achados_perdidos_repository.dart';
 import 'package:flutter/material.dart';
 

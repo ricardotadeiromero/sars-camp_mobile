@@ -1,8 +1,8 @@
 import 'package:TCC/configs/style.dart';
 import 'package:TCC/model/perdido.dart';
-import 'package:TCC/pages/componentes/a&pPage.dart';
+import 'package:TCC/view/components/a&pPage.dart';
 import 'package:flutter/material.dart';
-import 'package:TCC/pages/componentes/background.dart';
+import 'package:TCC/view/components/background.dart';
 
 class AchadosPerdidosPage extends StatefulWidget {
   final List<Perdido> list;

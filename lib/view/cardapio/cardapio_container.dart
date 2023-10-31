@@ -1,7 +1,7 @@
 import 'package:TCC/controller/cardapio_controller.dart';
-import 'package:TCC/pages/cardapio/pages/cardapio_error.dart';
-import 'package:TCC/pages/cardapio/pages/cardapio_loading.dart';
-import 'package:TCC/pages/cardapio/pages/cardapio_page.dart';
+import 'package:TCC/view/cardapio/pages/cardapio_error.dart';
+import 'package:TCC/view/cardapio/pages/cardapio_loading.dart';
+import 'package:TCC/view/cardapio/pages/cardapio_page.dart';
 import 'package:TCC/repositories/cardapio_repository.dart';
 import 'package:TCC/service/prefs_cardapio.dart';
 import 'package:flutter/material.dart';

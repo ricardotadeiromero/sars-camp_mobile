@@ -1,12 +1,13 @@
 import 'package:TCC/configs/style.dart';
-import 'package:TCC/pages/componentes/background.dart';
+import 'package:TCC/view/components/background.dart';
 import 'package:flutter/material.dart';
 
-class AchadosPerdidosLoading extends StatelessWidget {
-  const AchadosPerdidosLoading({super.key});
+class SaldoLoading extends StatelessWidget {
+  const SaldoLoading({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: myRed,
       body: Center(
@@ -16,7 +17,7 @@ class AchadosPerdidosLoading extends StatelessWidget {
           children: [
             SizedBox(
                 height: 250,
-                child: Image.asset('image/achados-e-perdidos.png')),
+                child: Image.asset('image/carteira.png')),
             const SizedBox(
               height: 10,
             ),

@@ -1,9 +1,9 @@
-import 'package:TCC/controller/cardapio_controller.dart';
-import 'package:TCC/view/cardapio/pages/cardapio_error.dart';
-import 'package:TCC/view/cardapio/pages/cardapio_loading.dart';
-import 'package:TCC/view/cardapio/pages/cardapio_page.dart';
-import 'package:TCC/repositories/cardapio_repository.dart';
-import 'package:TCC/service/prefs_cardapio.dart';
+import 'package:sarscamp/controller/cardapio_controller.dart';
+import 'package:sarscamp/view/cardapio/pages/cardapio_error.dart';
+import 'package:sarscamp/view/cardapio/pages/cardapio_loading.dart';
+import 'package:sarscamp/view/cardapio/pages/cardapio_page.dart';
+import 'package:sarscamp/repositories/cardapio_repository.dart';
+import 'package:sarscamp/service/prefs_cardapio.dart';
 import 'package:flutter/material.dart';
 
 class CardapioContainer extends StatelessWidget {

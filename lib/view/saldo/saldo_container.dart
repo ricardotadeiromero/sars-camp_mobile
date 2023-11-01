@@ -1,7 +1,7 @@
-import 'package:TCC/controller/aluno_controller.dart';
-import 'package:TCC/view/saldo/pages/saldo_error.dart';
-import 'package:TCC/view/saldo/pages/saldo_loading.dart';
-import 'package:TCC/view/saldo/pages/saldo_page.dart';
+import 'package:sarscamp/controller/aluno_controller.dart';
+import 'package:sarscamp/view/saldo/pages/saldo_error.dart';
+import 'package:sarscamp/view/saldo/pages/saldo_loading.dart';
+import 'package:sarscamp/view/saldo/pages/saldo_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

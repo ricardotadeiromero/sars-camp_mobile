@@ -1,5 +1,5 @@
-import 'package:TCC/configs/api.dart';
-import 'package:TCC/model/error.dart';
+import 'package:sarscamp/configs/api.dart';
+import 'package:sarscamp/model/error.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -25,7 +25,7 @@ class CardapioRepository implements ICardapioRepository {
       print(e.response);
       if (e.response != null) {
         if (e.response!.statusCode == 404) {
-          throw const FonError('Cardápio indisponível!');
+          throw Exception(e);
         } else {
           throw const FonError('Falha ao carregar cardápio');
         }

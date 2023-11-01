@@ -1,7 +1,7 @@
-import 'package:TCC/configs/api.dart';
-import 'package:TCC/model/aluno.dart';
-import 'package:TCC/model/error.dart';
-import 'package:TCC/model/saldo.dart';
+import 'package:sarscamp/configs/api.dart';
+import 'package:sarscamp/model/aluno.dart';
+import 'package:sarscamp/model/error.dart';
+import 'package:sarscamp/model/saldo.dart';
 import 'package:dio/dio.dart';
 
 abstract class IAlunoRepository {

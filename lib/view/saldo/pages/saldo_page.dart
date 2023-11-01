@@ -1,10 +1,10 @@
-import 'package:TCC/configs/style.dart';
-import 'package:TCC/controller/aluno_controller.dart';
-import 'package:TCC/model/aluno.dart';
-import 'package:TCC/view/components/background.dart';
-import 'package:TCC/view/components/saldoPage.dart';
-import 'package:TCC/view/saldo/pages/saldo_error.dart';
-import 'package:TCC/view/saldo/pages/saldo_loading.dart';
+import 'package:sarscamp/configs/style.dart';
+import 'package:sarscamp/controller/aluno_controller.dart';
+import 'package:sarscamp/model/aluno.dart';
+import 'package:sarscamp/view/components/background.dart';
+import 'package:sarscamp/view/components/saldoPage.dart';
+import 'package:sarscamp/view/saldo/pages/saldo_error.dart';
+import 'package:sarscamp/view/saldo/pages/saldo_loading.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

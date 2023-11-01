@@ -1,6 +1,6 @@
-import 'package:TCC/configs/api.dart';
-import 'package:TCC/model/error.dart';
-import 'package:TCC/model/perdido.dart';
+import 'package:sarscamp/configs/api.dart';
+import 'package:sarscamp/model/error.dart';
+import 'package:sarscamp/model/perdido.dart';
 import 'package:dio/dio.dart';
 
 abstract class IAchadosPerdidosRepository {

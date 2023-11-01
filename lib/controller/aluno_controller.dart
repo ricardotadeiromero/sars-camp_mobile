@@ -1,7 +1,7 @@
-import 'package:TCC/model/aluno.dart';
-import 'package:TCC/model/saldo.dart';
-import 'package:TCC/repositories/aluno_repository.dart';
-import 'package:TCC/service/prefs_aluno.dart';
+import 'package:sarscamp/model/aluno.dart';
+import 'package:sarscamp/model/saldo.dart';
+import 'package:sarscamp/repositories/aluno_repository.dart';
+import 'package:sarscamp/service/prefs_aluno.dart';
 import 'package:flutter/material.dart';
 
 class AlunoController with ChangeNotifier {

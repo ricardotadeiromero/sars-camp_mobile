@@ -1,4 +1,4 @@
-import 'package:TCC/model/cardapio.dart';
+import 'package:sarscamp/model/cardapio.dart';
 
 class DateController {
   static DateTime obterData(int diaSemana) {

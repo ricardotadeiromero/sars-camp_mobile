@@ -1,10 +1,10 @@
-import 'package:TCC/controller/aluno_controller.dart';
-import 'package:TCC/view/a&p/a&p_container.dart';
-import 'package:TCC/repositories/aluno_repository.dart';
-import 'package:TCC/service/prefs_aluno.dart';
+import 'package:sarscamp/controller/aluno_controller.dart';
+import 'package:sarscamp/view/a&p/a&p_container.dart';
+import 'package:sarscamp/repositories/aluno_repository.dart';
+import 'package:sarscamp/service/prefs_aluno.dart';
 import 'package:flutter/material.dart';
-import 'package:TCC/view/cardapio/cardapio_container.dart';
-import 'package:TCC/view/saldo/saldo_container.dart';
+import 'package:sarscamp/view/cardapio/cardapio_container.dart';
+import 'package:sarscamp/view/saldo/saldo_container.dart';
 import 'package:provider/provider.dart';
 import 'view/home_page.dart';
 

@@ -1,5 +1,5 @@
-import 'package:TCC/configs/style.dart';
-import 'package:TCC/model/perdido.dart';
+import 'package:sarscamp/configs/style.dart';
+import 'package:sarscamp/model/perdido.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

@@ -1,4 +1,4 @@
-# SARS-CAMP
+# sarscamp
 
 ##  SOBRE
 

@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:TCC/model/cardapio.dart';
-import 'package:TCC/repositories/cardapio_repository.dart';
-import 'package:TCC/service/prefs_cardapio.dart';
+import 'package:sarscamp/model/cardapio.dart';
+import 'package:sarscamp/model/error.dart';
+import 'package:sarscamp/repositories/cardapio_repository.dart';
+import 'package:sarscamp/service/prefs_cardapio.dart';
 
 class CardapioController {
   final ICardapioRepository repository;
@@ -31,7 +32,7 @@ class CardapioController {
     } catch (e) {
       print(e);
       if (e.toString().contains('404')) {
-        rethrow;
+        throw const FonError('Cardápio indisponível!');
       }
       final response = await prefsCardapio.get();
       if (response != null) {

@@ -1,5 +1,5 @@
-import 'package:TCC/model/perdido.dart';
-import 'package:TCC/repositories/achados_perdidos_repository.dart';
+import 'package:sarscamp/model/perdido.dart';
+import 'package:sarscamp/repositories/achados_perdidos_repository.dart';
 
 class AchadosPerdidosController {
   IAchadosPerdidosRepository repository;

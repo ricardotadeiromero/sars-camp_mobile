@@ -1,18 +1,22 @@
+import 'package:sarscamp/configs/style.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../model/Cardapio.dart';
+import '../../model/cardapio.dart';
 import 'background.dart';
 
-const TextStyle style =
-    TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);
-const TextStyle style2 = TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
-    color: Color.fromARGB(157, 255, 255, 255));
-const TextStyle style3 = TextStyle(color: Color.fromARGB(157, 255, 255, 255));
-Color textColor = const Color.fromARGB(159, 255, 255, 255);
 
+class CardapioBodyPage extends StatelessWidget {
+  final List<Cardapio> cardapios;
+  const CardapioBodyPage({Key? key, required this.cardapios}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: CardapiosDiaPanel(cardapios: cardapios),
+    );
+  }
+}
 class LoadingPage extends StatelessWidget {
   final bool type;
   const LoadingPage({super.key, required this.type});
@@ -35,8 +39,8 @@ class LoadingPage extends StatelessWidget {
               height: 10,
             ),
             type
-                ? const MyProgressIndicator()
-                : const Text(
+                ?  MyProgressIndicator()
+                :  Text(
                     'Cardápios indisponíveis!',
                     style: style,
                   )
@@ -49,8 +53,8 @@ class LoadingPage extends StatelessWidget {
 
 /// Uma ExpasionPanelList com um ExpansionPanel para cada Cardapio de um dia.
 class CardapiosDiaPanel extends StatefulWidget {
-  final Color? iconColor = const Color.fromARGB(159, 255, 255, 255);
-  final Color backgroundColor = const Color.fromARGB(255, 193, 54, 57);
+  final Color myBackgroundRed = const Color.fromARGB(255, 193, 54, 57);
+  final Color? myIconGray = const Color.fromARGB(159, 255, 255, 255);
   final List<Cardapio> cardapios;
 
   const CardapiosDiaPanel({super.key, required this.cardapios});
@@ -77,10 +81,10 @@ class _CardapiosDiaPanelState extends State<CardapiosDiaPanel> {
         isExpanded: _isExpanded[0],
         canTapOnHeader: true,
         backgroundColor:
-            _isExpanded[0] ? widget.backgroundColor : Colors.transparent,
+            _isExpanded[0] ? widget.myBackgroundRed : myTransparent,
         headerBuilder: (context, isExpanded) {
           return ListTile(
-            iconColor: _isExpanded[0] ? widget.iconColor : null,
+            iconColor: _isExpanded[0] ? widget.myIconGray : null,
             leading: const Icon(Icons.breakfast_dining),
             title: const Text("Café da Manhã"),
           );
@@ -94,10 +98,10 @@ class _CardapiosDiaPanelState extends State<CardapiosDiaPanel> {
         isExpanded: _isExpanded[index],
         canTapOnHeader: true,
         backgroundColor:
-            _isExpanded[index] ? widget.backgroundColor : Colors.transparent,
+            _isExpanded[index] ? widget.myBackgroundRed : myTransparent,
         headerBuilder: (context, isExpanded) {
           return ListTile(
-            iconColor: _isExpanded[index] ? widget.iconColor : null,
+            iconColor: _isExpanded[index] ? widget.myIconGray : null,
             leading:
                 Icon(cardapio.periodo == 1 ? Icons.nightlight : Icons.sunny),
             title: Text(cardapio.periodo == 1 ? "Janta" : "Almoço"),
@@ -140,8 +144,8 @@ class CardapiosDiaTab extends StatelessWidget {
 }
 
 class ExpansionWidgetCafe extends StatelessWidget {
-  final Color iconColor = const Color.fromARGB(159, 255, 255, 255);
-  final Color backgroundColor = const Color.fromARGB(255, 193, 54, 57);
+  final Color myIconExpansionGray = const Color.fromARGB(159, 255, 255, 255);
+  final Color myBackgroundExpansionRed = const Color.fromARGB(255, 193, 54, 57);
   final Icon leadingIcon;
   final String titleText;
   final Widget future;
@@ -156,9 +160,9 @@ class ExpansionWidgetCafe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      iconColor: iconColor,
-      textColor: textColor,
-      backgroundColor: backgroundColor,
+      iconColor: myIconExpansionGray,
+      textColor: myLightGray,
+      backgroundColor: myBackgroundExpansionRed,
       leading: leadingIcon,
       title: Text(
         titleText,
@@ -213,36 +217,36 @@ class CardapioView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: [
-              const ListTile(
+               ListTile(
                 leading: Text(
                   '18:00 - 19:45',
                   style: style2,
                 ),
               ),
-              const ListTile(
+               ListTile(
                 leading: Text(
                   'Arroz e feijão',
                   style: style,
                 ),
               ),
               ListTile(
-                leading: const Text('Principal: ', style: style),
+                leading: Text('Principal: ', style: style),
                 title: Text(cardapio.principal, style: style2),
               ),
               ListTile(
-                leading: const Text('Guarnição: ', style: style),
+                leading: Text('Guarnição: ', style: style),
                 title: Text(cardapio.guarnicao, style: style2),
               ),
               ListTile(
-                leading: const Text('Salada: ', style: style),
+                leading: Text('Salada: ', style: style),
                 title: Text(cardapio.salada, style: style2),
               ),
               ListTile(
-                leading: const Text('Sobremesa: ', style: style),
+                leading: Text('Sobremesa: ', style: style),
                 title: Text(cardapio.sobremesa, style: style2),
               ),
               ListTile(
-                leading: const Text('Suco: ', style: style),
+                leading: Text('Suco: ', style: style),
                 title: Text(cardapio.suco, style: style2),
               )
             ]);
@@ -251,36 +255,36 @@ class CardapioView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: [
-              const ListTile(
+               ListTile(
                 leading: Text(
                   '18:00 - 19:45',
                   style: style2,
                 ),
               ),
-              const ListTile(
+               ListTile(
                 leading: Text(
                   'Arroz integral e feijão',
                   style: style,
                 ),
               ),
               ListTile(
-                leading: const Text('Principal: ', style: style),
+                leading: Text('Principal: ', style: style),
                 title: Text(cardapio.principal, style: style2),
               ),
               ListTile(
-                leading: const Text('Guarnição: ', style: style),
+                leading: Text('Guarnição: ', style: style),
                 title: Text(cardapio.guarnicao, style: style2),
               ),
               ListTile(
-                leading: const Text('Salada: ', style: style),
+                leading: Text('Salada: ', style: style),
                 title: Text(cardapio.salada, style: style2),
               ),
               ListTile(
-                leading: const Text('Sobremesa: ', style: style),
+                leading: Text('Sobremesa: ', style: style),
                 title: Text(cardapio.sobremesa, style: style2),
               ),
               ListTile(
-                leading: const Text('Suco: ', style: style),
+                leading: Text('Suco: ', style: style),
                 title: Text(cardapio.suco, style: style2),
               )
             ]);
@@ -291,36 +295,36 @@ class CardapioView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: [
-              const ListTile(
+              ListTile(
                 leading: Text(
                   '11:00 - 14:00',
                   style: style2,
                 ),
               ),
-              const ListTile(
+              ListTile(
                 leading: Text(
                   'Arroz e feijão',
                   style: style,
                 ),
               ),
               ListTile(
-                leading: const Text('Principal: ', style: style),
+                leading: Text('Principal: ', style: style),
                 title: Text(cardapio.principal, style: style2),
               ),
               ListTile(
-                leading: const Text('Guarnição: ', style: style),
+                leading: Text('Guarnição: ', style: style),
                 title: Text(cardapio.guarnicao, style: style2),
               ),
               ListTile(
-                leading: const Text('Salada: ', style: style),
+                leading: Text('Salada: ', style: style),
                 title: Text(cardapio.salada, style: style2),
               ),
               ListTile(
-                leading: const Text('Sobremesa: ', style: style),
+                leading: Text('Sobremesa: ', style: style),
                 title: Text(cardapio.sobremesa, style: style2),
               ),
               ListTile(
-                leading: const Text('Suco: ', style: style),
+                leading: Text('Suco: ', style: style),
                 title: Text(cardapio.suco, style: style2),
               )
             ]);
@@ -329,36 +333,36 @@ class CardapioView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: [
-              const ListTile(
+              ListTile(
                 leading: Text(
                   '11:00 - 14:00',
                   style: style2,
                 ),
               ),
-              const ListTile(
+              ListTile(
                 leading: Text(
                   'Arroz integral e feijão',
                   style: style,
                 ),
               ),
               ListTile(
-                leading: const Text('Principal: ', style: style),
+                leading: Text('Principal: ', style: style),
                 title: Text(cardapio.principal, style: style2),
               ),
               ListTile(
-                leading: const Text('Guarnição: ', style: style),
+                leading: Text('Guarnição: ', style: style),
                 title: Text(cardapio.guarnicao, style: style2),
               ),
               ListTile(
-                leading: const Text('Salada: ', style: style),
+                leading: Text('Salada: ', style: style),
                 title: Text(cardapio.salada, style: style2),
               ),
               ListTile(
-                leading: const Text('Sobremesa: ', style: style),
+                leading: Text('Sobremesa: ', style: style),
                 title: Text(cardapio.sobremesa, style: style2),
               ),
               ListTile(
-                leading: const Text('Suco: ', style: style),
+                leading: Text('Suco: ', style: style),
                 title: Text(cardapio.suco, style: style2),
               )
             ]);
@@ -375,7 +379,7 @@ class MyListViewCafe extends StatelessWidget {
     return ListView(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        children: const [
+        children: [
           ListTile(
             leading: Text('07:00 - 08:30', style: style2),
           ),

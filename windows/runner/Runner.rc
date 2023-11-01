@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "tcc_telas" "\0"
+            VALUE "FileDescription", "sarscamp_telas" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "tcc_telas" "\0"
+            VALUE "InternalName", "sarscamp_telas" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "tcc_telas.exe" "\0"
-            VALUE "ProductName", "tcc_telas" "\0"
+            VALUE "OriginalFilename", "sarscamp_telas.exe" "\0"
+            VALUE "ProductName", "sarscamp_telas" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

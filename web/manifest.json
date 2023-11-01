@@ -1,6 +1,6 @@
 {
-    "name": "tcc_telas",
-    "short_name": "tcc_telas",
+    "name": "sarscamp_telas",
+    "short_name": "sarscamp_telas",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

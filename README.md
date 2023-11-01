@@ -1,4 +1,4 @@
-# SARS-CAMP
+<img src='image/logo.png' width='30' height='30'> # SARsCAMP
 
 ##  SOBRE
 

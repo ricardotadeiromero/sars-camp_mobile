@@ -1,11 +1,18 @@
+import 'package:sarscamp/controller/aluno_controller.dart';
+import 'package:sarscamp/view/a&p/a&p_container.dart';
+import 'package:sarscamp/repositories/aluno_repository.dart';
+import 'package:sarscamp/service/prefs_aluno.dart';
 import 'package:flutter/material.dart';
-import 'package:TCC/pages/a&p_page.dart';
-import 'package:TCC/pages/cardapio_page.dart';
-import 'package:TCC/pages/saldo_page.dart';
-import 'pages/home_page.dart';
+import 'package:sarscamp/view/cardapio/cardapio_container.dart';
+import 'package:sarscamp/view/saldo/saldo_container.dart';
+import 'package:provider/provider.dart';
+import 'view/home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => AlunoController(AlunoRepository(), PrefsAluno()),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,9 +25,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => const HomePage(),
-        '/saldoPage': (context) => const SaldoPage(),
-        '/cardapioPage': (context) => const CardapioPage(),
-        '/a&pPage': (context) => const AchaPerdi()
+        '/saldoPage': (context) => const SaldoContainer(),
+        '/cardapioPage': (context) => CardapioContainer(),
+        '/a&pPage': (context) => AchadosPerdidosContainer()
       },
     );
   }

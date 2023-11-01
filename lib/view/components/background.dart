@@ -1,3 +1,4 @@
+import 'package:sarscamp/configs/style.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -9,10 +10,6 @@ abrirUrl() async {
     throw 'Não é possível redirecionar ao link.';
   }
 }
-
-Color myGreen = const Color(0xFF0A6066);
-Color myRed = const Color(0xFFA12E2F);
-Color myLightGreen = const Color(0xFF007F82);
 
 class MyProgressIndicator extends StatelessWidget {
   const MyProgressIndicator({super.key});
@@ -98,7 +95,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      backgroundColor: const Color.fromARGB(255, 210, 210, 210),
+                      backgroundColor: myLightGray,
                       title: const Text(
                         'Deseja avaliar o aplicativo?',
                         textAlign: TextAlign.center,
@@ -110,8 +107,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 MaterialStateProperty.resolveWith<Color>(
                               (Set<MaterialState> states) {
                                 if (states.contains(MaterialState.pressed)) {
-                                  return Colors
-                                      .white; // cor do texto do botão quando pressionado
+                                  return myWhite; // cor do texto do botão quando pressionado
                                 }
                                 return myGreen; // cor do texto do botão quando não pressionado
                               },
@@ -130,8 +126,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 MaterialStateProperty.resolveWith<Color>(
                               (Set<MaterialState> states) {
                                 if (states.contains(MaterialState.pressed)) {
-                                  return Colors
-                                      .white; // cor do texto do botão quando pressionado
+                                  return myWhite; // cor do texto do botão quando pressionado
                                 }
                                 return myGreen; // cor do texto do botão quando não pressionado
                               },
@@ -162,7 +157,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    backgroundColor: const Color.fromARGB(255, 210, 210, 210),
+                    backgroundColor: myLightGray,
                     title: const Text(
                       'SARsCamp',
                       textAlign: TextAlign.center,
@@ -185,8 +180,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                               MaterialStateProperty.resolveWith<Color>(
                             (Set<MaterialState> states) {
                               if (states.contains(MaterialState.pressed)) {
-                                return Colors
-                                    .white; // cor do texto do botão quando pressionado
+                                return myWhite; // cor do texto do botão quando pressionado
                               }
                               return myGreen; // cor do texto do botão quando não pressionado
                             },

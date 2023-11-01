@@ -41,7 +41,7 @@ class AlunoRepository implements IAlunoRepository {
     } on DioException catch (e) {
       if (e.response != null) {
         if (e.response!.statusCode == 401) {
-          throw const FonError('Token inválido!');
+          throw Exception(e);
         }
       }
       throw const FonError('Erro ao consultar saldo!');

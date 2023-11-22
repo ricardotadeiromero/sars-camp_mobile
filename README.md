@@ -52,7 +52,7 @@ Esta seção é destinada a desenvolvedores.
 - flutter clean
 - flutter update
 
-## Versã atual do do SDK 🚀
+## Versão atual do do SDK 🚀
 SDK: >= 2.18.6 < 3.0.0
 
 ## Ferramentas da API🛠️

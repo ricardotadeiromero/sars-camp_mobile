@@ -59,7 +59,7 @@ SDK: >= 2.18.6 < 3.0.0
 - [Node.js](https://nodejs.org/en/docs) - Software utilizado para produção da API
 - [TypeScript](https://www.typescriptlang.org/docs/) - Linguagem utilizada para produção da API
 
-  ## Autores✒️
+## Autores✒️
 
 * **Ricardo Tadei Romero** - *Gerente de Projeto* - [Ricardo Tadei Romero](https://github.com/ricardotadeiromero)
 * **Gilmar da Silva** - *Desenvolvedor* - [Gilmar da Silva](https://github.com/Gil1513)
@@ -68,3 +68,7 @@ SDK: >= 2.18.6 < 3.0.0
 
 ## Expressões de gratidão🎁
 * Agradecemos aos professores do curso de Desenvolvimento de Sistemas do Colégio Técnico de Limeira - COTIL, pelas instruções e auxílios durante todo o período de desenvolvimento do projeto. Também agradecemos ao nosso colega de turma Pedro Augusto que nos auxiliou durante a produção da API do projeto.
+
+##Licença 
+  Esse projeto está sob a licença GNU General Public License v3.0
+- [LICENSE.md]

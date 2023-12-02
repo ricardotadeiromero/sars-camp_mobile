@@ -69,6 +69,5 @@ SDK: >= 2.18.6 < 3.0.0
 ## Expressões de gratidão🎁
 * Agradecemos aos professores do curso de Desenvolvimento de Sistemas do Colégio Técnico de Limeira - COTIL, pelas instruções e auxílios durante todo o período de desenvolvimento do projeto. Também agradecemos ao nosso colega de turma Pedro Augusto que nos auxiliou durante a produção da API do projeto.
 
-##Licença 
-  Esse projeto está sob a licença GNU General Public License v3.0
-- [LICENSE.md]
+## Licença 
+Esse projeto está sob a licença GNU General Public License v3.0 [LICENSE.md](/LICENSE.md)
